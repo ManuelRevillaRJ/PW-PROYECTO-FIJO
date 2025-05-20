@@ -4,11 +4,11 @@ interface GameCardProps {
   image?: string;
   title: string;
   description: string;
-  onDescriptionClick?: (
-    title: string,
-    description: string,
-    image?: string
-  ) => void;
+  onDetalleClick?: (juego: {
+    title: string;
+    description: string;
+    image?: string;
+  }) => void;
 }
 
 export default function GameCard2(props: GameCardProps) {
@@ -23,12 +23,19 @@ export default function GameCard2(props: GameCardProps) {
           </div>
           <div className="mt-auto">
             {/* Botón DETALLE */}
-            <Link
-              to={`/detalle/${encodeURIComponent(props.title)}`}
+            <button
               className="btn btn-primary w-100 mt-2"
+              onClick={() =>
+                props.onDetalleClick &&
+                props.onDetalleClick({
+                  title: props.title,
+                  description: props.description,
+                  image: props.image,
+                })
+              }
             >
               Detalle
-            </Link>
+            </button>
           </div>
         </div>
       </div>
