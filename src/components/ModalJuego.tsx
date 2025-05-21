@@ -8,7 +8,8 @@ interface ModalJuegoProps {
 }
 
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
-    const { titulo, description, videoURL, detalleImagenes } = juego
+    const { titulo, description, videoURL, detalleImagenes, precio } = juego
+    console.log(precio)
 
     return (
         <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
@@ -42,6 +43,8 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
                 </div>
 
                 <p>{description}</p>
+
+                <p>{precio}</p>
 
                 <div className="mb-3">
                     <p>Calificación:</p>
