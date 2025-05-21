@@ -1,0 +1,16 @@
+.layout-container {
+  display: flex;
+  height: 100vh; /* opcional, para que ocupe toda la altura */
+}
+
+/* Opcional: define ancho fijo o relativo para sidebar y tabla */
+.layout-container > *:first-child {
+  width: 200px; /* ancho fijo para el sidebar */
+  /* o usar flex-basis */
+}
+
+.layout-container > *:last-child {
+  flex: 1; /* la tabla ocupa el resto del espacio */
+  overflow: auto; /* para scroll si es necesario */
+  align-self: center;
+}

@@ -10,7 +10,7 @@ import type { Game } from "../types/Game";
 
 export const Table = () => {
   return (
-    <div className="table-wrapper">
+    <span className="table-wrapper">
       <table className="table">
         <thead>
           <tr>
@@ -47,6 +47,6 @@ export const Table = () => {
           })}
         </tbody>
       </table>
-    </div>
+    </span>
   );
 };
