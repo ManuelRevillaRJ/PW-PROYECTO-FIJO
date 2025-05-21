@@ -34,6 +34,7 @@ export default function MejoresValorados() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
               {ListaGames.map((game) => (
                 <GameCard2
+                  id = {game.id}
                   key={game.titulo}
                   titulo={game.titulo}
                   description={game.description}

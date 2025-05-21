@@ -16,10 +16,7 @@
   table-layout: auto;
   overflow-x: auto;
 }
-.btn {
-    margin-left: 60%;
-    margin-bottom: 15%;
-}
+
 
 .table thead {
   background-color: #ccc;

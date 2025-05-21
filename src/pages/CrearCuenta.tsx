@@ -53,12 +53,12 @@ const CrearCuenta = () => {
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        <SubmitButton label="Crear" />
+        <SubmitButton label="Crear" className="mx-auto p-2" />
       </form>
       {(() => {
         if (nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
           return (
-            <button type="button" className="btn btn-danger">
+            <button type="button" className="btn btn-danger mx-auto p-2">
               Los datos ingresados son incorrectos
             </button>
           );
@@ -72,4 +72,4 @@ const CrearCuenta = () => {
   );
 };
 
-export default CrearCuenta;
+export default CrearCuenta;
