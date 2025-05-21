@@ -46,18 +46,20 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
         <div className="mb-3">
           <p>Calificación:</p>
           <p>⭐⭐⭐⭐☆</p>
-          <div className="container text-center">
-            <div className="row align-items-start d-flex flex-column align-items-center">
-              <Button variant="success" className="me-2 col">
+          
+
+          <div >
+            <div className="row">
+              <Button variant="success" className="col btn btn-success ms-4 me-4">
                 👍 Buen Juego
               </Button>
-              <Button variant="danger" className="col">👎 Mal Juego</Button>
+              <Button variant="danger" className=" col me-auto">👎 Mal Juego</Button>
             </div>
           </div>
         </div>
       </Modal.Body>
 
-      <Modal.Footer className="bg-dark mx-auto p-2">
+      <Modal.Footer className="bg-dark">
         <Button variant="primary" className="mx-auto p-2">
           Comprar Ahora
         </Button>

@@ -44,7 +44,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
       <Modal.Body className="bg-dark text-white">
         <form onSubmit={handleSubmit}>
           <FormInput
-            label="Titulo1"
+            label="Titulo"
             type="text"
             id="titulo1"
             value={titulo1}
@@ -70,7 +70,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
       <Modal.Footer>
             {(()=> {
               if (titulo1 == "" || description == "") {
-              return <button type="button" className="btn btn-danger center"> Faltan datos </button>;
+              return <button type="button" className="btn btn-danger"> Faltan datos </button>;
             }})()}
           </Modal.Footer>
     </Modal>

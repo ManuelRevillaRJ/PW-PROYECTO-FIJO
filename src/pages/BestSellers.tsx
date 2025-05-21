@@ -32,7 +32,7 @@ export default function BestSellers() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
               {ListaGames.map((game) => (
                 <GameCard2
-                  id = {game.id}
+                  id={game.id}
                   key={game.titulo}
                   titulo={game.titulo}
                   description={game.description}
@@ -91,15 +91,17 @@ export default function BestSellers() {
             <div className="mb-3">
               <p className="mb-1">Calificación:</p>
               <p>⭐⭐⭐⭐☆</p>
-              <Button variant="success" className="me-2">
-                👍 Buen Juego
-              </Button>
-              <Button variant="danger">👎 Mal Juego</Button>
+              <div className="row">
+                <Button variant="success" className="col btn btn-success ms-4 me-4">
+                  👍 Buen Juego
+                </Button>
+                <Button variant="danger" className="col me-auto">👎 Mal Juego</Button>
+              </div>
             </div>
           </Modal.Body>
 
           <Modal.Footer className="bg-dark">
-            <Button variant="primary">Comprar Ahora</Button>
+            <Button variant="primary"className="mx-auto p-2 btn btn-primary">Comprar Ahora</Button>
           </Modal.Footer>
         </Modal>
       )}
