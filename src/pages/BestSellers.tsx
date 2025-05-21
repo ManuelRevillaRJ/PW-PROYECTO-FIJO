@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ListaGames } from "../utils/ListaJuegos";
+import CarouselBestSellers from "../components/CarouselBestSellers";
 
 export default function BestSellers() {
   const [juegoSeleccionado, setJuegoSeleccionado] = useState<null | {
@@ -16,11 +17,12 @@ export default function BestSellers() {
   return (
     <>
       <NavBar />
-      <div className="bg-dark text-white">
+      <div className="bg-white text-dark">
         <div className="container mt-5">
+          <br></br>
           <h2 className="mb-4">Best Sellers</h2>
 
-          <Carousel />
+          <CarouselBestSellers />
 
           <div
             className="row row-cols-2 row-cols-md-5 g-4"
@@ -52,11 +54,11 @@ export default function BestSellers() {
           size="lg"
           backdrop="static"
         >
-          <Modal.Header closeButton className="bg-dark text-white">
+          <Modal.Header closeButton className="bg-white text-dark">
             <Modal.Title>{juegoSeleccionado.titulo}</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body className="bg-dark text-white">
+          <Modal.Body className="bg-white text-dark">
             {/* Video del juego */}
             <div className="mb-3">
               <video width="100%" controls poster={juegoSeleccionado.image}>

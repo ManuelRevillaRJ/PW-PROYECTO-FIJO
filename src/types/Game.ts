@@ -4,13 +4,13 @@ export type Game = {
   id?: string;
   image?: string;
   titulo: string;
-  description: string;
+  description?: string;
   precio?: number;
   categoria_id?: number;
   esta_oferta?: boolean;
   estado?: boolean;
   videoURL?: string;
-  detalleImagenes: string[];
+  detalleImagenes?: string[];
 
   // Relaciones:
   categoria?: Category;

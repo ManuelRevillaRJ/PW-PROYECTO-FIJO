@@ -30,7 +30,7 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
         </div>
 
         <div className="d-flex overflow-auto gap-2 mb-3">
-          {detalleImagenes.map((img, idx) => (
+          {detalleImagenes?.map((img, idx) => (
             <img
               key={idx}
               src={img}
