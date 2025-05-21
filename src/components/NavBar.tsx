@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { cerrarSesion } from "../utils/cerrar_sesion";
+
 
 export default function NavBar() {
+  
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
       <div className="container-fluid">
@@ -106,18 +109,66 @@ export default function NavBar() {
                 Special Offers
               </Link>
             </li>
-            <li className="nav-item">
-              <div className="d-flex align-items-center">
-                <Link className="nav-link" to={"/profile"}>
-                  <i className="bi bi-person-circle me-2"></i>
-                  Profile
-                </Link>
-              </div>
+
+            
+
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Perfil
+              </a>
+              <ul className="dropdown-menu">
+                {(() => {
+                  if (
+                    sessionStorage.getItem("user") == "" ||
+                    sessionStorage.getItem("user") == null
+                  ) {
+                    return (
+                      <>
+                        <li>
+                          <Link
+                            className="dropdown-item"
+                            to={"/iniciar_sesion"}
+                          >
+                            Iniciar Sesión
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" to={"/crear_cuenta"}>
+                            Crear Cuenta
+                          </Link>
+                        </li>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <li>
+                          <Link className="dropdown-item" to={"/profile"}>
+                            Perfil
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" onClick={cerrarSesion} to={"/"}>
+                            Cerrar sesión
+                          </Link>
+                        </li>
+                      </>
+                    );
+                  }
+                })()}
+              </ul>
             </li>
+
             <li className="nav-item">
-              <Link className="nav-link" to={"/users"}>
+              <Link className="nav-link" to={"/ganancias"}>
                 <i className="bi bi-bar-chart me-2"></i>
-                Admin View
+                Estadisticas
               </Link>
             </li>
             <li className="nav-item">
@@ -140,6 +191,6 @@ export default function NavBar() {
           </form>
         </div>
       </div>
-    </nav>
-  );
+    </nav>
+  );
 }
