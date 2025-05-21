@@ -11,8 +11,8 @@ import Ganancias from "./pages/Ganancias";
 
 import MejoresValorados from "./pages/MejorValorados";
 import BestSellers from "./pages/BestSellers";
-import CartUI from "./pages/CartTestPage";
 import CartTestPage from "./pages/CartTestPage";
+import Usuarios from "./pages/Usuarios";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -26,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/best-sellers" element={<BestSellers />} />
         <Route path="/ganancias" element={<Ganancias />} />
         <Route path="/carrito" element={<CartTestPage />} />
+        <Route path="/users" element={<Usuarios />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

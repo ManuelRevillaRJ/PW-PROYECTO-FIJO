@@ -115,9 +115,9 @@ export default function NavBar() {
               </div>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={"/ganancias"}>
+              <Link className="nav-link" to={"/users"}>
                 <i className="bi bi-bar-chart me-2"></i>
-                Estadisticas
+                Admin View
               </Link>
             </li>
             <li className="nav-item">

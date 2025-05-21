@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DummyGC from '../components/DummyGameCard';
 import CartBar from '../components/CartBar';
+import NavBar from '../components/NavBar';
 
 type CartItem = {
   name: string;
@@ -29,28 +30,31 @@ const CartTestPage = () => {
 
   return (
     <>
-      <div className="container mt-4">
-        <h2>Featured Games</h2>
-        <div className="row g-3">
-          <DummyGC name="Game 1" onAddToCart={addToCart} />
-          <DummyGC name="Game 2" onAddToCart={addToCart} />
+    <div>
+      <NavBar />
+        <div className="container mt-4">
+          <h2>Featured Games</h2>
+          <div className="row g-3">
+            <DummyGC name="Game 1" onAddToCart={addToCart} />
+            <DummyGC name="Game 2" onAddToCart={addToCart} />
+          </div>
         </div>
-      </div>
 
-      <button
-        className="btn btn-dark position-fixed top-0 end-0 m-3"
-        onClick={toggleCart}
-      >
-        🛒
-      </button>
+        <button
+          className="btn btn-dark position-fixed top-0 end-0 m-3"
+          onClick={toggleCart}
+        >
+          🛒
+        </button>
 
-      <CartBar
-        cartItems={cartItems}
-        onRemoveItem={removeFromCart}
-        onCheckout={checkout}
-        onClearCart={clearCart}
-        isVisible={isCartVisible}
-      />
+        <CartBar
+          cartItems={cartItems}
+          onRemoveItem={removeFromCart}
+          onCheckout={checkout}
+          onClearCart={clearCart}
+          isVisible={isCartVisible}
+        />
+    </div>
     </>
   );
 };
