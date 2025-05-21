@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Carousel from "../components/Carousel";
 import GameCard2 from "../components/GameCard";
 import NavBar from "../components/NavBar";
 import { Modal, Button } from "react-bootstrap";

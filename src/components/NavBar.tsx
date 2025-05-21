@@ -120,6 +120,12 @@ export default function NavBar() {
                 Estadisticas
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={"/carrito"}>
+                <i className="bi bi-bar-chart me-2"></i>
+                Carrito de Compras
+              </Link>
+            </li>
           </ul>
           <form className="d-flex" role="search">
             <input
