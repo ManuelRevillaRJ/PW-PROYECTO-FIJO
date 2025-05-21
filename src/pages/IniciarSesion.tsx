@@ -4,11 +4,15 @@ import FormInput from "../components/FormInput";
 import SubmitButton from "../components/Button";
 import FormTitle from "../components/FormTitle";
 import { Link } from "react-router-dom";
+import { revisarAdmin } from "../utils/admins";
+import { useNavigate } from "react-router-dom"
+
 
 const IniciarSesion = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate() 
   
   let siExiste: null | boolean = true;
 
@@ -20,7 +24,11 @@ const IniciarSesion = () => {
     // verificacion que existan en base de datos, ahorita prelim
     siExiste = true;
     sessionStorage.setItem("user", nombre);
-    //navigate("/")
+    if (revisarAdmin (nombre, email, password)){
+      navigate("/games")
+    }
+
+    
   };
 
   return (
@@ -51,12 +59,12 @@ const IniciarSesion = () => {
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        <SubmitButton label="Ingresar" />
+        <SubmitButton label="Ingresar" className="mx-auto p-2" />
       </form>
       {(() => {
         if (!siExiste || nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
           return (
-            <button type="button" className="btn btn-danger">
+            <button type="button" className="btn btn-danger mx-auto p-2">
               Los datos ingresados son incorrectos
             </button>
           );

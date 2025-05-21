@@ -15,7 +15,6 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
   const [titulo1, setTitulo1] = useState("");
   const [description, setDescription] = useState("");
   const [precio, setPrecio] = useState(0);
-  let errorEncontrado = "";
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -31,9 +30,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
         precio: precio,
       });
       onHide();
-    } else {
-      errorEncontrado = '<button type="button" className={`btn btn-danger ${ errorEncontrado ? "visible" : "invisible" }`} > Los datos ingresados son incorrectos </button>';
-    }
+    } 
   };
 
   
@@ -73,7 +70,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
       <Modal.Footer>
             {(()=> {
               if (titulo1 == "" || description == "") {
-              return <button type="button" className="btn btn-danger"> Faltan datos </button>;
+              return <button type="button" className="btn btn-danger center"> Faltan datos </button>;
             }})()}
           </Modal.Footer>
     </Modal>

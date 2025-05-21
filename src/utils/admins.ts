@@ -1,0 +1,27 @@
+export type User = {
+  id: number;
+  correo: string;
+  password: string;
+  nombre: string;
+  token: string;
+  estado: boolean;
+};
+
+export const ListaAdmins: User[] = [ 
+    {id: 2,
+  correo: "melissa.maqueira@gmail.com",
+  password: "123",
+  nombre: "Melissa",
+  token: "token",
+  estado: true}
+
+]
+
+export function revisarAdmin (user: string, email: string, password : string) : boolean {
+    for (const administrador of ListaAdmins){
+        if (administrador.nombre == user && administrador.correo == email && administrador.password == password){
+            return true;
+        }
+    }
+    return false;
+}
