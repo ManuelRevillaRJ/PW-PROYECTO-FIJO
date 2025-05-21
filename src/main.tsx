@@ -7,8 +7,8 @@ import CrearCuenta from "./pages/CrearCuenta";
 import IniciarSesion from "./pages/IniciarSesion";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
+import Ganancias from "./pages/Ganancias";
 
-//import App from "./pages/App";
 import MejoresValorados from "./pages/MejorValorados";
 import BestSellers from "./pages/BestSellers";
 
@@ -22,6 +22,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/iniciar_sesion" element={<IniciarSesion />} />
         <Route path="/top-rated" element={<MejoresValorados />} />
         <Route path="/best-sellers" element={<BestSellers />} />
+        <Route path="/ganancias" element={<Ganancias />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

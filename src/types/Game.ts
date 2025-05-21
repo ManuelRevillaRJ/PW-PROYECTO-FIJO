@@ -1,3 +1,23 @@
+// Juego (Game) - principal
+export type Game = {
+  rating?: number;
+  id?: string;
+  image?: string;
+  titulo: string;
+  description: string;
+  precio?: number;
+  categoria_id?: number;
+  esta_oferta?: boolean;
+  estado?: boolean;
+  videoURL?: string;
+  detalleImagenes: string[];
+
+  // Relaciones:
+  categoria?: Category;
+  plataformas?: Platform[];
+  ventas?: Sale[];
+};
+
 // Plataforma (muchos a muchos con Juego)
 export type Platform = {
   id: number;
@@ -36,24 +56,4 @@ export type Sale = {
   juego_id: number;
   codigo: string;
   monto_pagado: number;
-};
-
-// Juego (Game) - principal
-export type Game = {
-  rating?: number;
-  id?: string;
-  image?: string;
-  titulo: string;
-  description: string;
-  precio?: number;
-  categoria_id?: number;
-  esta_oferta?: boolean;
-  estado?: boolean;
-  videoURL?: string;
-  detalleImagenes: string[];
-
-  // Relaciones:
-  categoria?: Category;
-  plataformas?: Platform[];
-  ventas?: Sale[];
 };

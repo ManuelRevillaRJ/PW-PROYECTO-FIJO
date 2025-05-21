@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link } from "react-router";
 
 export default function NavBar() {
   return (
@@ -14,7 +14,8 @@ export default function NavBar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -30,7 +31,8 @@ export default function NavBar() {
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Categories
               </a>
               <ul className="dropdown-menu">
@@ -67,7 +69,8 @@ export default function NavBar() {
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Platform
               </a>
               <ul className="dropdown-menu">
@@ -111,6 +114,12 @@ export default function NavBar() {
                 </Link>
               </div>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={"/ganancias"}>
+                <i className="bi bi-bar-chart me-2"></i>
+                Estadisticas
+              </Link>
+            </li>
           </ul>
           <form className="d-flex" role="search">
             <input
@@ -126,5 +135,5 @@ export default function NavBar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
