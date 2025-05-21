@@ -6,15 +6,17 @@ import { ListaGames } from "../utils/ListaJuegos";
 import "../styles/Modal.css";
 import type { Game } from "../types/Game";
 
-interface ModalAgregarJuego {
+interface ModalEliminarJuego {
   show: boolean;
   onHide: () => void;
   id: string;
 }
 
-
-
-export default function ModalAgregar({ show, onHide , id}: ModalAgregarJuego) {
+export default function ModalEliminar({
+  show,
+  onHide,
+  id,
+}: ModalEliminarJuego) {
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     // aca poner que elimine
@@ -23,17 +25,30 @@ export default function ModalAgregar({ show, onHide , id}: ModalAgregarJuego) {
   };
 
   return (
-    <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
+    <Modal
+      className="modal"
+      show={show}
+      onHide={onHide}
+      centered
+      size="lg"
+      backdrop="static"
+    >
       <Modal.Header closeButton className="bg-dark text-white">
         <Modal.Title>¿Seguro que quiere eliminar este juego?</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="bg-dark text-white">
         <form onSubmit={handleSubmit}>
-          <button type="button" onClick={onHide}>
-            Cancelar
-          </button>
-          <SubmitButton label="Eliminar" />
+          <div>
+            <div className="row align-items-start">
+              <button type="button" onClick={onHide} className="col btn btn-secondary mt-2 mb-2 w-100">
+                Cancelar
+              </button>
+              <SubmitButton label="Eliminar" className="col" />
+            </div>
+          </div>
+
+          
         </form>
       </Modal.Body>
     </Modal>
