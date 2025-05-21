@@ -8,7 +8,7 @@ import { ListaGames } from "../utils/ListaJuegos";
 
 export default function BestSellers() {
   const [juegoSeleccionado, setJuegoSeleccionado] = useState<null | {
-    title: string;
+    titulo: string;
     description: string;
     image?: string;
   }>(null);
@@ -31,12 +31,12 @@ export default function BestSellers() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
               {ListaGames.map((game) => (
                 <GameCard2
-                  key={game.title}
-                  titulo={game.title}
-                  description={game.desc}
-                  image={game.img}
-                  videoURL={game.video}
-                  detalleImagenes={game.detalles}
+                  key={game.titulo}
+                  titulo={game.titulo}
+                  description={game.description}
+                  image={game.image}
+                  videoURL={game.videoURL}
+                  detalleImagenes={game.detalleImagenes}
                 />
               ))}
             </div>
@@ -53,7 +53,7 @@ export default function BestSellers() {
           backdrop="static"
         >
           <Modal.Header closeButton className="bg-dark text-white">
-            <Modal.Title>{juegoSeleccionado.title}</Modal.Title>
+            <Modal.Title>{juegoSeleccionado.titulo}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body className="bg-dark text-white">
