@@ -1,22 +1,15 @@
 import { Modal, Button } from "react-bootstrap";
+import type { Game } from "../types/Game";
 
 interface ModalJuegoProps {
   show: boolean;
   onHide: () => void;
-  titulo: string;
-  descripcion: string;
-  videoURL: string;
-  imagenes: string[];
+  juego: Game;
 }
 
-export default function ModalJuego({
-  show,
-  onHide,
-  titulo,
-  descripcion,
-  videoURL,
-  imagenes,
-}: ModalJuegoProps) {
+export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
+  const { titulo, description, videoURL, detalleImagenes } = juego;
+
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
       <Modal.Header closeButton className="bg-dark text-white">
@@ -37,7 +30,7 @@ export default function ModalJuego({
         </div>
 
         <div className="d-flex overflow-auto gap-2 mb-3">
-          {imagenes.map((img, idx) => (
+          {detalleImagenes.map((img, idx) => (
             <img
               key={idx}
               src={img}
@@ -48,7 +41,7 @@ export default function ModalJuego({
           ))}
         </div>
 
-        <p>{descripcion}</p>
+        <p>{description}</p>
 
         <div className="mb-3">
           <p>Calificación:</p>

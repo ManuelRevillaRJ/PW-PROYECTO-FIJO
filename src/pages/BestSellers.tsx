@@ -100,7 +100,7 @@ export default function BestSellers() {
               {ListaGames.map((game) => (
                 <GameCard2
                   key={game.title}
-                  title={game.title}
+                  titulo={game.title}
                   description={game.desc}
                   image={game.img}
                   videoURL={game.video}

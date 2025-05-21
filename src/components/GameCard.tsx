@@ -1,21 +1,39 @@
-export type Game = {
-  image: string;
-  title: string;
-  description: string;
-};
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import ModalJuego from "./ModalJuego";
+import type { Game } from "../types/Game";
 
-const GameCard = (e: Game) => {
+export default function GameCard2(game: Game) {
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const { image, titulo, description } = game;
+
   return (
-    <div className="col">
-      <div className="card h-100">
-        <img src={e.image} className="card-img-top" alt={e.title} />
-        <div className="card-body">
-          <h5 className="card-title">{e.title}</h5>
-          <p className="card-text">{e.description}</p>
+    <>
+      <div className="col">
+        <div className="card h-100">
+          <img src={image} className="card-img-top" alt={titulo} />
+          <div className="card-body d-flex flex-column justify-content-between">
+            <div>
+              <h5 className="card-title">{titulo}</h5>
+              <p className="card-text">{description}</p>
+            </div>
+            <div className="mt-auto">
+              <Button
+                className="w-100 mt-2"
+                onClick={() => setMostrarModal(true)}
+              >
+                Detalle
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default GameCard;
+      <ModalJuego
+        show={mostrarModal}
+        onHide={() => setMostrarModal(false)}
+        juego={game}
+      />
+    </>
+  );
+}
