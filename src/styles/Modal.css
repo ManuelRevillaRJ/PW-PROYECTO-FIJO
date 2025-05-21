@@ -23,6 +23,10 @@
   margin: auto;
 }
 
+.btn {
+    margin: center;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;

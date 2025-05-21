@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 
@@ -6,11 +6,35 @@ import "../styles/Table.css";
 
 import { ListaGames } from "../utils/ListaJuegos";
 import type { Game } from "../types/Game";
+import ModalAgregar from "./ModalAgregar";
 
+
+
+  
 
 export const Table = () => {
+  const [modalAbierto, setModalAbierto] = useState(false);
+
+  const abrirModal = () => setModalAbierto(true);
+  const cerrarModal = () => setModalAbierto(false);
+
+  
   return (
-    <span className="table-wrapper">
+    <div className="table-wrapper">
+      <div className="col-md-2">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => {abrirModal()}}
+        >
+          Agregar
+        </button>
+
+        {modalAbierto && (
+        <ModalAgregar show={modalAbierto} onHide={cerrarModal}/>
+      )}
+
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -22,13 +46,13 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {ListaGames.map( (juego: Game) => {
+          {ListaGames.map((juego: Game) => {
             return (
               <tr key={juego.id}>
-                <td >{juego.id}</td>
+                <td>{juego.id}</td>
                 <td className="expandesque">{juego.titulo}</td>
                 <td className="expand">{juego.description}</td>
-                <td >{juego.precio}</td>
+                <td>{juego.precio}</td>
 
                 <td className="fit">
                   <span className="actions">
@@ -47,6 +71,6 @@ export const Table = () => {
           })}
         </tbody>
       </table>
-    </span>
+    </div>
   );
 };
