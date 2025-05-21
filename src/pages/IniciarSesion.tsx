@@ -3,13 +3,12 @@ import AuthCard from "../components/AuthCard";
 import FormInput from "../components/FormInput";
 import SubmitButton from "../components/Button";
 import FormTitle from "../components/FormTitle";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const IniciarSesion = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
   
   let siExiste: null | boolean = true;
 

@@ -55,6 +55,16 @@ const CrearCuenta = () => {
         />
         <SubmitButton label="Crear" />
       </form>
+      {(() => {
+        if (nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
+          return (
+            <button type="button" className="btn btn-danger">
+              Los datos ingresados son incorrectos
+            </button>
+          );
+        }
+      })()}
+      
       <Link to="/iniciar_sesion" className="d-block mt-3">
         ¿Ya tienes una cuenta?
       </Link>

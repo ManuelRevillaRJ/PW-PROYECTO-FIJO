@@ -73,7 +73,7 @@ export const ListaGames: Game[] = [
     ventas: [],
   },
   {
-    id: "simulación de granja desarrollado por Eric ConcernedApe Barone y publicado por Chucklefish Games (actualmente por ConcernedApe). ",
+    id: "4",
     titulo: "R.E.P.O",
     description:
       "Videojuego cooperativo de terror y supervivencia en línea , desarrollado y publicado por el estudio sueco Semiwork para Windows .",
@@ -95,3 +95,4 @@ export const ListaGames: Game[] = [
     ventas: [],
   },
 ];
+

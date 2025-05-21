@@ -13,6 +13,7 @@ import MejoresValorados from "./pages/MejorValorados";
 import BestSellers from "./pages/BestSellers";
 import CartTestPage from "./pages/CartTestPage";
 import Usuarios from "./pages/Usuarios";
+import VistaAdmin from "./pages/VistaAdmin";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/ganancias" element={<Ganancias />} />
         <Route path="/carrito" element={<CartTestPage />} />
         <Route path="/users" element={<Usuarios />} />
+        <Route path="/games" element={<VistaAdmin />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
