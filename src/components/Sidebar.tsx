@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { cerrarSesion } from "../utils/cerrar_sesion";
 
 export default function Sidebar() {
   return (
@@ -49,10 +50,11 @@ export default function Sidebar() {
           Statistics
         </NavLink>
         <NavLink
-          to="/logout"
+          to="/"
           className={({ isActive }) =>
             "nav-link mt-4" + (isActive ? " bg-light text-dark rounded" : " text-white")
           }
+          onClick={cerrarSesion}
         >
           Log out
         </NavLink>
