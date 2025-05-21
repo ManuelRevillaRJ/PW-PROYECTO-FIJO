@@ -3,20 +3,24 @@ import AuthCard from "../components/AuthCard";
 import FormInput from "../components/FormInput";
 import SubmitButton from "../components/Button";
 import FormTitle from "../components/FormTitle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const CrearCuenta = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate()
+   
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     // prueba
     console.log({ nombre, email, password });
 
     // aca poner que envie correo de confirmacion y que envíe a la pagina de confirmacion
+    sessionStorage.setItem("user", nombre);
+    navigate("/")
+    
   };
 
 
@@ -58,4 +62,4 @@ const CrearCuenta = () => {
   );
 };
 
-export default CrearCuenta;
+export default CrearCuenta;

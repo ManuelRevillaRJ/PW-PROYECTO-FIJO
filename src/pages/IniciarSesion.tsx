@@ -3,12 +3,14 @@ import AuthCard from "../components/AuthCard";
 import FormInput from "../components/FormInput";
 import SubmitButton from "../components/Button";
 import FormTitle from "../components/FormTitle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const IniciarSesion = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  
   let siExiste: null | boolean = true;
 
   const handleSubmit = (evt: FormEvent) => {
@@ -18,6 +20,8 @@ const IniciarSesion = () => {
 
     // verificacion que existan en base de datos, ahorita prelim
     siExiste = true;
+    sessionStorage.setItem("user", nombre);
+    //navigate("/")
   };
 
   return (
@@ -51,7 +55,7 @@ const IniciarSesion = () => {
         <SubmitButton label="Ingresar" />
       </form>
       {(() => {
-        if (!siExiste) {
+        if (!siExiste || nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
           return (
             <button type="button" className="btn btn-danger">
               Los datos ingresados son incorrectos
@@ -76,4 +80,4 @@ const IniciarSesion = () => {
   );
 };
 
-export default IniciarSesion;
+export default IniciarSesion;
