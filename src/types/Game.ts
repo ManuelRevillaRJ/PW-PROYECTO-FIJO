@@ -1,7 +1,7 @@
 // Juego (Game) - principal
 export type Game = {
   rating?: number;
-  id?: string;
+  id: string;
   image?: string;
   titulo: string;
   description?: string;

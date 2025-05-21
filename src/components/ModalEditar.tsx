@@ -5,17 +5,18 @@ import SubmitButton from "./Button";
 import { ListaGames } from "../utils/ListaJuegos";
 
 import "../styles/Modal.css";
+import type { Game } from "../types/Game";
 
-interface ModalAgregarJuego {
+interface ModalEditarJuego {
   show: boolean;
   onHide: () => void;
+  juego: Game;
 }
 
-export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
-  const [titulo1, setTitulo1] = useState("");
-  const [description, setDescription] = useState("");
-  const [precio, setPrecio] = useState(0);
-  let errorEncontrado = "";
+export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
+  const [titulo1, setTitulo1] = useState(juego.titulo);
+  const [description, setDescription] = useState(juego.description ?? ""); // descripcion o sino vacio
+  const [precio, setPrecio] = useState(juego.precio ?? 0);
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -24,19 +25,12 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
 
     // aca poner que agregue a la lista de juegos
     if (titulo1 != "" && description != "") {
-      ListaGames.push({
-        id: JSON.stringify(ListaGames.length +1),
-        titulo: titulo1,
-        description: description,
-        precio: precio,
-      });
+      juego.titulo = titulo1;
+      juego.description = description;
+      juego.precio = precio;
       onHide();
-    } else {
-      errorEncontrado = '<button type="button" className={`btn btn-danger ${ errorEncontrado ? "visible" : "invisible" }`} > Los datos ingresados son incorrectos </button>';
-    }
+    } 
   };
-
-  
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
@@ -67,7 +61,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             value={precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
-          <SubmitButton label="Crear"/>
+          <SubmitButton label="Guardar"/>
         </form>
       </Modal.Body>
       <Modal.Footer>
@@ -75,7 +69,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
               if (titulo1 == "" || description == "") {
               return <button type="button" className="btn btn-danger"> Faltan datos </button>;
             }})()}
-          </Modal.Footer>
+      </Modal.Footer>
     </Modal>
   );
 }
