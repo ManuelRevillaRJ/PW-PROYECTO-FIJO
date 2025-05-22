@@ -8,7 +8,6 @@ import { revisarAdmin } from "../utils/admins"
 import { useNavigate } from "react-router-dom"
 
 const IniciarSesion = () => {
-    const [nombre, setNombre] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -18,12 +17,12 @@ const IniciarSesion = () => {
     const handleSubmit = (evt: FormEvent) => {
         evt.preventDefault()
         // prueba
-        console.log({ nombre, email, password })
+        console.log({email, password })
 
         // verificacion que existan en base de datos, ahorita prelim
         siExiste = true
-        sessionStorage.setItem("user", nombre)
-        if (revisarAdmin(nombre, email, password)) {
+        sessionStorage.setItem("mail", email)
+        if (revisarAdmin(email, password)) {
             navigate("/games")
         }
     }
@@ -34,13 +33,6 @@ const IniciarSesion = () => {
                 <FormTitle
                     title="Iniciar Sesión en GameStore"
                     description="Llene los siguientes datos para ingresar:"
-                />
-                <FormInput
-                    label="Nombre"
-                    type="text"
-                    id="nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.currentTarget.value)}
                 />
                 <FormInput
                     label="Correo Electrónico"
@@ -61,7 +53,6 @@ const IniciarSesion = () => {
             {(() => {
                 if (
                     !siExiste ||
-                    nombre == "" ||
                     !email.includes("@") ||
                     !email.includes(".") ||
                     password == ""

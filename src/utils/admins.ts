@@ -17,9 +17,9 @@ export const ListaAdmins: User[] = [
 
 ]
 
-export function revisarAdmin (user: string, email: string, password : string) : boolean {
+export function revisarAdmin (email: string, password : string) : boolean {
     for (const administrador of ListaAdmins){
-        if (administrador.nombre == user && administrador.correo == email && administrador.password == password){
+        if (administrador.correo == email && administrador.password == password){
             return true;
         }
     }
