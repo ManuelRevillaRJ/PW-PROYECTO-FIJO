@@ -34,7 +34,7 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
       <Modal.Header closeButton className="bg-dark text-white">
-        <Modal.Title>Agregar Juego</Modal.Title>
+        <Modal.Title>Editar Juego</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="bg-dark text-white">
@@ -63,7 +63,7 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
           <SubmitButton label="Guardar"/>
         </form>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className="bg-dark text-white">
             {(()=> {
               if (titulo1 == "" || description == "") {
               return <button type="button" className="btn btn-danger"> Faltan datos </button>;

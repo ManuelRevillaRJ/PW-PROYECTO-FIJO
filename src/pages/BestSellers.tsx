@@ -38,8 +38,8 @@ export default function BestSellers() {
                   description={game.description}
                   image={game.image}
                   videoURL={game.videoURL}
-                  detalleImagenes={game.detalleImagenes}
-                />
+                  detalleImagenes={game.detalleImagenes} 
+                  precio={game.precio}                />
               ))}
             </div>
           </div>
