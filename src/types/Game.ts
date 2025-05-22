@@ -5,7 +5,7 @@ export type Game = {
     image?: string
     titulo: string
     description?: string
-    precio?: number
+    precio: number
     categoria_id?: number
     esta_oferta?: boolean
     estado?: boolean

@@ -2,7 +2,6 @@ import { Modal } from "react-bootstrap";
 import { useState, type FormEvent } from "react";
 import FormInput from "./FormInput";
 import SubmitButton from "./Button";
-import { ListaGames } from "../utils/ListaJuegos";
 
 import "../styles/Modal.css";
 import type { Game } from "../types/Game";
@@ -41,7 +40,7 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
       <Modal.Body className="bg-dark text-white">
         <form onSubmit={handleSubmit}>
           <FormInput
-            label="Titulo1"
+            label="Titulo"
             type="text"
             id="titulo1"
             value={titulo1}
@@ -58,7 +57,7 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
             label="Precio"
             type="number"
             id="precio"
-            value={precio}
+            value={""+precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
           <SubmitButton label="Guardar"/>
