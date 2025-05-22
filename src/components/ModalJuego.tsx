@@ -58,7 +58,7 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
                             >
                                 👍 Buen Juego
                             </Button>
-                            <Button variant="danger" className=" col me-auto">
+                            <Button variant="danger" className=" ms-4 me-4">
                                 👎 Mal Juego
                             </Button>
                         </div>

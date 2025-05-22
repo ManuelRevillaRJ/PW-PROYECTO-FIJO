@@ -41,10 +41,10 @@ export default function ModalEliminar({
         <form onSubmit={handleSubmit}>
           <div>
             <div className="row align-items-start">
-              <button type="button" onClick={onHide} className="col btn btn-secondary mt-2 mb-2 w-100">
+              <button type="button" onClick={onHide} className="col btn btn-secondary mt-2 mb-2 w-100 ms-4 me-4">
                 Cancelar
               </button>
-              <SubmitButton label="Eliminar" className="col" />
+              <SubmitButton label="Eliminar" className="col ms-4 me-4" />
             </div>
           </div>
 

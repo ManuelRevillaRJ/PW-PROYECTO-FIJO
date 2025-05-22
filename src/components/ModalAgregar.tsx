@@ -61,13 +61,13 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             label="Precio"
             type="number"
             id="precio"
-            value={precio}
+            value={""+precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
           <SubmitButton label="Crear"/>
         </form>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className="bg-dark text-white">
             {(()=> {
               if (titulo1 == "" || description == "") {
               return <button type="button" className="btn btn-danger"> Faltan datos </button>;
