@@ -1,18 +1,10 @@
-import { useState } from "react";
-import Carousel from "../components/Carousel";
-import GameCard2 from "../components/GameCard";
-import NavBar from "../components/NavBar";
-import { Modal, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ListaGames } from "../utils/ListaJuegos";
+import Carousel from "../components/Carousel"
+import GameCard from "../components/GameCard"
+import NavBar from "../components/NavBar"
+import "bootstrap/dist/css/bootstrap.min.css"
+import { ListaGames } from "../utils/ListaJuegos"
 
 export default function BestSellers() {
-  const [juegoSeleccionado, setJuegoSeleccionado] = useState<null | {
-    titulo: string;
-    description: string;
-    image?: string;
-  }>(null);
-
   return (
     <>
       <NavBar />
@@ -22,85 +14,17 @@ export default function BestSellers() {
 
           <Carousel />
 
-          <div
-            className="row row-cols-2 row-cols-md-5 g-4"
-            id="games-list"
-          ></div>
+          <div className="row row-cols-2 row-cols-md-5 g-4" id="games-list"></div>
 
           <div className="container text-center">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
               {ListaGames.map((game) => (
-                <GameCard2
-                  key={game.titulo}
-                  titulo={game.titulo}
-                  description={game.description}
-                  image={game.image}
-                  videoURL={game.videoURL}
-                  detalleImagenes={game.detalleImagenes}
-                />
+                <GameCard game={game} />
               ))}
             </div>
           </div>
         </div>
       </div>
-
-      {juegoSeleccionado && (
-        <Modal
-          show
-          onHide={() => setJuegoSeleccionado(null)}
-          centered
-          size="lg"
-          backdrop="static"
-        >
-          <Modal.Header closeButton className="bg-dark text-white">
-            <Modal.Title>{juegoSeleccionado.titulo}</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body className="bg-dark text-white">
-            {/* Video del juego */}
-            <div className="mb-3">
-              <video width="100%" controls poster={juegoSeleccionado.image}>
-                <source
-                  src="https://www.w3schools.com/html/mov_bbb.mp4"
-                  type="video/mp4"
-                />
-                Tu navegador no soporta video HTML5.
-              </video>
-            </div>
-
-            {/* Imágenes de gameplay en scroll horizontal */}
-            <div className="d-flex overflow-auto gap-2 mb-3">
-              {[1, 2, 3, 4].map((i) => (
-                <img
-                  key={i}
-                  src={`https://picsum.photos/seed/${i}/150`}
-                  alt="Gameplay"
-                  className="rounded"
-                />
-              ))}
-            </div>
-
-            {/* Descripción del juego */}
-            <div className="mb-3">
-              <p>{juegoSeleccionado.description}</p>
-            </div>
-
-            {/* Calificación del juego */}
-            <div className="mb-3">
-              <p className="mb-1">Calificación:</p>
-              <p>⭐⭐⭐⭐☆</p>
-              <Button variant="success" className="me-2">
-                👍 Buen Juego
-              </Button>
-              <Button variant="danger">👎 Mal Juego</Button>
-            </div>
-          </Modal.Body>
-
-          <Modal.Footer className="bg-dark">
-            <Button variant="primary">Comprar Ahora</Button>
-          </Modal.Footer>
-        </Modal>
-      )}
     </>
-  );
+  )
 }

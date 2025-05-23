@@ -1,4 +1,4 @@
-import type { Game } from "../types/Game";
+import type { Game } from "../types/types"
 
 export const ListaGames: Game[] = [
   {
@@ -19,18 +19,14 @@ export const ListaGames: Game[] = [
     categoria_id: 1,
     esta_oferta: true,
     estado: true,
-    categoria: { id: 1, nombre: "Acción" },
-    plataformas: [
-      { id: 1, nombre: "PC" },
-      { id: 2, nombre: "PlayStation" },
-    ],
+    categorias: ["Action", "Crime"],
+    plataformas: ["Windows", "PS5", "PS4"],
     ventas: [],
   },
   {
     id: "2",
     titulo: "Shadowfall",
-    description:
-      "A stealth-based ninja adventure with parkour mechanics and gripping narrative.",
+    description: "A stealth-based ninja adventure with parkour mechanics and gripping narrative.",
     image: "https://picsum.photos/id/1005/400/250",
     videoURL: "https://www.w3schools.com/html/movie.mp4",
     detalleImagenes: [
@@ -43,15 +39,14 @@ export const ListaGames: Game[] = [
     categoria_id: 2,
     esta_oferta: false,
     estado: true,
-    categoria: { id: 2, nombre: "Aventura" },
-    plataformas: [{ id: 1, nombre: "PC" }],
+    categorias: ["Stealth", "Adventure", "Movement"],
+    plataformas: ["PS5", "Switch"],
     ventas: [],
   },
   {
     id: "3",
     titulo: "Pixel Forge",
-    description:
-      "Build, craft, and survive in a voxel-based fantasy world full of secrets.",
+    description: "Build, craft, and survive in a voxel-based fantasy world full of secrets.",
     image: "https://picsum.photos/id/1025/400/250",
     videoURL: "https://www.w3schools.com/html/mov_bbb.mp4",
     detalleImagenes: [
@@ -64,15 +59,14 @@ export const ListaGames: Game[] = [
     categoria_id: 3,
     esta_oferta: false,
     estado: true,
-    categoria: { id: 3, nombre: "Sandbox" },
-    plataformas: [{ id: 3, nombre: "Nintendo Switch" }],
+    categorias: ["Survival", "Builder", "Fantasy"],
+    plataformas: ["Windows", "PS5", "MacOS"],
     ventas: [],
   },
   {
     id: "4",
     titulo: "RoboArena",
-    description:
-      "Fast-paced multiplayer battles with customizable mechs and explosive abilities.",
+    description: "Fast-paced multiplayer battles with customizable mechs and explosive abilities.",
     image: "https://picsum.photos/id/1035/400/250",
     videoURL: "https://www.w3schools.com/html/movie.mp4",
     detalleImagenes: [
@@ -85,18 +79,14 @@ export const ListaGames: Game[] = [
     categoria_id: 4,
     esta_oferta: true,
     estado: true,
-    categoria: { id: 4, nombre: "Multiplayer" },
-    plataformas: [
-      { id: 1, nombre: "PC" },
-      { id: 4, nombre: "Xbox" },
-    ],
+    categorias: ["Action", "Multiplayer", "FPS"],
+    plataformas: ["Windows", "PS5", "Switch", "MacOS"],
     ventas: [],
   },
   {
     id: "5",
     titulo: "Silent Echo",
-    description:
-      "A psychological horror puzzle game where every sound could be your last.",
+    description: "A psychological horror puzzle game where every sound could be your last.",
     image: "https://picsum.photos/id/1065/400/250",
     videoURL: "https://www.w3schools.com/html/mov_bbb.mp4",
     detalleImagenes: [
@@ -109,15 +99,14 @@ export const ListaGames: Game[] = [
     categoria_id: 5,
     esta_oferta: false,
     estado: true,
-    categoria: { id: 5, nombre: "Horror" },
-    plataformas: [{ id: 2, nombre: "PlayStation" }],
+    categorias: ["Horror", "Puzzle"],
+    plataformas: ["Windows", "PS5"],
     ventas: [],
   },
   {
     id: "6",
     titulo: "Neon Drift",
-    description:
-      "Race through futuristic cityscapes in gravity-defying anti-grav vehicles.",
+    description: "Race through futuristic cityscapes in gravity-defying anti-grav vehicles.",
     image: "https://picsum.photos/id/1045/400/250",
     videoURL: "https://www.w3schools.com/html/movie.mp4",
     detalleImagenes: [
@@ -130,11 +119,8 @@ export const ListaGames: Game[] = [
     categoria_id: 6,
     esta_oferta: true,
     estado: true,
-    categoria: { id: 6, nombre: "Carreras" },
-    plataformas: [
-      { id: 1, nombre: "PC" },
-      { id: 4, nombre: "Xbox" },
-    ],
+    categorias: ["Racing", "Sci-Fi"],
+    plataformas: ["Windows", "PS5", "Switch"],
     ventas: [],
   },
-];
+]

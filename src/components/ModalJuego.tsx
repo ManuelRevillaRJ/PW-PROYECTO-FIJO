@@ -1,14 +1,14 @@
 import { Modal, Button } from "react-bootstrap";
-import type { Game } from "../types/Game";
+import type { Game } from "../types/types"
 
 interface ModalJuegoProps {
-  show: boolean;
-  onHide: () => void;
-  juego: Game;
+  show: boolean
+  onHide: () => void
+  juego: Game
 }
 
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
-  const { titulo, description, videoURL, detalleImagenes } = juego;
+  const { titulo, description, videoURL, detalleImagenes, precio } = juego
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
@@ -25,23 +25,17 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
             title={titulo}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+            allowFullScreen></iframe>
         </div>
 
         <div className="d-flex overflow-auto gap-2 mb-3">
           {detalleImagenes.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`img-${idx}`}
-              className="rounded"
-              width={150}
-            />
+            <img key={idx} src={img} alt={`img-${idx}`} className="rounded" width={150} />
           ))}
         </div>
 
         <p>{description}</p>
+        <p>Precio: ${precio}</p>
 
         <div className="mb-3">
           <p>Calificación:</p>
@@ -57,5 +51,5 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
         <Button variant="primary">Comprar Ahora</Button>
       </Modal.Footer>
     </Modal>
-  );
+  )
 }
