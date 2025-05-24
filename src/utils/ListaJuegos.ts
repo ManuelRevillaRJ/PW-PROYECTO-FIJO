@@ -25,19 +25,12 @@ export const ListaGames: Game[] = [
   },
   {
     id: "2",
-<<<<<<< HEAD
-    titulo: "Shadowfall",
-    description: "A stealth-based ninja adventure with parkour mechanics and gripping narrative.",
-    image: "https://picsum.photos/id/1005/400/250",
-    videoURL: "https://www.w3schools.com/html/movie.mp4",
-=======
     titulo: "Stardew Valley",
     description:
       "simulación de granja desarrollado por Eric ConcernedApe Barone y publicado por Chucklefish Games (actualmente por ConcernedApe). ",
     image:
       "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/capsule_616x353.jpg?t=1711128146",
     videoURL: "https://www.youtube.com/embed/ot7uXNQskhs",
->>>>>>> 99fad86190f4c032fa21129146a3ce7a9ab8654e
     detalleImagenes: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2xir6ckE-F1dzm_IsSXW8NkSfzrcnSxhvXg&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtwjV19g36n4h_hKIMGdQcHDQkbkkCqSg9uw&s",
@@ -54,36 +47,6 @@ export const ListaGames: Game[] = [
   },
   {
     id: "3",
-<<<<<<< HEAD
-    titulo: "Pixel Forge",
-    description: "Build, craft, and survive in a voxel-based fantasy world full of secrets.",
-    image: "https://picsum.photos/id/1025/400/250",
-    videoURL: "https://www.w3schools.com/html/mov_bbb.mp4",
-    detalleImagenes: [
-      "https://picsum.photos/seed/pixel1/150",
-      "https://picsum.photos/seed/pixel2/150",
-      "https://picsum.photos/seed/pixel3/150",
-    ],
-    rating: 4.0,
-    precio: 24.99,
-    categoria_id: 3,
-    esta_oferta: false,
-    estado: true,
-    categorias: ["Survival", "Builder", "Fantasy"],
-    plataformas: ["Windows", "PS5", "MacOS"],
-    ventas: [],
-  },
-  {
-    id: "4",
-    titulo: "RoboArena",
-    description: "Fast-paced multiplayer battles with customizable mechs and explosive abilities.",
-    image: "https://picsum.photos/id/1035/400/250",
-    videoURL: "https://www.w3schools.com/html/movie.mp4",
-    detalleImagenes: [
-      "https://picsum.photos/seed/robo1/150",
-      "https://picsum.photos/seed/robo2/150",
-      "https://picsum.photos/seed/robo3/150",
-=======
     titulo: "Schedule I",
     description: "Simulador de Breaking Bad",
     image:
@@ -93,7 +56,6 @@ export const ListaGames: Game[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1fx9-ClPlWqwz5rEqCwi5gBi-E0xV7q8Xiw&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuaIQMd0PsU6xQdQKtXFmhlU-pouTwmCj5GQ&s",
       "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg",
->>>>>>> 99fad86190f4c032fa21129146a3ce7a9ab8654e
     ],
     rating: 3.9,
     precio: 29.99,
@@ -105,13 +67,6 @@ export const ListaGames: Game[] = [
     ventas: [],
   },
   {
-<<<<<<< HEAD
-    id: "5",
-    titulo: "Silent Echo",
-    description: "A psychological horror puzzle game where every sound could be your last.",
-    image: "https://picsum.photos/id/1065/400/250",
-    videoURL: "https://www.w3schools.com/html/mov_bbb.mp4",
-=======
     id: "4",
     titulo: "R.E.P.O",
     description:
@@ -119,7 +74,6 @@ export const ListaGames: Game[] = [
     image:
       "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3241660/2cff5912c1add2e009eb1c1c630a47ac06cb81a1/capsule_616x353.jpg?t=1747381002",
     videoURL: "https://www.youtube.com/embed/oSfoK8eSeD8",
->>>>>>> 99fad86190f4c032fa21129146a3ce7a9ab8654e
     detalleImagenes: [
       "https://generacionxbox.com/wp-content/uploads/2025/03/repo-guia-nuevos-jugadores.jpg",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeokBQUC3ekgTdN81xIzs3nkQrMMXeYuqudg&s",
@@ -130,37 +84,264 @@ export const ListaGames: Game[] = [
     categoria_id: 5,
     esta_oferta: false,
     estado: true,
-<<<<<<< HEAD
     categorias: ["Horror", "Puzzle"],
     plataformas: ["Windows", "PS5"],
     ventas: [],
   },
   {
-    id: "6",
-    titulo: "Neon Drift",
-    description: "Race through futuristic cityscapes in gravity-defying anti-grav vehicles.",
-    image: "https://picsum.photos/id/1045/400/250",
-    videoURL: "https://www.w3schools.com/html/movie.mp4",
+    id: "5",
+    titulo: "The Witcher 3: Wild Hunt",
+    description:
+      "Un RPG de mundo abierto donde juegas como Geralt de Rivia, un cazador de monstruos en busca de su hija adoptiva.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg",
+    videoURL: "https://www.youtube.com/embed/ndl1W4ltcmg",
     detalleImagenes: [
-      "https://picsum.photos/seed/neon1/150",
-      "https://picsum.photos/seed/neon2/150",
-      "https://picsum.photos/seed/neon3/150",
+      "https://cdn.mos.cms.futurecdn.net/KMHpNEPe7xhzhnq9Eeap3K.jpg",
+      "https://cdn.wccftech.com/wp-content/uploads/2015/03/Witcher-3-Screenshot.jpg",
+      "https://static.wikia.nocookie.net/witcher/images/6/66/Witcher3screenshot.jpg",
     ],
-    rating: 4.1,
-    precio: 34.99,
-    categoria_id: 6,
+    rating: 4.9,
+    precio: 39.99,
+    categoria_id: 2,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["RPG", "Fantasy"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+  {
+    id: "6",
+    titulo: "Red Dead Redemption 2",
+    description:
+      "Un épico juego de acción y aventura del viejo oeste desarrollado por Rockstar Games.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg",
+    videoURL: "https://www.youtube.com/embed/eaW0tYpxyp0",
+    detalleImagenes: [
+      "https://cdn.vox-cdn.com/thumbor/GGzpqlRZoySBzjxu_Az-0cRGFaI=/0x0:3840x2160/1400x788/filters:focal(1613x713:2227x1327):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/62394169/red_dead_redemption_2_pc_4k_screenshot_7.0.jpg",
+      "https://www.rockstargames.com/reddeadredemption2/img/global/order/pc.jpg",
+      "https://i.ytimg.com/vi/HVRzx17WHVk/maxresdefault.jpg",
+    ],
+    rating: 4.7,
+    precio: 69.99,
+    categoria_id: 1,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["Action", "Adventure", "Western"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+  {
+    id: "7",
+    titulo: "Cyberpunk 2077",
+    description:
+      "Un juego de rol de acción ambientado en un futuro distópico donde juegas como un mercenario conocido como V.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
+    videoURL: "https://www.youtube.com/embed/qIcTM8WXFjk",
+    detalleImagenes: [
+      "https://media.wired.com/photos/5fc53a212c7f9b54c23950f2/master/w_2560%2Cc_limit/Gear-Cyberpunk-2077-Screenshots-2.jpg",
+      "https://i.ytimg.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_a96b87e00e79e97b2340f597e0ac3c0cd2a6acdd.1920x1080.jpg",
+    ],
+    rating: 4.2,
+    precio: 49.99,
+    categoria_id: 3,
     esta_oferta: true,
     estado: true,
-    categorias: ["Racing", "Sci-Fi"],
-    plataformas: ["Windows", "PS5", "Switch"],
+    categorias: ["RPG", "Sci-Fi"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+
+  {
+    id: "8",
+    titulo: "Elden Ring",
+    description:
+      "Un RPG de acción desarrollado por FromSoftware en colaboración con George R. R. Martin.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
+    videoURL: "https://www.youtube.com/embed/E3Huy2cdih0",
+    detalleImagenes: [
+      "https://i.ytimg.com/vi/K_03kFqWfqs/maxresdefault.jpg",
+      "https://images6.alphacoders.com/120/1204831.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/ss_bfdfeaf3b0cba18a58db9c0a2c060d78684b0a4f.1920x1080.jpg",
+    ],
+    rating: 4.9,
+    precio: 59.99,
+    categoria_id: 2,
+    esta_oferta: true,
+    estado: true,
+    categorias: ["RPG", "Dark Fantasy"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+  {
+    id: "9",
+    titulo: "Infinity Blade II",
+    description:
+      "La secuela del revolucionario juego de acción y combate, ahora adaptado para Windows y MacOS con gráficos remasterizados y nuevas mecánicas de RPG.",
+    image:
+      "https://cdn2.unrealengine.com/Infinity+Blade%2FIB2+Assets%2FIB2_01_SirisVNoc-1136x640-631e2af3fc865236dbe04f73946b989dc9be4418.jpg",
+    videoURL: "https://www.youtube.com/embed/LydxcQfeFVU",
+    detalleImagenes: [
+      "https://i.ytimg.com/vi/7bze8C_BHks/maxresdefault.jpg",
+      "https://cdn2.unrealengine.com/IB2_hero-1920x1080-7214e40a7b53.jpg",
+      "https://cdn2.unrealengine.com/infinityblade2_featured-1920x1080-ea293af64866.jpg",
+    ],
+    rating: 4.3,
+    precio: 19.99,
+    categoria_id: 3,
+    esta_oferta: true,
+    estado: true,
+    categorias: ["Action", "Fantasy"],
+    plataformas: ["Windows", "MacOS"],
+    ventas: [],
+  },
+  {
+    id: "10",
+    titulo: "Titanfall 2",
+    description:
+      "Shooter en primera persona con una campaña aclamada y multijugador intenso donde combates como piloto y titán.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1237970/header.jpg",
+    videoURL: "https://www.youtube.com/embed/HwbutTQ8Yow",
+    detalleImagenes: [
+      "https://images5.alphacoders.com/719/719401.jpg",
+      "https://cdn1.epicgames.com/offer/8e54fe7f5a4f40cd84f6f6b3d312dc20/tf2_2560x1440-02_2560x1440-8bd68cb96e67c520abe27cf49e0d59ba",
+      "https://cdn.mos.cms.futurecdn.net/EqkqH3d9BdzHsyN4qkkAWP.jpg",
+    ],
+    rating: 4.6,
+    precio: 29.99,
+    categoria_id: 1,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["FPS", "Sci-Fi"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+  {
+    id: "11",
+    titulo: "Ironsight",
+    description:
+      "FPS gratuito ambientado en un futuro cercano con combates rápidos, drones, y armas futuristas.",
+    image: "https://cdn.cloudflare.steamstatic.com/steam/apps/783770/header.jpg",
+    videoURL: "https://www.youtube.com/embed/5wFaF5AKwB8",
+    detalleImagenes: [
+      "https://static.wikia.nocookie.net/ironsight/images/1/1b/Ironsight_Screenshot_01.jpg",
+      "https://i.ytimg.com/vi/Ft5Zp3MvHok/maxresdefault.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/783770/ss_89b94fa7c1160599b7396a7a987e44cfb6bb8d69.1920x1080.jpg",
+    ],
+    rating: 4.1,
+    precio: 0,
+    categoria_id: 1,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["FPS", "Multiplayer"],
+    plataformas: ["Windows"],
+    ventas: [],
+  },
+  {
+    id: "12",
+    titulo: "Resident Evil 4 Remake",
+    description:
+      "Remake del clásico de terror y acción con gráficos modernos y jugabilidad renovada para la nueva generación.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg",
+    videoURL: "https://www.youtube.com/embed/-L2NfKL4cPM",
+    detalleImagenes: [
+      "https://cdn.mos.cms.futurecdn.net/vuRvyhN3FwSpPbTrMCEpRe.jpg",
+      "https://images.ctfassets.net/rporu91m20dc/7vhdI6MvS3cIm7F1frnbil/58ab17c61774693e184def76107abf63/re4-remake.jpg",
+      "https://assetsio.reedpopcdn.com/resident-evil-4-remake-screen-1.jpg",
+    ],
+    rating: 4.9,
+    precio: 59.99,
+    categoria_id: 1,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["Horror", "Action"],
+    plataformas: ["Windows", "PS5"],
+    ventas: [],
+  },
+  {
+    id: "13",
+    titulo: "Resident Evil Village",
+    description:
+      "Sobrevive a horrores sobrenaturales en una villa maldita en esta entrega de la icónica saga Resident Evil.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1196590/header.jpg",
+    videoURL: "https://www.youtube.com/embed/dRpXEc-EJow",
+    detalleImagenes: [
+      "https://cdn.vox-cdn.com/thumbor/YJtVW4acyaJvQZURa3XjzyzoHD8=/0x0:1920x1080/920x613/filters:focal(806x254:1112x560):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/69037624/RE8_Screenshot_10.0.jpg",
+      "https://i.ytimg.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+      "https://assets1.ignimgs.com/2021/01/21/residentevilvillage-1611257297612.jpg",
+    ],
+    rating: 4.5,
+    precio: 49.99,
+    categoria_id: 1,
+    esta_oferta: true,
+    estado: true,
+    categorias: ["Horror", "Survival"],
+    plataformas: ["Windows", "PS5", "MacOS"],
+    ventas: [],
+  },
+  {
+    id: "14",
+    titulo: "Bravely Default",
+    description:
+      "Un RPG clásico con combate por turnos y una profunda historia en un mundo de fantasía.",
+    image:
+      "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_3ds_25/SI_3DS_BravelyDefault.jpg",
+    videoURL: "https://www.youtube.com/embed/EJxil2CzUHg",
+    detalleImagenes: [
+      "https://images.nintendolife.com/eb30a976f60f8/bravely-default.original.jpg",
+      "https://assets1.ignimgs.com/2020/10/28/bravely-default-ii-screenshot-1603889424359.jpg",
+      "https://i.ytimg.com/vi/8vRtvkQ_bK8/maxresdefault.jpg",
+    ],
+    rating: 4.3,
+    precio: 39.99,
+    categoria_id: 2,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["RPG", "Fantasy"],
+    plataformas: ["Switch"],
+    ventas: [],
+  },
+  {
+    id: "15",
+    titulo: "ULTRAKILL",
+    description:
+      "Un frenético shooter retro inspirado en DOOM con acción intensa, combos y sangre en píxeles.",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1229490/header.jpg",
+    videoURL: "https://www.youtube.com/embed/U9kDgDM3-_M",
+    detalleImagenes: [
+      "https://cdn.akamai.steamstatic.com/steam/apps/1229490/ss_1b72e34c9b50d7df3fc93c74df3eb98961ec2191.1920x1080.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1229490/ss_6c558ef1a65fa7c3218c5c3cbdf62f865015d3f7.1920x1080.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1229490/ss_24df2135cfe33fbb92726be0c0e60148c2e0f6d1.1920x1080.jpg",
+    ],
+    rating: 4.7,
+    precio: 24.99,
+    categoria_id: 1,
+    esta_oferta: true,
+    estado: true,
+    categorias: ["FPS", "Retro"],
+    plataformas: ["Windows", "MacOS"],
+    ventas: [],
+  },
+  {
+    id: "16",
+    titulo: "Xenoblade Chronicles",
+    description:
+      "Un vasto RPG de acción con historia épica, batallas en tiempo real y exploración en entornos masivos.",
+    image:
+      "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000029711/d55f4d73ad88beed1ea061aaaacbe772e40f46b598db513f3f85369d3455aa82",
+    videoURL: "https://www.youtube.com/embed/Og4jdEnmF2E",
+    detalleImagenes: [
+      "https://assets1.ignimgs.com/2020/05/27/xenoblade-1590621247205.jpg",
+      "https://cdn.vox-cdn.com/thumbor/w2j-rkZ5Mx9j0iEtjF5oZGzMaqM=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/20011819/xeno.jpg",
+      "https://cdn.mos.cms.futurecdn.net/JkoPo6RF7woQsbndfMD4gC.jpg",
+    ],
+    rating: 4.6,
+    precio: 59.99,
+    categoria_id: 2,
+    esta_oferta: false,
+    estado: true,
+    categorias: ["RPG", "Fantasy"],
+    plataformas: ["Switch"],
     ventas: [],
   },
 ]
-=======
-    categoria: { id: 5, nombre: "Horror" },
-    plataformas: [{ id: 2, nombre: "PC" }],
-    ventas: [],
-  },
-];
-
->>>>>>> 99fad86190f4c032fa21129146a3ce7a9ab8654e
