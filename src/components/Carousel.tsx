@@ -37,7 +37,7 @@ export default function Carousel() {
             <img
               src="assets/carrusel/titanfall.jpg"
               className="d-block w-100"
-              style={{ height: "400px", objectFit: "contain" }}
+              style={{ height: "650px", objectFit: "contain" }}
               alt="Titanfall"
             />
           </div>
@@ -45,7 +45,7 @@ export default function Carousel() {
             <img
               src="assets/carrusel/infinityblade.jpg"
               className="d-block w-100"
-              style={{ height: "400px", objectFit: "contain" }}
+              style={{ height: "650px", objectFit: "contain" }}
               alt="Infinity Blade"
             />
           </div>
@@ -53,7 +53,7 @@ export default function Carousel() {
             <img
               src="assets/carrusel/ironsight.jpg"
               className="d-block w-100"
-              style={{ height: "400px", objectFit: "contain" }}
+              style={{ height: "650px", objectFit: "contain" }}
               alt="Ironsight"
             />
           </div>

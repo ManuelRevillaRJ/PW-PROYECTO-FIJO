@@ -14,8 +14,14 @@
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
+<<<<<<< HEAD
     "react-range-slider-input": "^3.2.1",
     "react-router-dom": "^7.6.0"
+=======
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.0",
+    "recharts": "^2.15.3"
+>>>>>>> 99fad86190f4c032fa21129146a3ce7a9ab8654e
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
