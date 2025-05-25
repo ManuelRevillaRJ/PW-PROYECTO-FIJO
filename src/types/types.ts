@@ -41,7 +41,7 @@ export type Game = {
   detalleImagenes: string[]
 
   // Relaciones:
-  categorias?: string[]
-  plataformas?: string[]
+  categorias: string[]
+  plataformas: string[]
   ventas?: Sale[]
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import type { Game } from "../types/types"
 import GameCard from "./GameCard"
 import RangeSlider from "react-range-slider-input"
@@ -9,62 +9,224 @@ interface GameCatalogProps {
 }
 
 export default function GameCatalog({ gameList }: GameCatalogProps) {
-  const [games, setGames] = useState<Game[]>([])
-  const [filterGames, setFilterGames] = useState<Game[]>([])
+  // filter state
+  const allCategorias: string[] = [...new Set(gameList.flatMap((game) => game.categorias))]
+  const allPlataformas: string[] = [...new Set(gameList.flatMap((game) => game.plataformas))]
 
-  const [minPrice, setMinPrice] = useState<number>(0)
-  const [maxPrice, setMaxPrice] = useState<number>(100)
-  const [enOferta, setEnOferta] = useState<boolean>(false)
+  const minPrice = gameList.length > 0 ? Math.min(...gameList.map((g) => g.precio)) : 0
+  const maxPrice = gameList.length > 0 ? Math.max(...gameList.map((g) => g.precio)) + 1 : 100
 
+  const [filters, setFilters] = useState({
+    search: "",
+    rangoPrecio: [0, 100],
+    enOferta: false,
+    strict: false,
+    selectedCategorias: [] as string[],
+    selectedPlataformas: [] as string[],
+  })
+
+  // calculate price range on load or dep change
   useEffect(() => {
-    setGames(gameList)
-    setFilterGames(gameList)
-    setMaxPrice(Math.max(...gameList.map((g) => g.precio)) + 1)
+    if (gameList.length > 0) {
+      const min = Math.min(...gameList.map((g) => g.precio))
+      const max = Math.max(...gameList.map((g) => g.precio)) + 1
+      setFilters((prev) => ({
+        ...prev,
+        rangoPrecio: [min, max],
+      }))
+    }
   }, [gameList])
 
+  // filtered games
+  const filteredGames = useMemo(() => {
+    return gameList.filter((game) => {
+      if (
+        filters.search &&
+        !game.titulo.toLowerCase().includes(filters.search.trim().toLowerCase())
+      ) {
+        return false
+      }
+
+      if (game.precio < filters.rangoPrecio[0] || game.precio > filters.rangoPrecio[1]) {
+        return false
+      }
+
+      if (filters.enOferta && !game.esta_oferta) {
+        return false
+      }
+
+      if (filters.selectedCategorias.length > 0) {
+        if (!filters.strict) {
+          if (!filters.selectedCategorias.some((c) => game.categorias.includes(c))) {
+            return false
+          }
+        } else {
+          if (!filters.selectedCategorias.every((c) => game.categorias.includes(c))) {
+            return false
+          }
+        }
+      }
+
+      if (
+        filters.selectedPlataformas.length > 0 &&
+        !filters.selectedPlataformas.some((p) => game.plataformas.includes(p))
+      ) {
+        return false
+      }
+      return true
+    })
+  }, [gameList, filters])
+
+  // helper functions
+  const toggleCategoria = (cat: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      selectedCategorias: prev.selectedCategorias.includes(cat)
+        ? prev.selectedCategorias.filter((c) => c !== cat)
+        : [...prev.selectedCategorias, cat],
+    }))
+  }
+
+  const togglePlataforma = (plat: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      selectedPlataformas: prev.selectedPlataformas.includes(plat)
+        ? prev.selectedPlataformas.filter((p) => p !== plat)
+        : [...prev.selectedPlataformas, plat],
+    }))
+  }
+
   return (
-    <div className="container text-center" style={{ minHeight: "900px" }}>
-      <div className="row">
-        <h1>Game Catalog</h1>
-        <h3>Games: {filterGames.length}</h3>
-        <div className="row row-cols-4 g-4 col-8">
-          {filterGames.map((game) => {
-            return <GameCard game={game}></GameCard>
-          })}
-        </div>
-        <div className="col-4 text-start">
-          <form>
-            <div className="mb-3">
-              <label>Price Range</label>
-              <div className="d-flex justify-content-between mb-2">
-                <span>${minPrice}</span>
-                <span>${maxPrice}</span>
+    <div className="container text-center">
+      <div className="row gx-4">
+        {/* Game Cards */}
+        <div className="col-md-8">
+          <div className="card p-3">
+            <div
+              data-bs-spy="scroll"
+              data-bs-target="#filter-pane"
+              data-bs-smooth-scroll="true"
+              className="scrollspy-example"
+              tabIndex={0}
+              style={{ height: "75vh", overflowY: "auto" }}>
+              <div className="text-start sticky-top" style={{ backgroundColor: "white" }}>
+                <h3 className="mb-1">Game Catalog</h3>
+                <h5 className="mb-4">Total: {filteredGames.length}</h5>
               </div>
-              <RangeSlider
-                min={0}
-                max={Math.max(...games.map((g) => g.precio)) + 1}
-                defaultValue={[0, 100]}
-                value={[minPrice, maxPrice]}
-                onInput={([min, max]) => {
-                  setMinPrice(min)
-                  setMaxPrice(max)
-                  setFilterGames(games.filter((game) => game.precio >= min && game.precio <= max))
-                }}
-                ariaLabel={[minPrice.toString(), maxPrice.toString()]}
-                ariaLabelledBy={[minPrice.toString(), maxPrice.toString()]}
-              />
+              <div className="row row-cols-4 g-4">
+                {filteredGames.map((game) => {
+                  return <GameCard game={game}></GameCard>
+                })}
+              </div>
             </div>
-            <div className="form-check mb-3">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                checked={enOferta}
-                onChange={() => setEnOferta(!enOferta)}
-              />
-              <label>En Oferta</label>
-            </div>
-          </form>
+          </div>
+        </div>
+        {/* Filters */}
+        <div id="filter-pane" className="col-md-4 text-start">
+          <div className="card p-3">
+            <form>
+              <div className="mb-4 form-floating">
+                <input
+                  type="search"
+                  className="form-control"
+                  id="filter-search"
+                  placeholder="Buscar juegos..."
+                  value={filters.search}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, search: e.target.value }))}
+                />
+                <label htmlFor="filter-search">Search</label>
+              </div>
+
+              <div className="mb-4">
+                <h5>Rango de Precio</h5>
+                <div className="d-flex justify-content-between mb-2">
+                  <span>${filters.rangoPrecio[0]}</span>
+                  <span>${filters.rangoPrecio[1]}</span>
+                </div>
+                <RangeSlider
+                  min={minPrice}
+                  max={maxPrice}
+                  value={[filters.rangoPrecio[0], filters.rangoPrecio[1]]}
+                  onInput={([min, max]) => {
+                    setFilters((prev) => ({ ...prev, rangoPrecio: [min, max] }))
+                  }}
+                  ariaLabel={["Precio Min", "Precio Max"]}
+                />
+              </div>
+
+              <div className="form-check mb-4">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  checked={filters.enOferta}
+                  onChange={() => {
+                    setFilters({ ...filters, enOferta: !filters.enOferta })
+                  }}
+                />
+                <h5>En Oferta</h5>
+              </div>
+
+              <div className="mb-4">
+                <div className="d-flex align-items-center justify-content-between">
+                  <h4 className="mb-2">Categorías</h4>
+                  <div className="form-check align-items-center">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked={filters.strict}
+                      onChange={() => {
+                        setFilters({ ...filters, strict: !filters.strict })
+                      }}
+                    />
+                    <h5>Strict</h5>
+                  </div>
+                </div>
+                {/* row row-cols-4 g-4 col-8 */}
+                <div className="">
+                  {allCategorias.map((cat) => {
+                    return (
+                      <div className="form-check form-check-inline">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value={cat}
+                          checked={filters.selectedCategorias.includes(cat)}
+                          onChange={() => toggleCategoria(cat)}
+                        />
+                        <label key={cat} className="form-check-label">
+                          {cat}
+                        </label>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <h4 className="mb-2">Plataformas</h4>
+                <div className="">
+                  {allPlataformas.map((plat) => {
+                    return (
+                      <div className="form-check form-check-inline">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value={plat}
+                          checked={filters.selectedPlataformas.includes(plat)}
+                          onChange={() => togglePlataforma(plat)}
+                        />
+                        <label key={plat} className="form-check-label">
+                          {plat}
+                        </label>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
