@@ -1,20 +1,26 @@
-import { useEffect, useMemo, useState } from "react"
-import type { Game } from "../types/types"
-import GameCard from "./GameCard"
-import RangeSlider from "react-range-slider-input"
-import "react-range-slider-input/dist/style.css"
+import { useEffect, useMemo, useState } from "react";
+import type { Game } from "../types/types";
+import GameCard from "./GameCard";
+import RangeSlider from "react-range-slider-input";
+import "react-range-slider-input/dist/style.css";
 
 interface GameCatalogProps {
-  gameList: Game[]
+  gameList: Game[];
 }
 
 export default function GameCatalog({ gameList }: GameCatalogProps) {
   // filter state
-  const allCategorias: string[] = [...new Set(gameList.flatMap((game) => game.categorias))]
-  const allPlataformas: string[] = [...new Set(gameList.flatMap((game) => game.plataformas))]
+  const allCategorias: string[] = [
+    ...new Set(gameList.flatMap((game) => game.categorias)),
+  ];
+  const allPlataformas: string[] = [
+    ...new Set(gameList.flatMap((game) => game.plataformas)),
+  ];
 
-  const minPrice = gameList.length > 0 ? Math.min(...gameList.map((g) => g.precio)) : 0
-  const maxPrice = gameList.length > 0 ? Math.max(...gameList.map((g) => g.precio)) + 1 : 100
+  const minPrice =
+    gameList.length > 0 ? Math.min(...gameList.map((g) => g.precio)) : 0;
+  const maxPrice =
+    gameList.length > 0 ? Math.max(...gameList.map((g) => g.precio)) + 1 : 100;
 
   const [filters, setFilters] = useState({
     search: "",
@@ -23,19 +29,19 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
     strict: false,
     selectedCategorias: [] as string[],
     selectedPlataformas: [] as string[],
-  })
+  });
 
   // calculate price range on load or dep change
   useEffect(() => {
     if (gameList.length > 0) {
-      const min = Math.min(...gameList.map((g) => g.precio))
-      const max = Math.max(...gameList.map((g) => g.precio)) + 1
+      const min = Math.min(...gameList.map((g) => g.precio));
+      const max = Math.max(...gameList.map((g) => g.precio)) + 1;
       setFilters((prev) => ({
         ...prev,
         rangoPrecio: [min, max],
-      }))
+      }));
     }
-  }, [gameList])
+  }, [gameList]);
 
   // filtered games
   const filteredGames = useMemo(() => {
@@ -44,25 +50,34 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
         filters.search &&
         !game.titulo.toLowerCase().includes(filters.search.trim().toLowerCase())
       ) {
-        return false
+        return false;
       }
 
-      if (game.precio < filters.rangoPrecio[0] || game.precio > filters.rangoPrecio[1]) {
-        return false
+      if (
+        game.precio < filters.rangoPrecio[0] ||
+        game.precio > filters.rangoPrecio[1]
+      ) {
+        return false;
       }
 
       if (filters.enOferta && !game.esta_oferta) {
-        return false
+        return false;
       }
 
       if (filters.selectedCategorias.length > 0) {
         if (!filters.strict) {
-          if (!filters.selectedCategorias.some((c) => game.categorias.includes(c))) {
-            return false
+          if (
+            !filters.selectedCategorias.some((c) => game.categorias.includes(c))
+          ) {
+            return false;
           }
         } else {
-          if (!filters.selectedCategorias.every((c) => game.categorias.includes(c))) {
-            return false
+          if (
+            !filters.selectedCategorias.every((c) =>
+              game.categorias.includes(c)
+            )
+          ) {
+            return false;
           }
         }
       }
@@ -71,11 +86,11 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
         filters.selectedPlataformas.length > 0 &&
         !filters.selectedPlataformas.some((p) => game.plataformas.includes(p))
       ) {
-        return false
+        return false;
       }
-      return true
-    })
-  }, [gameList, filters])
+      return true;
+    });
+  }, [gameList, filters]);
 
   // helper functions
   const toggleCategoria = (cat: string) => {
@@ -84,8 +99,8 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
       selectedCategorias: prev.selectedCategorias.includes(cat)
         ? prev.selectedCategorias.filter((c) => c !== cat)
         : [...prev.selectedCategorias, cat],
-    }))
-  }
+    }));
+  };
 
   const togglePlataforma = (plat: string) => {
     setFilters((prev) => ({
@@ -93,8 +108,8 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
       selectedPlataformas: prev.selectedPlataformas.includes(plat)
         ? prev.selectedPlataformas.filter((p) => p !== plat)
         : [...prev.selectedPlataformas, plat],
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="container text-center">
@@ -108,14 +123,18 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
               data-bs-smooth-scroll="true"
               className="scrollspy-example"
               tabIndex={0}
-              style={{ height: "75vh", overflowY: "auto" }}>
-              <div className="text-start sticky-top" style={{ backgroundColor: "white" }}>
+              style={{ height: "75vh", overflowY: "auto" }}
+            >
+              <div
+                className="text-start sticky-top"
+                style={{ backgroundColor: "white" }}
+              >
                 <h3 className="mb-1">Game Catalog</h3>
                 <h5 className="mb-4">Total: {filteredGames.length}</h5>
               </div>
               <div className="row row-cols-4 g-4">
                 {filteredGames.map((game) => {
-                  return <GameCard game={game}></GameCard>
+                  return <GameCard game={game}></GameCard>;
                 })}
               </div>
             </div>
@@ -132,7 +151,9 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                   id="filter-search"
                   placeholder="Buscar juegos..."
                   value={filters.search}
-                  onChange={(e) => setFilters((prev) => ({ ...prev, search: e.target.value }))}
+                  onChange={(e) =>
+                    setFilters((prev) => ({ ...prev, search: e.target.value }))
+                  }
                 />
                 <label htmlFor="filter-search">Search</label>
               </div>
@@ -148,7 +169,10 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                   max={maxPrice}
                   value={[filters.rangoPrecio[0], filters.rangoPrecio[1]]}
                   onInput={([min, max]) => {
-                    setFilters((prev) => ({ ...prev, rangoPrecio: [min, max] }))
+                    setFilters((prev) => ({
+                      ...prev,
+                      rangoPrecio: [min, max],
+                    }));
                   }}
                   ariaLabel={["Precio Min", "Precio Max"]}
                 />
@@ -161,7 +185,7 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                   value=""
                   checked={filters.enOferta}
                   onChange={() => {
-                    setFilters({ ...filters, enOferta: !filters.enOferta })
+                    setFilters({ ...filters, enOferta: !filters.enOferta });
                   }}
                 />
                 <h5>En Oferta</h5>
@@ -177,7 +201,7 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                       value=""
                       checked={filters.strict}
                       onChange={() => {
-                        setFilters({ ...filters, strict: !filters.strict })
+                        setFilters({ ...filters, strict: !filters.strict });
                       }}
                     />
                     <h5>Strict</h5>
@@ -199,7 +223,7 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                           {cat}
                         </label>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -221,7 +245,7 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                           {plat}
                         </label>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -230,5 +254,5 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import type { Game } from "../types/types"
+import type { Game } from "../types/types";
 
 export const ListaGames: Game[] = [
   {
@@ -16,12 +16,52 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.8,
     precio: 59.99,
-    categoria_id: 1,
     esta_oferta: true,
     estado: true,
     categorias: ["Action", "Crime"],
     plataformas: ["Windows", "PS5", "PS4"],
-    ventas: [],
+    ventas: [
+      {
+        id: "1",
+        fecha: Date.now() - 3 * 24 * 60 * 60 * 1000, // 3 days ago
+        usuario_id: "1",
+        juego_id: "1",
+        codigo: "SALE-XYZ123",
+        monto_pagado: 29.99,
+      },
+      {
+        id: "2",
+        fecha: Date.now() - 10 * 24 * 60 * 60 * 1000, // 10 days ago
+        usuario_id: "1",
+        juego_id: "1",
+        codigo: "SALE-ABC789",
+        monto_pagado: 49.99,
+      },
+      {
+        id: "3",
+        fecha: Date.now() - 1 * 24 * 60 * 60 * 1000, // Yesterday
+        usuario_id: "1",
+        juego_id: "1",
+        codigo: "SALE-QWE456",
+        monto_pagado: 19.99,
+      },
+      {
+        id: "4",
+        fecha: Date.now() - 30 * 24 * 60 * 60 * 1000, // 30 days ago
+        usuario_id: "1",
+        juego_id: "1",
+        codigo: "SALE-LMN321",
+        monto_pagado: 59.99,
+      },
+      {
+        id: "5",
+        fecha: Date.now(), // Today
+        usuario_id: "1",
+        juego_id: "1",
+        codigo: "SALE-JKL654",
+        monto_pagado: 39.99,
+      },
+    ],
   },
   {
     id: "2",
@@ -38,12 +78,20 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.2,
     precio: 39.99,
-    categoria_id: 2,
     esta_oferta: false,
     estado: true,
     categorias: ["Stealth", "Adventure", "Movement"],
     plataformas: ["PS5", "Switch"],
-    ventas: [],
+    ventas: [
+      {
+        id: "1",
+        fecha: Date.now() - 3 * 24 * 60 * 60 * 1000, // 3 days ago
+        usuario_id: "1",
+        juego_id: "2",
+        codigo: "SALE-XYZ123",
+        monto_pagado: 29.99,
+      },
+    ],
   },
   {
     id: "3",
@@ -59,7 +107,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 3.9,
     precio: 29.99,
-    categoria_id: 4,
     esta_oferta: true,
     estado: true,
     categorias: ["Action", "Multiplayer", "FPS"],
@@ -81,7 +128,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.3,
     precio: 19.99,
-    categoria_id: 5,
     esta_oferta: false,
     estado: true,
     categorias: ["Horror", "Puzzle"],
@@ -102,7 +148,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.9,
     precio: 39.99,
-    categoria_id: 2,
     esta_oferta: false,
     estado: true,
     categorias: ["RPG", "Fantasy"],
@@ -123,7 +168,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.7,
     precio: 69.99,
-    categoria_id: 1,
     esta_oferta: false,
     estado: true,
     categorias: ["Action", "Adventure", "Western"],
@@ -144,7 +188,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.2,
     precio: 49.99,
-    categoria_id: 3,
     esta_oferta: true,
     estado: true,
     categorias: ["RPG", "Sci-Fi"],
@@ -166,7 +209,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.9,
     precio: 59.99,
-    categoria_id: 2,
     esta_oferta: true,
     estado: true,
     categorias: ["RPG", "Dark Fantasy"],
@@ -188,7 +230,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.3,
     precio: 19.99,
-    categoria_id: 3,
     esta_oferta: true,
     estado: true,
     categorias: ["Action", "Fantasy"],
@@ -209,7 +250,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.6,
     precio: 29.99,
-    categoria_id: 1,
     esta_oferta: false,
     estado: true,
     categorias: ["FPS", "Sci-Fi"],
@@ -221,7 +261,8 @@ export const ListaGames: Game[] = [
     titulo: "Ironsight",
     description:
       "FPS gratuito ambientado en un futuro cercano con combates rápidos, drones, y armas futuristas.",
-    image: "https://cdn.cloudflare.steamstatic.com/steam/apps/783770/header.jpg",
+    image:
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/783770/header.jpg",
     videoURL: "https://www.youtube.com/embed/5wFaF5AKwB8",
     detalleImagenes: [
       "https://static.wikia.nocookie.net/ironsight/images/1/1b/Ironsight_Screenshot_01.jpg",
@@ -230,7 +271,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.1,
     precio: 0,
-    categoria_id: 1,
     esta_oferta: false,
     estado: true,
     categorias: ["FPS", "Multiplayer"],
@@ -251,7 +291,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.9,
     precio: 59.99,
-    categoria_id: 1,
     esta_oferta: false,
     estado: true,
     categorias: ["Horror", "Action"],
@@ -272,7 +311,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.5,
     precio: 49.99,
-    categoria_id: 1,
     esta_oferta: true,
     estado: true,
     categorias: ["Horror", "Survival"],
@@ -294,7 +332,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.3,
     precio: 39.99,
-    categoria_id: 2,
     esta_oferta: false,
     estado: true,
     categorias: ["RPG", "Fantasy"],
@@ -315,7 +352,6 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.7,
     precio: 24.99,
-    categoria_id: 1,
     esta_oferta: true,
     estado: true,
     categorias: ["FPS", "Retro"],
@@ -337,11 +373,10 @@ export const ListaGames: Game[] = [
     ],
     rating: 4.6,
     precio: 59.99,
-    categoria_id: 2,
     esta_oferta: false,
     estado: true,
     categorias: ["RPG", "Fantasy"],
     plataformas: ["Switch"],
     ventas: [],
   },
-]
+];

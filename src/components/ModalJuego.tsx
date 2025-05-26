@@ -1,17 +1,17 @@
-import { Modal, Button } from "react-bootstrap"
-import type { Game } from "../types/types"
+import { Modal, Button } from "react-bootstrap";
+import type { Game } from "../types/types";
 
 interface ModalJuegoProps {
-  show: boolean
-  onHide: () => void
-  juego: Game
+  show: boolean;
+  onHide: () => void;
+  juego: Game;
 }
 
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
-  const { titulo, description, videoURL, detalleImagenes, precio } = juego
+  const { titulo, description, videoURL, detalleImagenes, precio } = juego;
 
   return (
-    <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
+    <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
       <Modal.Header closeButton className="bg-dark text-white">
         <Modal.Title>{titulo}</Modal.Title>
       </Modal.Header>
@@ -25,12 +25,19 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
             title={titulo}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen></iframe>
+            allowFullScreen
+          ></iframe>
         </div>
 
         <div className="d-flex overflow-auto gap-2 mb-3">
           {detalleImagenes.map((img, idx) => (
-            <img key={idx} src={img} alt={`img-${idx}`} className="rounded" width={150} />
+            <img
+              key={idx}
+              src={img}
+              alt={`img-${idx}`}
+              className="rounded"
+              width={150}
+            />
           ))}
         </div>
 
@@ -53,5 +60,5 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
