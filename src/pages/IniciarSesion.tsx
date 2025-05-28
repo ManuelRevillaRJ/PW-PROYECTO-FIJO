@@ -6,6 +6,7 @@ import FormTitle from "../components/FormTitle"
 import { Link } from "react-router-dom"
 import { revisarAdmin } from "../utils/admins"
 import { useNavigate } from "react-router-dom"
+import { iniciarSesion } from "../utils/sesion"
 
 const IniciarSesion = () => {
     const [email, setEmail] = useState("")
@@ -17,11 +18,11 @@ const IniciarSesion = () => {
     const handleSubmit = (evt: FormEvent) => {
         evt.preventDefault()
         // prueba
-        console.log({email, password })
+        console.log({ email, password })
 
         // verificacion que existan en base de datos, ahorita prelim
         siExiste = true
-        sessionStorage.setItem("mail", email)
+        iniciarSesion({ mail: email })
         if (revisarAdmin(email, password)) {
             navigate("/games")
         }
