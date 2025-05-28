@@ -1,33 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react"
 
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs"
 
-import "../styles/Table.css";
+import "../styles/Table.css"
 
-import { ListaGames } from "../utils/ListaJuegos";
-import type { Game } from "../types/Game";
-import ModalAgregar from "./ModalAgregar";
-import ModalEliminar from "./ModalEliminar";
-import ModalEditar from "./ModalEditar";
+import { ListaGames } from "../utils/ListaJuegos"
+import ModalAgregar from "./ModalAgregar"
+import ModalEliminar from "./ModalEliminar"
+import ModalEditar from "./ModalEditar"
+import type { Game } from "../types/types"
 
 export const Table = () => {
   // de agregar
-  const [modalAbierto, setModalAbierto] = useState(false);
+  const [modalAbierto, setModalAbierto] = useState(false)
 
-  const abrirModal = () => setModalAbierto(true);
-  const cerrarModal = () => setModalAbierto(false);
+  const abrirModal = () => setModalAbierto(true)
+  const cerrarModal = () => setModalAbierto(false)
 
   // de eliminar
-  const [modalAbierto2, setModalAbierto2] = useState(false);
+  const [modalAbierto2, setModalAbierto2] = useState(false)
 
-  const abrirModal2 = () => setModalAbierto2(true);
-  const cerrarModal2 = () => setModalAbierto2(false);
+  const abrirModal2 = () => setModalAbierto2(true)
+  const cerrarModal2 = () => setModalAbierto2(false)
 
   // de editar
-  const [modalAbierto3, setModalAbierto3] = useState(false);
+  const [modalAbierto3, setModalAbierto3] = useState(false)
 
-  const abrirModal3 = () => setModalAbierto3(true);
-  const cerrarModal3 = () => setModalAbierto3(false);
+  const abrirModal3 = () => setModalAbierto3(true)
+  const cerrarModal3 = () => setModalAbierto3(false)
 
   return (
     <div className="table-wrapper">
@@ -36,15 +36,12 @@ export const Table = () => {
           className="btn btn-primary btn-de-tabla"
           type="button"
           onClick={() => {
-            abrirModal();
-          }}
-        >
+            abrirModal()
+          }}>
           Agregar
         </button>
 
-        {modalAbierto && (
-          <ModalAgregar show={modalAbierto} onHide={cerrarModal} />
-        )}
+        {modalAbierto && <ModalAgregar show={modalAbierto} onHide={cerrarModal} />}
       </div>
       <table className="table">
         <thead>
@@ -70,40 +67,31 @@ export const Table = () => {
                     <BsFillTrashFill
                       className="delete-btn"
                       onClick={() => {
-                        abrirModal2();
+                        abrirModal2()
                       }}
                     />
 
                     {modalAbierto2 && (
-                      <ModalEliminar
-                        show={modalAbierto2}
-                        onHide={cerrarModal2}
-                        id={juego.id}
-                      />
+                      <ModalEliminar show={modalAbierto2} onHide={cerrarModal2} id={juego.id} />
                     )}
 
                     <BsFillPencilFill
                       className="edit-btn"
                       onClick={() => {
-                        abrirModal3();
+                        abrirModal3()
                       }}
                     />
 
                     {modalAbierto3 && (
-                      <ModalEditar
-                        show={modalAbierto3}
-                        onHide={cerrarModal3}
-                        juego={juego}
-                      />
+                      <ModalEditar show={modalAbierto3} onHide={cerrarModal3} juego={juego} />
                     )}
-
                   </span>
                 </td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}

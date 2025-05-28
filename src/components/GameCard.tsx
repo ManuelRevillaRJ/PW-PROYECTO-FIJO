@@ -21,6 +21,8 @@ export default function GameCard({ game }: GameCardProps) {
 
             <div className="mb-2">
               <span className="badge bg-primary">${game.precio}</span>
+              {game.precio === 0 && <span className="badge bg-success ms-1">Free</span>}
+              {game.esta_oferta && <span className="badge bg-danger ms-1">Offer!</span>}
             </div>
 
             <div className="mb-2">

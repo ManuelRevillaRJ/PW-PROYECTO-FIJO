@@ -124,16 +124,13 @@ export default function NavBar() {
               <ul className="dropdown-menu">
                 {(() => {
                   if (
-                    sessionStorage.getItem("user") == "" ||
-                    sessionStorage.getItem("user") == null
+                    sessionStorage.getItem("mail") == "" ||
+                    sessionStorage.getItem("mail") == null
                   ) {
                     return (
                       <>
                         <li>
-                          <Link
-                            className="dropdown-item"
-                            to={"/iniciar_sesion"}
-                          >
+                          <Link className="dropdown-item" to={"/iniciar_sesion"}>
                             Iniciar Sesión
                           </Link>
                         </li>
@@ -143,7 +140,7 @@ export default function NavBar() {
                           </Link>
                         </li>
                       </>
-                    );
+                    )
                   } else {
                     return (
                       <>
@@ -153,16 +150,12 @@ export default function NavBar() {
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            className="dropdown-item"
-                            onClick={cerrarSesion}
-                            to={"/"}
-                          >
+                          <Link className="dropdown-item" onClick={cerrarSesion} to={"/"}>
                             Cerrar sesión
                           </Link>
                         </li>
                       </>
-                    );
+                    )
                   }
                 })()}
               </ul>
