@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client"
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 import CrearCuenta from "./pages/CrearCuenta"
 import IniciarSesion from "./pages/IniciarSesion"
 import ProfilePage from "./pages/ProfilePage"
 import HomePage from "./pages/HomePage"
 import Ganancias from "./pages/Ganancias"
-
 import MejoresValorados from "./pages/MejorValorados"
 import BestSellers from "./pages/BestSellers"
 import CartTestPage from "./pages/CartTestPage"

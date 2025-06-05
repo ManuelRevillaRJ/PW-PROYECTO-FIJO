@@ -177,25 +177,26 @@ export default function NavBar() {
                                         )
                                     } else {
                                         return (
-                                            <>
-                                                <li>
-                                                    <Link
-                                                        className="dropdown-item"
-                                                        to={"/profile"}
-                                                    >
-                                                        Perfil
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link
-                                                        className="dropdown-item"
-                                                        onClick={cerrarSesion}
-                                                        to={"/"}
-                                                    >
-                                                        Cerrar sesión
-                                                    </Link>
-                                                </li>
-                                            </>
+                                          <>
+                                            <li>
+                                              <Link className="dropdown-item" to={"/profile"}>
+                                                Perfil
+                                              </Link>
+                                            </li>
+                                            <li>
+                                              <Link className="dropdown-item" to={"/cambio-contra"}>
+                                                Cambiar Contraseña
+                                              </Link>
+                                            </li>
+                                            <li>
+                                              <Link
+                                                className="dropdown-item"
+                                                onClick={cerrarSesion}
+                                                to={"/"}>
+                                                Cerrar sesión
+                                              </Link>
+                                            </li>
+                                          </>
                                         )
                                     }
                                 })()}
