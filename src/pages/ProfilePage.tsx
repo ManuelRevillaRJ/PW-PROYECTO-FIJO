@@ -1,11 +1,12 @@
 import { useState } from "react"
 import NavBar from "../components/NavBar"
+import { actualizarPerfil } from "../utils/usuario"
 
 export default function ProfilePage() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: sessionStorage.getItem("mail") || "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,11 +14,11 @@ export default function ProfilePage() {
     setForm({ ...form, [name]: value })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: send data to backend
-    alert("Information updated!")
-    
+    const success = await actualizarPerfil({ fields: form })
+    console.log(success)
   }
 
   return (

@@ -6,7 +6,7 @@ import FormTitle from "../components/FormTitle";
 import { Link, useNavigate } from "react-router-dom";
 import { crearCuenta } from "../utils/sesion";
 import type { User } from "../types/types";
-import Layout from "../layouts/Layout";
+import LayoutNavBar from "../layouts/LayoutNavBar"
 
 const CrearCuenta = () => {
   const [nombre, setNombre] = useState("")
@@ -43,50 +43,50 @@ const CrearCuenta = () => {
   }
 
   return (
-    <Layout>
-        <AuthCard>
-          <form onSubmit={handleSubmit}>
-            <FormTitle
-              title="Crear Cuenta en GameStore"
-              description="Llene los siguientes datos para crear una cuenta:"
-            />
-            <FormInput
-              label="Nombre"
-              type="text"
-              id="nombre"
-              value={nombre}
-              onChange={(e) => setNombre(e.currentTarget.value)}
-            />
-            <FormInput
-              label="Correo Electrónico"
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.currentTarget.value)}
-            />
-            <FormInput
-              label="Contraseña"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.currentTarget.value)}
-            />
-            <SubmitButton label="Crear" className="mx-auto p-2" />
-          </form>
-          {(() => {
-            if (nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
-              return (
-                <button type="button" className="btn btn-danger mx-auto p-2">
-                  Los datos ingresados son incorrectos
-                </button>
-              )
-            }
-          })()}
-          <Link to="/iniciar_sesion" className="d-block mt-3">
-            ¿Ya tienes una cuenta?
-          </Link>
-        </AuthCard>
-     </Layout>
+    <LayoutNavBar>
+      <AuthCard>
+        <form onSubmit={handleSubmit}>
+          <FormTitle
+            title="Crear Cuenta en GameStore"
+            description="Llene los siguientes datos para crear una cuenta:"
+          />
+          <FormInput
+            label="Nombre"
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.currentTarget.value)}
+          />
+          <FormInput
+            label="Correo Electrónico"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+          <FormInput
+            label="Contraseña"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+          <SubmitButton label="Crear" className="mx-auto p-2" />
+        </form>
+        {(() => {
+          if (nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
+            return (
+              <button type="button" className="btn btn-danger mx-auto p-2">
+                Los datos ingresados son incorrectos
+              </button>
+            )
+          }
+        })()}
+        <Link to="/iniciar_sesion" className="d-block mt-3">
+          ¿Ya tienes una cuenta?
+        </Link>
+      </AuthCard>
+    </LayoutNavBar>
   )
 }
 

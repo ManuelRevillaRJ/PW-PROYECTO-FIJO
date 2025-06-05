@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { revisarAdmin } from "../utils/admins"
 import { useNavigate } from "react-router-dom"
 import { iniciarSesion } from "../utils/sesion"
-import Layout from "../layouts/Layout"
+import LayoutNavBar from "../layouts/LayoutNavBar"
 
 const IniciarSesion = () => {
   const [email, setEmail] = useState("")
@@ -30,7 +30,7 @@ const IniciarSesion = () => {
   }
 
   return (
-    <Layout>
+    <LayoutNavBar>
       <AuthCard>
         <form onSubmit={handleSubmit}>
           <FormTitle
@@ -76,7 +76,7 @@ const IniciarSesion = () => {
           </div>
         </div>
       </AuthCard>
-    </Layout>
+    </LayoutNavBar>
   )
 }
 

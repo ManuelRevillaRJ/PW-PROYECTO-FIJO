@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react"
 import { passChange } from "../utils/sesion"
-import Layout from "../layouts/Layout"
+import LayoutNavBar from "../layouts/LayoutNavBar"
 
 export default function CambioContra() {
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ export default function CambioContra() {
   }
 
   return (
-    <Layout>
+    <LayoutNavBar>
       <div className="container mt-5 justify-content-center d-flex">
         <div className="card" style={{ maxWidth: "500px", width: "100%" }}>
           <div className="card-body text-center">
@@ -96,6 +96,6 @@ export default function CambioContra() {
           </div>
         </div>
       </div>
-   </Layout>
+    </LayoutNavBar>
   )
 }
