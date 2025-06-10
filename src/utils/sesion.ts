@@ -1,12 +1,13 @@
 import type { User } from "../types/types"
 
 export const crearCuenta = async (user: User) => {
-  sessionStorage.setItem("mail", user.correo)
   const res = await fetch("http://localhost:3000/sessions/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
   })
+  sessionStorage.setItem("mail", user.correo)
+  // localStorage.setItem("token", await res.json())
   console.log(res)
 }
 
