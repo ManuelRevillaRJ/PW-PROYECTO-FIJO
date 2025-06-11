@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
-import type { User } from "../types/types"
 import { jwtDecode } from "jwt-decode"
+import { toast } from "sonner"
+import type { User } from "../types/types"
+import { loginRequest, signupRequest, changePasswordRequest } from "../utils/api/sessionsApi"
+import { useNavigate } from "react-router-dom"
 
 export const useUser = () => {
+  const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
@@ -13,18 +17,87 @@ export const useUser = () => {
       const decoded: User = jwtDecode(token)
       setUser(decoded)
     } catch (error) {
-      console.log(error)
-      localStorage.removeItem("token")
-      setUser(null)
+      console.error("Token decode failed", error)
     }
   }, [])
+
+  const login = async (correo: string, password: string) => {
+    try {
+      const res = await loginRequest(correo, password)
+
+      if (!res.ok) {
+        const msg = await res.json()
+        toast.error(msg.message)
+      }
+
+      const data = await res.json()
+      localStorage.setItem("token", data.token)
+
+      const decoded: User = jwtDecode(data.token)
+      setUser(decoded)
+
+      toast.success("Inicio de sesión exitoso")
+      return true
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+
+  const signup = async (nombre: string, correo: string, password: string) => {
+    try {
+      const res = await signupRequest(nombre, correo, password)
+
+      if (!res.ok) {
+        const msg = await res.json()
+        toast.error(msg.message)
+      }
+
+      const data = await res.json()
+      localStorage.setItem("token", data.token)
+
+      const decoded: User = jwtDecode(data.token)
+      setUser(decoded)
+
+      toast.success("Registro exitoso")
+      return true
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+
+  const changePassword = async (correo: string, newPass: string) => {
+    try {
+      const res = await changePasswordRequest(correo, newPass)
+      if (!res.ok) {
+        const msg = await res.json()
+        toast.error(msg.message)
+      }
+
+      sessionStorage.removeItem("mail")
+      toast.success("Contraseña cambiada correctamente")
+      return true
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
 
   const logout = () => {
     localStorage.removeItem("token")
     setUser(null)
+    toast.info("Cierre de sesión")
+    navigate("/")
+    // window.location.reload()
   }
 
-  const isLoggedIn = !!user
-
-  return { user, logout, isLoggedIn }
+  return {
+    user,
+    isLoggedIn: !!user,
+    login,
+    signup,
+    logout,
+    changePassword,
+  }
 }

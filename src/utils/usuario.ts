@@ -15,5 +15,5 @@ export async function actualizarPerfil({ fields }: actualizarPerfilProps) {
   })
   console.log(res)
 
-  return true
+  return
 }

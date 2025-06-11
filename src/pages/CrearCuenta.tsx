@@ -3,43 +3,32 @@ import AuthCard from "../components/AuthCard";
 import FormInput from "../components/FormInput";
 import SubmitButton from "../components/Button";
 import FormTitle from "../components/FormTitle";
-import { Link, useNavigate } from "react-router-dom";
-import { crearCuenta } from "../utils/sesion";
-import type { User } from "../types/types";
+import { Link, useNavigate } from "react-router-dom"
 import LayoutNavBar from "../layouts/LayoutNavBar"
+import { toast } from "sonner"
+import { useUser } from "../hooks/useUser"
 
 const CrearCuenta = () => {
+  const { signup } = useUser()
+  const navigate = useNavigate()
+
   const [nombre, setNombre] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
-  const handleSubmit = (evt: FormEvent) => {
+  const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
-    // prueba
 
-    const newUser: User = {
-      id: String(Date.now()), // id unico
-      correo: email,
-      password: password,
-      nombre: nombre,
-      token: "",
-      estado: true,
-      permiso: "user", // user | admin
+    if (nombre === "" || email === "" || password === "") {
+      toast.error("Completa tus datos")
+      return
     }
 
-    crearCuenta(newUser)
-    navigate("/")
-
-    // try {
-    //   const response = await axios.post("https://your-api-url.com/users", newUser);
-    //   console.log("User created:", response.data);
-
-    //   // Redirect after successful account creation
-    //   navigate("/confirmacion");
-    // } catch (error) {
-    //   console.error("Error creating user:", error);
-    // }
+    const success = await signup(nombre, email, password)
+    if (success) {
+      navigate("/")
+    }
   }
 
   return (
@@ -73,7 +62,7 @@ const CrearCuenta = () => {
           />
           <SubmitButton label="Crear" className="mx-auto p-2" />
         </form>
-        {(() => {
+        {/* {(() => {
           if (nombre == "" || !email.includes("@") || !email.includes(".") || password == "") {
             return (
               <button type="button" className="btn btn-danger mx-auto p-2">
@@ -81,7 +70,7 @@ const CrearCuenta = () => {
               </button>
             )
           }
-        })()}
+        })()} */}
         <Link to="/iniciar_sesion" className="d-block mt-3">
           ¿Ya tienes una cuenta?
         </Link>

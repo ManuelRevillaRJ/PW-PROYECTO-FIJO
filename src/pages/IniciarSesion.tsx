@@ -6,26 +6,38 @@ import FormTitle from "../components/FormTitle"
 import { Link } from "react-router-dom"
 import { revisarAdmin } from "../utils/admins"
 import { useNavigate } from "react-router-dom"
-import { iniciarSesion } from "../utils/sesion"
 import LayoutNavBar from "../layouts/LayoutNavBar"
+import { toast } from "sonner"
+import { useUser } from "../hooks/useUser"
 
 const IniciarSesion = () => {
+  const { login, user } = useUser()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
-  let siExiste: null | boolean = true
+  // let siExiste: null | boolean = true
 
-  const handleSubmit = (evt: FormEvent) => {
+  const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
-    // prueba
-    console.log({ email, password })
+
+    if (email === "" || password === "") {
+      toast.error("Completa tus datos")
+      return
+    }
 
     // verificacion que existan en base de datos, ahorita prelim
-    siExiste = true
-    iniciarSesion(email)
-    if (revisarAdmin(email, password)) {
-      navigate("/games")
+    // siExiste = true
+
+    // Update
+    const success = await login(email, password)
+    if (success) {
+      if (revisarAdmin(email, password) || user?.permiso === "admin") {
+        navigate("/games")
+      } else {
+        navigate("/")
+      }
     }
   }
 
@@ -53,15 +65,6 @@ const IniciarSesion = () => {
           />
           <SubmitButton label="Ingresar" className="mx-auto p-2" />
         </form>
-        {(() => {
-          if (!siExiste || !email.includes("@") || !email.includes(".") || password == "") {
-            return (
-              <button type="button" className="btn btn-danger mx-auto p-2">
-                Los datos ingresados son incorrectos
-              </button>
-            )
-          }
-        })()}
 
         <div className="row justify-content-around">
           <div className="col-4">

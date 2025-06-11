@@ -1,10 +1,13 @@
 import { useState, type FormEvent } from "react"
-import { passChange } from "../utils/sesion"
 import LayoutNavBar from "../layouts/LayoutNavBar"
+import { useUser } from "../hooks/useUser"
 
 export default function CambioContra() {
+  const { changePassword } = useUser()
+
   const [formData, setFormData] = useState({
-    correo: sessionStorage.getItem("mail") || "",
+    // correo: sessionStorage.getItem("mail") || "",
+    correo: localStorage.getItem("token") || "",
     newPassword: "",
     confirmPassword: "",
     errorMsg: "",
@@ -19,7 +22,7 @@ export default function CambioContra() {
       return
     }
 
-    const success = await passChange(formData.correo, formData.newPassword)
+    const success = await changePassword(formData.correo, formData.newPassword)
 
     if (success) {
       setFormData({

@@ -243,25 +243,20 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                                 <div className="">
                                     {allCategorias.map((cat) => {
                                         return (
-                                            <div className="form-check form-check-inline">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    value={cat}
-                                                    checked={filters.selectedCategorias.includes(
-                                                        cat
-                                                    )}
-                                                    onChange={() =>
-                                                        toggleCategoria(cat)
-                                                    }
-                                                />
-                                                <label
-                                                    key={cat}
-                                                    className="form-check-label"
-                                                >
-                                                    {cat}
-                                                </label>
-                                            </div>
+                                          <div
+                                            key={allCategorias.indexOf(cat)}
+                                            className="form-check form-check-inline">
+                                            <input
+                                              className="form-check-input"
+                                              type="checkbox"
+                                              value={cat}
+                                              checked={filters.selectedCategorias.includes(cat)}
+                                              onChange={() => toggleCategoria(cat)}
+                                            />
+                                            <label key={cat} className="form-check-label">
+                                              {cat}
+                                            </label>
+                                          </div>
                                         )
                                     })}
                                 </div>
@@ -272,25 +267,20 @@ export default function GameCatalog({ gameList }: GameCatalogProps) {
                                 <div className="">
                                     {allPlataformas.map((plat) => {
                                         return (
-                                            <div className="form-check form-check-inline">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    value={plat}
-                                                    checked={filters.selectedPlataformas.includes(
-                                                        plat
-                                                    )}
-                                                    onChange={() =>
-                                                        togglePlataforma(plat)
-                                                    }
-                                                />
-                                                <label
-                                                    key={plat}
-                                                    className="form-check-label"
-                                                >
-                                                    {plat}
-                                                </label>
-                                            </div>
+                                          <div
+                                            key={allPlataformas.indexOf(plat)}
+                                            className="form-check form-check-inline">
+                                            <input
+                                              className="form-check-input"
+                                              type="checkbox"
+                                              value={plat}
+                                              checked={filters.selectedPlataformas.includes(plat)}
+                                              onChange={() => togglePlataforma(plat)}
+                                            />
+                                            <label key={plat} className="form-check-label">
+                                              {plat}
+                                            </label>
+                                          </div>
                                         )
                                     })}
                                 </div>
