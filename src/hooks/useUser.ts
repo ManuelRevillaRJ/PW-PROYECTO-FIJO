@@ -8,10 +8,13 @@ import { useNavigate } from "react-router-dom"
 export const useUser = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(null)
+  const [token, setToken] = useState<string | null>(null)
 
   useEffect(() => {
     const token = localStorage.getItem("token")
-    if (!token) return
+    if (token) {
+      setToken(token)
+    } else return
 
     try {
       const decoded: User = jwtDecode(token)
@@ -32,6 +35,7 @@ export const useUser = () => {
 
       const data = await res.json()
       localStorage.setItem("token", data.token)
+      setToken(data.token)
 
       const decoded: User = jwtDecode(data.token)
       setUser(decoded)
@@ -55,6 +59,7 @@ export const useUser = () => {
 
       const data = await res.json()
       localStorage.setItem("token", data.token)
+      setToken(data.token)
 
       const decoded: User = jwtDecode(data.token)
       setUser(decoded)
@@ -86,6 +91,7 @@ export const useUser = () => {
 
   const logout = () => {
     localStorage.removeItem("token")
+    setToken(null)
     setUser(null)
     toast.info("Cierre de sesión")
     navigate("/")
@@ -94,6 +100,7 @@ export const useUser = () => {
 
   return {
     user,
+    token,
     isLoggedIn: !!user,
     login,
     signup,
