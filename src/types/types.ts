@@ -3,6 +3,7 @@ export type User = {
   id: string
   correo: string
   password: string
+  token? : string
   nombre: string
   estado: boolean
   permiso: "user" | "admin"
