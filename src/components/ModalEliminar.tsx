@@ -1,10 +1,8 @@
 import { Modal } from "react-bootstrap";
-import { useState, type FormEvent } from "react";
-import SubmitButton from "./Button";
-import { ListaGames } from "../utils/ListaJuegos";
+import { type FormEvent } from "react"
+import SubmitButton from "./Button"
 
-import "../styles/Modal.css";
-import type { Game } from "../types/Game";
+import "../styles/Modal.css"
 
 interface ModalEliminarJuego {
   show: boolean;
@@ -15,24 +13,17 @@ interface ModalEliminarJuego {
 export default function ModalEliminar({
   show,
   onHide,
-  id,
-}: ModalEliminarJuego) {
+}: // id,
+ModalEliminarJuego) {
   const handleSubmit = (evt: FormEvent) => {
-    evt.preventDefault();
+    evt.preventDefault()
     // aca poner que elimine
     //eliminarJuego(id);
-    onHide();
-  };
+    onHide()
+  }
 
   return (
-    <Modal
-      className="modal"
-      show={show}
-      onHide={onHide}
-      centered
-      size="lg"
-      backdrop="static"
-    >
+    <Modal className="modal" show={show} onHide={onHide} centered size="lg" backdrop="static">
       <Modal.Header closeButton className="bg-dark text-white">
         <Modal.Title>¿Seguro que quiere eliminar este juego?</Modal.Title>
       </Modal.Header>
@@ -41,16 +32,17 @@ export default function ModalEliminar({
         <form onSubmit={handleSubmit}>
           <div>
             <div className="row align-items-start">
-              <button type="button" onClick={onHide} className="col btn btn-secondary mt-2 mb-2 w-100 ms-4 me-4">
+              <button
+                type="button"
+                onClick={onHide}
+                className="col btn btn-secondary mt-2 mb-2 w-100 ms-4 me-4">
                 Cancelar
               </button>
               <SubmitButton label="Eliminar" className="col ms-4 me-4" />
             </div>
           </div>
-
-          
         </form>
       </Modal.Body>
     </Modal>
-  );
+  )
 }
