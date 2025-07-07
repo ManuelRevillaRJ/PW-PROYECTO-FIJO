@@ -1,33 +1,45 @@
-const productos = [
-  { id: 1, nombre: "PC Gamer" },
-  { id: 2, nombre: "Teclado Mecanico" },
-  { id: 3, nombre: "Audifonos Gamer" }
-]
-
+const token = localStorage.getItem("token");
 const contenedor = document.getElementById('carrito');
 
-function render() {
-  contenedor.innerHTML = ""
+function cargarCarrito() {
+  fetch("http://localhost:3000/carrito", {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(res => res.json())
+    .then(juegos => render(juegos))
+    .catch(err => console.error("Error cargando el carrito:", err));
+}
 
-  productos.forEach((producto, index) => {
-    const itemDiv = document.createElement('div')
-    itemDiv.className = "item"
+function render(productos) {
+  contenedor.innerHTML = "";
 
+  productos.forEach((producto) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "item";
     itemDiv.innerHTML = `
-      <span>${producto.nombre}</span>
-      <button class="eliminar" onclick="eliminarItem(${index})">Eliminar</button>`
-
-    contenedor.appendChild(itemDiv)
+      <span>${producto.juego.nombre}</span>
+      <button class="eliminar" onclick="eliminarItem(${producto.juego.id})">Eliminar</button>
+    `;
+    contenedor.appendChild(itemDiv);
   });
 
   if (productos.length === 0) {
-    contenedor.innerHTML = "<p>Tu carrito está vacío.</p>"
+    contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
   }
 }
 
-function eliminarItem(indice) {
-  productos.splice(indice, 1)
-  render()
+function eliminarItem(idDelJuego) {
+  fetch(`http://localhost:3000/carrito/item/${idDelJuego}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
+  })
+    .then(res => res.json())
+    .then(() => cargarCarrito()) 
+    .catch(err => console.error("Error eliminando ítem:", err));
 }
 
-render()
+cargarCarrito(); 
