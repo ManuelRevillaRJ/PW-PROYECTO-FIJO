@@ -1,45 +1,41 @@
-import { useState, type FormEvent } from "react"
-import AuthCard from "../components/AuthCard"
-import FormInput from "../components/FormInput"
-import SubmitButton from "../components/Button"
-import FormTitle from "../components/FormTitle"
-import { Link } from "react-router-dom"
-import { revisarAdmin } from "../utils/admins"
-import { useNavigate } from "react-router-dom"
-import LayoutNavBar from "../layouts/LayoutNavBar"
-import { toast } from "sonner"
-import { useUser } from "../hooks/useUser"
+import { useState, type FormEvent } from "react";
+import AuthCard from "../components/AuthCard";
+import FormInput from "../components/FormInput";
+import SubmitButton from "../components/Button";
+import FormTitle from "../components/FormTitle";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LayoutNavBar from "../layouts/LayoutNavBar";
+import { toast } from "sonner";
+import { useUser } from "../hooks/useUser";
 
 const IniciarSesion = () => {
-  const { login, user } = useUser()
+  const { login, refresh } = useUser();
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // let siExiste: null | boolean = true
 
   const handleSubmit = async (evt: FormEvent) => {
-    evt.preventDefault()
+    evt.preventDefault();
 
     if (email === "" || password === "") {
-      toast.error("Completa tus datos")
-      return
+      toast.error("Completa tus datos");
+      return;
     }
-
-    // verificacion que existan en base de datos, ahorita prelim
-    // siExiste = true
-
-    // Update
-    const success = await login(email, password)
-    if (success) {
-      if (revisarAdmin(email, password) || user?.permiso === "admin") {
-        navigate("/games")
+    const loggedUser = await login(email, password); // <-- ahora es el usuario
+    
+    if (loggedUser) {
+      refresh();
+      if (loggedUser.permiso === "admin") {
+        navigate("/games");
       } else {
-        navigate("/")
+        navigate("/");
       }
     }
-  }
+  };
 
   return (
     <LayoutNavBar>
@@ -80,7 +76,7 @@ const IniciarSesion = () => {
         </div>
       </AuthCard>
     </LayoutNavBar>
-  )
-}
+  );
+};
 
-export default IniciarSesion
+export default IniciarSesion;

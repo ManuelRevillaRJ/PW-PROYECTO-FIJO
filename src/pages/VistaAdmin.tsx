@@ -9,6 +9,7 @@ export default function VistaAdmin() {
         <div className="layout-container modal-container">
             <Sidebar />
             <Table />
+            
         </div>
     )
 }

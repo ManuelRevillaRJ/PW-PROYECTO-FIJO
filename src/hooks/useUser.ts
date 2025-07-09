@@ -11,6 +11,11 @@ export const useUser = () => {
   const [token, setToken] = useState<string | null>(null)
 
   useEffect(() => {
+    refresh()
+  }, [])
+
+  
+  const refresh = () => {
     const token = localStorage.getItem("token")
     if (token) {
       setToken(token)
@@ -22,31 +27,33 @@ export const useUser = () => {
     } catch (error) {
       console.error("Token decode failed", error)
     }
-  }, [])
+  }
 
   const login = async (correo: string, password: string) => {
-    try {
-      const res = await loginRequest(correo, password)
+  try {
+    const res = await loginRequest(correo, password);
 
-      if (!res.ok) {
-        const msg = await res.json()
-        toast.error(msg.message)
-      }
-
-      const data = await res.json()
-      localStorage.setItem("token", data.token)
-      setToken(data.token)
-
-      const decoded: User = jwtDecode(data.token)
-      setUser(decoded)
-
-      toast.success("Inicio de sesión exitoso")
-      return true
-    } catch (error) {
-      console.log(error)
-      return false
+    if (!res.ok) {
+      const msg = await res.json();
+      toast.error(msg.message);
+      return null; // <-- Cambia esto
     }
+
+    const data = await res.json();
+    localStorage.setItem("token", data.token);
+    setToken(data.token);
+
+    const decoded: User = jwtDecode(data.token);
+    setUser(decoded);
+
+    toast.success("Inicio de sesión exitoso");
+    return decoded; // <-- Devuelve el usuario
+  } catch (error) {
+    console.log(error);
+    return null;
   }
+}
+
 
   const signup = async (nombre: string, correo: string, password: string) => {
     try {
@@ -106,5 +113,6 @@ export const useUser = () => {
     signup,
     logout,
     changePassword,
+    refresh
   }
 }
