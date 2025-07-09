@@ -4,7 +4,7 @@ import FormInput from "./FormInput";
 import SubmitButton from "./Button";
 
 import "../styles/Modal.css";
-import type { Game } from "../types/Game";
+import type { Game } from "../types/types";
 
 interface ModalEditarJuego {
   show: boolean;
@@ -16,6 +16,7 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
   const [titulo1, setTitulo1] = useState(juego.titulo);
   const [description, setDescription] = useState(juego.description ?? ""); // descripcion o sino vacio
   const [precio, setPrecio] = useState(juego.precio ?? 0);
+  const [imagen, setImagen] = useState(juego.image ?? "");
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -60,12 +61,20 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
             value={""+precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
+          <FormInput
+            label="Imagen (URL)"
+            type="text"
+            id="imagen"
+            value={imagen}
+            onChange={(e) => setImagen(e.currentTarget.value)}
+          />
+          
           <SubmitButton label="Guardar"/>
         </form>
       </Modal.Body>
       <Modal.Footer className="bg-dark text-white">
             {(()=> {
-              if (titulo1 == "" || description == "") {
+              if (titulo1 == "" || description == "" || imagen == "") {
               return <button type="button" className="btn btn-danger"> Faltan datos </button>;
             }})()}
       </Modal.Footer>
