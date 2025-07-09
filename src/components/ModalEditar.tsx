@@ -24,10 +24,11 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
     console.log({ titulo1, description, precio });
 
     // aca poner que agregue a la lista de juegos
-    if (titulo1 != "" && description != "") {
+    if (titulo1 != "" && description != "" && imagen != "") {
       juego.titulo = titulo1;
       juego.description = description;
       juego.precio = precio;
+      juego.image = imagen;
       onHide();
     } 
   };
@@ -68,13 +69,13 @@ export default function ModalEditar({ show, onHide, juego }: ModalEditarJuego) {
             value={imagen}
             onChange={(e) => setImagen(e.currentTarget.value)}
           />
-          
+
           <SubmitButton label="Guardar"/>
         </form>
       </Modal.Body>
       <Modal.Footer className="bg-dark text-white">
             {(()=> {
-              if (titulo1 == "" || description == "" || imagen == "") {
+              if (titulo1 == "" || description == "") {
               return <button type="button" className="btn btn-danger"> Faltan datos </button>;
             }})()}
       </Modal.Footer>

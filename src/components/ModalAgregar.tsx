@@ -64,6 +64,14 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             value={""+precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
+          <FormInput
+            label="Imagen (URL)"
+            type="text"
+            id="imagen"
+            value={imagen}
+            onChange={(e) => setImagen(e.currentTarget.value)}
+          />
+
           <SubmitButton label="Crear"/>
         </form>
       </Modal.Body>
