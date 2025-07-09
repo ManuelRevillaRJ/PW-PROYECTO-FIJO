@@ -15,6 +15,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
   const [titulo1, setTitulo1] = useState("");
   const [description, setDescription] = useState("");
   const [precio, setPrecio] = useState(0);
+  const [imagen, setImagen] = useState("");
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -28,8 +29,15 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
         titulo: titulo1,
         description: description,
         precio: precio,
+        image: imagen,
+        esta_oferta: false,
+        detalleImagenes: [],
+        categorias: [],
+        plataformas: [],
+        ventas: [],
       });
       onHide();
+
     } 
   };
 
@@ -64,6 +72,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             value={""+precio}
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
+
           <FormInput
             label="Imagen (URL)"
             type="text"
@@ -71,7 +80,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             value={imagen}
             onChange={(e) => setImagen(e.currentTarget.value)}
           />
-
+          
           <SubmitButton label="Crear"/>
         </form>
       </Modal.Body>
