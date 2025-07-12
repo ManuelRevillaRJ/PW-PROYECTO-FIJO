@@ -4,6 +4,7 @@ import { toast } from "sonner"
 import type { User } from "../types/types"
 import { loginRequest, signupRequest, changePasswordRequest } from "../utils/api/sessionsApi"
 import { useNavigate } from "react-router-dom"
+import { actualizarPerfil } from "../utils/api/userApi"
 
 export const useUser = () => {
   const navigate = useNavigate()
@@ -14,7 +15,6 @@ export const useUser = () => {
     refresh()
   }, [])
 
-  
   const refresh = () => {
     const token = localStorage.getItem("token")
     if (token) {
@@ -24,36 +24,36 @@ export const useUser = () => {
     try {
       const decoded: User = jwtDecode(token)
       setUser(decoded)
+      console.log(decoded)
     } catch (error) {
       console.error("Token decode failed", error)
     }
   }
 
   const login = async (correo: string, password: string) => {
-  try {
-    const res = await loginRequest(correo, password);
+    try {
+      const res = await loginRequest(correo, password)
 
-    if (!res.ok) {
-      const msg = await res.json();
-      toast.error(msg.message);
-      return null; // <-- Cambia esto
+      if (!res.ok) {
+        const msg = await res.json()
+        toast.error(msg.message)
+        return null
+      }
+
+      const data = await res.json()
+      localStorage.setItem("token", data.token)
+      setToken(data.token)
+
+      const decoded: User = jwtDecode(data.token)
+      setUser(decoded)
+
+      toast.success("Inicio de sesión exitoso")
+      return decoded
+    } catch (error) {
+      console.log(error)
+      return null
     }
-
-    const data = await res.json();
-    localStorage.setItem("token", data.token);
-    setToken(data.token);
-
-    const decoded: User = jwtDecode(data.token);
-    setUser(decoded);
-
-    toast.success("Inicio de sesión exitoso");
-    return decoded; // <-- Devuelve el usuario
-  } catch (error) {
-    console.log(error);
-    return null;
   }
-}
-
 
   const signup = async (nombre: string, correo: string, password: string) => {
     try {
@@ -96,6 +96,37 @@ export const useUser = () => {
     }
   }
 
+  const updateProfile = async (
+    userId: string | undefined,
+    firstName: string,
+    lastName: string,
+    email: string
+  ) => {
+    if (!userId || userId === undefined) return null
+    try {
+      const res = await actualizarPerfil(userId, firstName, lastName, email)
+      if (!res.ok) {
+        const msg = await res.json()
+        toast.error(msg.error)
+        return null
+      }
+
+      const data = await res.json()
+
+      localStorage.setItem("token", data.token)
+      setToken(data.token)
+
+      const decoded: User = jwtDecode(data.token)
+      setUser(decoded)
+
+      toast.success(data.message)
+      return decoded
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  }
+
   const logout = () => {
     localStorage.removeItem("token")
     setToken(null)
@@ -113,6 +144,7 @@ export const useUser = () => {
     signup,
     logout,
     changePassword,
-    refresh
+    updateProfile,
+    refresh,
   }
 }

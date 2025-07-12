@@ -16,8 +16,6 @@ const IniciarSesion = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // let siExiste: null | boolean = true
-
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault();
 

@@ -1,12 +1,15 @@
 import { useState } from "react"
 import NavBar from "../components/NavBar"
-import { actualizarPerfil } from "../utils/usuario"
+import { useUser } from "../hooks/useUser"
+import { useNavigate } from "react-router-dom"
 
 export default function ProfilePage() {
+  const navigate = useNavigate()
+  const { user, refresh, updateProfile } = useUser()
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    email: sessionStorage.getItem("mail") || "",
+    email: user?.correo || "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,9 +19,16 @@ export default function ProfilePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: send data to backend
-    const success = await actualizarPerfil({ fields: form })
-    console.log(success)
+    const usuarioActualizado = await updateProfile(
+      user?.id,
+      form.firstName,
+      form.lastName,
+      form.email
+    )
+    if (usuarioActualizado) {
+      refresh()
+      navigate("/")
+    }
   }
 
   return (
