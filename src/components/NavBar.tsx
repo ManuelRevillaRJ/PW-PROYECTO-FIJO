@@ -1,8 +1,22 @@
-import { Link } from "react-router"
-import { useUser } from "../hooks/useUser"
+import { Link } from "react-router";
+import { useUser } from "../hooks/useUser";
+import SearchBar from "./SearchBar";
+
+// Implementado para el buscador de juegos
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
-  const { logout, isLoggedIn, user } = useUser()
+  const { logout, isLoggedIn, user } = useUser();
+
+  // Implementado para el buscador de juegos
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    navigate(`/buscar?nombre=${encodeURIComponent(searchTerm)}`);
+  };
 
   return (
     <nav className="navbar justify-content-center navbar-expand-lg fixed-top bg-body-tertiary">
@@ -17,10 +31,14 @@ export default function NavBar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse text-center"
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav justify-content-center">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to={"/"}>
@@ -33,7 +51,8 @@ export default function NavBar() {
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Categories
               </a>
               <ul className="dropdown-menu">
@@ -70,7 +89,8 @@ export default function NavBar() {
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Platform
               </a>
               <ul className="dropdown-menu">
@@ -113,7 +133,8 @@ export default function NavBar() {
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Perfil
               </a>
               <ul className="dropdown-menu">
@@ -126,7 +147,10 @@ export default function NavBar() {
                     return (
                       <>
                         <li>
-                          <Link className="dropdown-item" to={"/iniciar_sesion"}>
+                          <Link
+                            className="dropdown-item"
+                            to={"/iniciar_sesion"}
+                          >
                             Iniciar Sesión
                           </Link>
                         </li>
@@ -136,7 +160,7 @@ export default function NavBar() {
                           </Link>
                         </li>
                       </>
-                    )
+                    );
                   } else {
                     return (
                       <>
@@ -151,12 +175,16 @@ export default function NavBar() {
                           </Link>
                         </li>
                         <li>
-                          <Link className="dropdown-item" onClick={logout} to={"/"}>
+                          <Link
+                            className="dropdown-item"
+                            onClick={logout}
+                            to={"/"}
+                          >
                             Cerrar sesión
                           </Link>
                         </li>
                       </>
-                    )
+                    );
                   }
                 })()}
               </ul>
@@ -168,9 +196,13 @@ export default function NavBar() {
                 Carrito de Compras
               </Link>
             </li>
+
+            <li className="nav-item ms-auto d-flex align-items-center">
+              <SearchBar />
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
+  );
 }

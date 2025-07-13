@@ -1,0 +1,1 @@
+export const URL = "postgres://postgres:pgsu@localhost:5433/prograweb"

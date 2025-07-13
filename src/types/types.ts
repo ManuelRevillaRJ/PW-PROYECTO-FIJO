@@ -1,13 +1,13 @@
 // Usuario (uno a muchos con Venta y Calificación)
 export type User = {
-  id: string
-  correo: string
-  password: string
-  token? : string
-  nombre: string
-  estado: boolean
-  permiso: "user" | "admin"
-}
+  id: string;
+  correo: string;
+  password: string;
+  token?: string;
+  nombre: string;
+  estado: boolean;
+  permiso: "user" | "admin";
+};
 
 // Noticia (sin relaciones)
 export type News = {
