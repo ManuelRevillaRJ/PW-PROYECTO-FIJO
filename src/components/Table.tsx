@@ -1,0 +1,238 @@
+import { useEffect, useState } from "react";
+
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import { URL } from "../secret";
+import "../styles/Table.css";
+
+import { ListaGames } from "../utils/ListaJuegos";
+import ModalAgregar from "./ModalAgregar";
+import ModalEliminar from "./ModalEliminar";
+import ModalEditar from "./ModalEditar";
+import type { Game } from "../types/types";
+const juegoDefault = {
+  id: "",
+  titulo: "",
+  description: "",
+  precio: 0,
+  esta_oferta: false,
+  detalleImagenes: [],
+  categorias: [],
+  plataformas: [],
+  ventas: [],
+};
+const URLPrueba = "http://localhost:3000";
+export const Table = () => {
+  const [inputId, setInputId] = useState("");
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null);
+  // de agregar
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const abrirModal = () => setModalAbierto(true);
+  const cerrarModal = () => setModalAbierto(false);
+
+  // de eliminar
+  const [modalAbierto2, setModalAbierto2] = useState(false);
+  const abrirModal2 = (juego: Game) => {
+    setJuegoSeleccionado(juego);
+    setModalAbierto2(true);
+  };
+  const cerrarModal2 = () => setModalAbierto2(false);
+
+  // de editar
+  const [modalAbierto3, setModalAbierto3] = useState(false);
+  const abrirModal3 = (juego: Game) => {
+    setJuegoSeleccionado(juego);
+    setModalAbierto3(true);
+  };
+  const cerrarModal3 = () => setModalAbierto3(false);
+
+  const buscarJuego = async () => {
+    if (!inputId) return alert("Ingresa un ID válido"); // cambiar
+    try {
+      const res = await fetch(`${URL}/games/${inputId}`);
+      if (!res.ok) throw new Error("Juego no encontrado");
+      const data = await res.json();
+      setJuegoSeleccionado(data);
+    } catch (error) {
+      setJuegoSeleccionado(null);
+      alert((error as Error).message); // esto cambiar, es para probar
+    }
+  };
+
+  const httpAcualizarJuegos = async () => {
+    try {
+      const resp = await fetch(`${URL}/games/top-rated`); // `${URL}/games/top-rated`
+      if (!resp.ok) throw new Error("servidor");
+      const data = await resp.json();
+      // ver que hacer aqui para que se actualice la  tabla
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    httpAcualizarJuegos();
+  }, []);
+
+  return (
+    <div className="row container mt-auto">
+      <div className="col-md-2">
+        <button
+          className="btn btn-primary btn-de-tabla justify-content-start mt-5"
+          type="button"
+          onClick={() => {
+            abrirModal();
+          }}
+        >
+          Agregar
+        </button>
+
+        <div>
+          <div className="input-group input-group-sm mb-3 justify-content-start mt-3">
+            <p className="input-group-text" id="inputGroup-sizing-sm">
+              Id Juego:
+            </p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault(); // Evita que la página se recargue
+                buscarJuego();
+              }}
+            >
+              <input
+                type="text"
+                className="form-control"
+                id="idJue"
+                value={inputId}
+                onChange={(e) => setInputId(e.target.value)}
+                placeholder="Ingresa ID del juego"
+              />
+              <>
+                <button type="submit" className="btn btn-primary mt-2">
+                  Buscar
+                </button>
+              </>
+            </form>
+          </div>
+
+          <span className="actions">
+            <BsFillTrashFill
+              className="delete-btn"
+              onClick={() => {
+                if (juegoSeleccionado) abrirModal2(juegoSeleccionado);
+                else alert("Busca un juego primero"); // borrar cambiar
+                return
+              }}
+            />
+
+            {modalAbierto2 && juegoSeleccionado && (
+              <ModalEliminar
+                show={modalAbierto2}
+                onHide={cerrarModal2}
+                id={juegoSeleccionado.id}
+                onDeleted={() => {
+                  cerrarModal2();
+                  setJuegoSeleccionado(null);
+                  setInputId("");
+                }}
+              />
+            )}
+
+            <BsFillPencilFill
+              className="edit-btn"
+              onClick={() => {
+                if (juegoSeleccionado) abrirModal3(juegoSeleccionado);
+                else alert("Busca un juego primero"); //borrar cambiar
+                return
+              }}
+            />
+
+            {modalAbierto3 && juegoSeleccionado && (
+              <ModalEditar
+                show={modalAbierto3}
+                onHide={cerrarModal3}
+                juego={juegoSeleccionado}
+                onUpdated={(juegoActualizado) => {
+                  setJuegoSeleccionado(juegoActualizado);
+                  cerrarModal3();
+                }}
+              />
+            )}
+          </span>
+        </div>
+
+        {modalAbierto && (
+          <ModalAgregar show={modalAbierto} onHide={cerrarModal} />
+        )}
+      </div>
+      <div className="col-md-10">
+        <div className="table-wrapper">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th className="expandesque">Titulo</th>
+                <th className="expand wrapper">Descripcion</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ListaGames.map((juego: Game) => {
+                return (
+                  <tr key={juego.id}>
+                    <td>{juego.id}</td>
+                    <td className="expandesque">{juego.titulo}</td>
+                    <td className="expand">{juego.description}</td>
+                    <td>{juego.precio}</td>
+
+                    <td className="fit">
+                      <span className="actions">
+                        <BsFillTrashFill
+                          className="delete-btn"
+                          onClick={() => {
+                            abrirModal2(juego);
+                          }}
+                        />
+
+                        {modalAbierto2 && (
+                          <ModalEliminar
+                            show={modalAbierto2}
+                            onHide={cerrarModal2}
+                            id={juego.id}
+                            onDeleted={() => {
+                              cerrarModal2();
+                              setJuegoSeleccionado(null);
+                              setInputId("");
+                            }}
+                          />
+                        )}
+
+                        <BsFillPencilFill
+                          className="edit-btn"
+                          onClick={() => {
+                            abrirModal3(juego);
+                          }}
+                        />
+
+                        {modalAbierto3 && (
+                          <ModalEditar
+                            show={modalAbierto3}
+                            onHide={cerrarModal3}
+                            juego={juego}
+                            onUpdated={(juegoActualizado) => {
+                              setJuegoSeleccionado(juegoActualizado);
+                              cerrarModal3();
+                            }}
+                          />
+                        )}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};

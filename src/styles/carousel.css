@@ -1,0 +1,50 @@
+body {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.placeholder-nav {
+  background-color: #f1f1f1;
+  color: #6c757d;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-style: italic;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-game {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #212529;
+  transition: transform 0.2s;
+}
+
+.card-game:hover {
+  transform: scale(1.05);
+}
+
+.carousel-inner img {
+  height: 400px;
+  object-fit: contain;
+}
+
+/* Flechas del carrusel en negro */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 0.75;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
