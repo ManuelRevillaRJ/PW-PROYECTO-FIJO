@@ -1,36 +1,29 @@
-import GameCard from "../components/GameCard"
-import NavBar from "../components/NavBar"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { ListaGames } from "../utils/ListaJuegos"
-import type { Game } from "../types/types"
-import CarouselTopRated from "../components/CarouselTopRated"
-import { useEffect, useState } from "react"
-import {URL} from "../secret" // usar este en vez de los de prueba
+import GameCard from "../components/GameCard";
+import NavBar from "../components/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import type { Game } from "../types/types";
+import CarouselTopRated from "../components/CarouselTopRated";
+import { useEffect, useState } from "react";
+import { URL } from "../secret"; // usar este en vez de los de prueba
 
 export default function TopRated() {
-  const topRated: Game[] = ListaGames.sort(
-    (a, b) => (b.rating ?? 0) - (a.rating ?? 0)
-  ).slice(0, 12)
-
-  const [topRatedList, setTopRatedList] = useState<Game[]>([])
+  const [topRatedList, setTopRatedList] = useState<Game[]>([]);
 
   const httpObtenerTopRateds = async () => {
     try {
-      const resp = await fetch(`${URL}/games/top-rated`) 
-      if (!resp.ok) throw new Error("servidor")
-      const data = await resp.json()
-      console.log(data)
-      setTopRatedList(data)      
+      const resp = await fetch(`${URL}/games/top-rated`);
+      if (!resp.ok) throw new Error("servidor");
+      const data = await resp.json();
+      console.log(data);
+      setTopRatedList(data);
     } catch (error) {
-      console.error(error)
-    } 
-  }
+      console.error(error);
+    }
+  };
 
-  useEffect(()=>{
-    httpObtenerTopRateds()
-  },[]);
-
-  
+  useEffect(() => {
+    httpObtenerTopRateds();
+  }, []);
 
   return (
     <>
@@ -42,17 +35,24 @@ export default function TopRated() {
 
           <CarouselTopRated />
 
-          <div className="row row-cols-2 row-cols-md-5 g-4" id="games-list"></div>
+          <div
+            className="row row-cols-2 row-cols-md-5 g-4"
+            id="games-list"
+          ></div>
 
           <div className="container text-center">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-              {topRated.map((game) => (                         // Cambiar a topRatedList.map
-                <GameCard key={game.id} game={game} />
-              ))}
+              {topRatedList.map(
+                (
+                  game // Cambiar a topRatedList.map
+                ) => (
+                  <GameCard key={game.id} game={game} />
+                )
+              )}
             </div>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

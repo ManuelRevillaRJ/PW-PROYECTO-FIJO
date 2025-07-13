@@ -3,20 +3,20 @@ import { useUser } from "../hooks/useUser";
 import SearchBar from "./SearchBar";
 
 // Implementado para el buscador de juegos
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useState } from "react";
+//import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const { logout, isLoggedIn, user } = useUser();
 
   // Implementado para el buscador de juegos
-  const [searchTerm, setSearchTerm] = useState("");
+  /*const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
     navigate(`/buscar?nombre=${encodeURIComponent(searchTerm)}`);
-  };
+  }*/
 
   return (
     <nav className="navbar justify-content-center navbar-expand-lg fixed-top bg-body-tertiary">

@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
-import DummyGC from '../components/DummyGameCard';
-import CartBar from '../components/CartBar';
-import NavBar from '../components/NavBar';
+import { useState } from "react"; //BORRÉ React
+import DummyGC from "../components/DummyGameCard";
+import CartBar from "../components/CartBar";
+import NavBar from "../components/NavBar";
 
 type CartItem = {
   name: string;
 };
 
 const CartTestPage = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [isCartVisible, setIsCartVisible] = useState(true)
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartVisible, setIsCartVisible] = useState(true);
 
   const addToCart = (name: string) => {
-    setCartItems([...cartItems, { name }])
-    setIsCartVisible(true)
-  }
+    setCartItems([...cartItems, { name }]);
+    setIsCartVisible(true);
+  };
 
   const removeFromCart = (index: number) => {
-    const newCart = [...cartItems]
-    newCart.splice(index, 1)
-    setCartItems(newCart)
-  }
+    const newCart = [...cartItems];
+    newCart.splice(index, 1);
+    setCartItems(newCart);
+  };
 
-  const clearCart = () => setCartItems([])
+  const clearCart = () => setCartItems([]);
 
   const checkout = () =>
-    alert("Checkout not implemented yet. Items: " + cartItems.map((i) => i.name).join(", "))
+    alert(
+      "Checkout not implemented yet. Items: " +
+        cartItems.map((i) => i.name).join(", ")
+    );
   // request checkout -> checkoutRequest(userId: number, gameIdList: number[])
 
-  const toggleCart = () => setIsCartVisible(!isCartVisible)
+  const toggleCart = () => setIsCartVisible(!isCartVisible);
 
   return (
     <>
@@ -42,7 +45,10 @@ const CartTestPage = () => {
           </div>
         </div>
 
-        <button className="btn btn-dark position-fixed top-0 end-0 m-3" onClick={toggleCart}>
+        <button
+          className="btn btn-dark position-fixed top-0 end-0 m-3"
+          onClick={toggleCart}
+        >
           🛒
         </button>
 
@@ -55,7 +61,7 @@ const CartTestPage = () => {
         />
       </div>
     </>
-  )
+  );
 };
 
 export default CartTestPage;

@@ -9,6 +9,7 @@ import ModalAgregar from "./ModalAgregar";
 import ModalEliminar from "./ModalEliminar";
 import ModalEditar from "./ModalEditar";
 import type { Game } from "../types/types";
+/*
 const juegoDefault = {
   id: "",
   titulo: "",
@@ -20,6 +21,7 @@ const juegoDefault = {
   plataformas: [],
   ventas: [],
 };
+*/
 export const Table = () => {
   const [inputId, setInputId] = useState("");
   const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null);
@@ -61,7 +63,7 @@ export const Table = () => {
     try {
       const resp = await fetch(`${URL}/games/top-rated`); // `${URL}/games/top-rated`
       if (!resp.ok) throw new Error("servidor");
-      const data = await resp.json();
+      //const data = await resp.json();
       // ver que hacer aqui para que se actualice la  tabla
     } catch (error) {
       console.error(error);
