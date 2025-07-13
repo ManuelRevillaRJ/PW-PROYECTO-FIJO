@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000"
+import { API_URL } from "../../secret"
 
 export const signupRequest = async (nombre: string, correo: string, password: string) => {
   const res = await fetch(`${API_URL}/sessions/signup`, {

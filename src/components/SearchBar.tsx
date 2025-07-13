@@ -1,49 +1,45 @@
 import { useState, useEffect } from "react";
 import type { Game } from "../types/types";
 import GameCard from "./GameCard";
-import {URL} from "../secret"
+import { API_URL } from "../secret"
 
 export default function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [resultados, setResultados] = useState<Game[]>([]);
-  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null);
+  const [searchTerm, setSearchTerm] = useState("")
+  const [resultados, setResultados] = useState<Game[]>([])
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null)
 
   // Buscar juegos por nombre
   useEffect(() => {
     const fetchJuegos = async () => {
       if (searchTerm.trim().length === 0) {
-        setResultados([]);
-        return;
+        setResultados([])
+        return
       }
 
       try {
-        const res = await fetch(
-          `${URL}/games/buscar?nombre=${encodeURIComponent(
-            searchTerm
-          )}`
-        );
-        const data = await res.json();
-        setResultados(data);
+        const res = await fetch(`${API_URL}/games/buscar?nombre=${encodeURIComponent(searchTerm)}`)
+        const data = await res.json()
+        setResultados(data)
       } catch (error) {
-        console.error("Error al buscar juegos:", error);
-        setResultados([]);
+        console.error("Error al buscar juegos:", error)
+        setResultados([])
       }
-    };
+    }
 
-    const timeout = setTimeout(fetchJuegos, 300);
-    return () => clearTimeout(timeout);
-  }, [searchTerm]);
+    const timeout = setTimeout(fetchJuegos, 300)
+    return () => clearTimeout(timeout)
+  }, [searchTerm])
 
   // Al hacer clic en un juego
   const handleJuegoClick = async (id: number) => {
     try {
-      const res = await fetch(`${URL}/games/${id}`);
-      const juego = await res.json();
-      setJuegoSeleccionado(juego);
+      const res = await fetch(`${API_URL}/games/${id}`)
+      const juego = await res.json()
+      setJuegoSeleccionado(juego)
     } catch (error) {
-      console.error("Error al obtener juego:", error);
+      console.error("Error al obtener juego:", error)
     }
-  };
+  }
 
   return (
     <div className="position-relative" style={{ minWidth: "250px" }}>
@@ -70,20 +66,17 @@ export default function SearchBar() {
             maxHeight: "200px",
             overflowY: "auto",
             border: "1px solid #ced4da",
-          }}
-        >
+          }}>
           {resultados.map((juego) => (
             <li
               key={juego.id}
               className="list-group-item list-group-item-action"
               onClick={(e) => {
-                e.preventDefault();
-                handleJuegoClick(Number(juego.id));
+                e.preventDefault()
+                handleJuegoClick(Number(juego.id))
               }}
-              style={{ cursor: "pointer" }}
-            >
+              style={{ cursor: "pointer" }}>
               {juego.titulo}
-              
             </li>
           ))}
         </ul>
@@ -96,5 +89,5 @@ export default function SearchBar() {
         </div>
       )}
     </div>
-  );
+  )
 }

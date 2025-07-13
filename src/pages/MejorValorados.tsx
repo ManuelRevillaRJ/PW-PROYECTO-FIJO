@@ -4,26 +4,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import type { Game } from "../types/types";
 import CarouselTopRated from "../components/CarouselTopRated";
 import { useEffect, useState } from "react";
-import { URL } from "../secret"; // usar este en vez de los de prueba
+import { API_URL } from "../secret" // usar este en vez de los de prueba
 
 export default function TopRated() {
-  const [topRatedList, setTopRatedList] = useState<Game[]>([]);
+  const [topRatedList, setTopRatedList] = useState<Game[]>([])
 
   const httpObtenerTopRateds = async () => {
     try {
-      const resp = await fetch(`${URL}/games/top-rated`);
-      if (!resp.ok) throw new Error("servidor");
-      const data = await resp.json();
-      console.log(data);
-      setTopRatedList(data);
+      const resp = await fetch(`${API_URL}/games/top-rated`)
+      if (!resp.ok) throw new Error("servidor")
+      const data = await resp.json()
+      console.log(data)
+      setTopRatedList(data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    httpObtenerTopRateds();
-  }, []);
+    httpObtenerTopRateds()
+  }, [])
 
   return (
     <>
@@ -35,10 +35,7 @@ export default function TopRated() {
 
           <CarouselTopRated />
 
-          <div
-            className="row row-cols-2 row-cols-md-5 g-4"
-            id="games-list"
-          ></div>
+          <div className="row row-cols-2 row-cols-md-5 g-4" id="games-list"></div>
 
           <div className="container text-center">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -54,5 +51,5 @@ export default function TopRated() {
         </div>
       </div>
     </>
-  );
+  )
 }

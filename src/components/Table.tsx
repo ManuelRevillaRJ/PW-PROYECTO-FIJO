@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
-import { URL } from "../secret";
-import "../styles/Table.css";
+import { API_URL } from "../secret"
+import "../styles/Table.css"
 
-import { ListaGames } from "../utils/ListaJuegos";
-import ModalAgregar from "./ModalAgregar";
-import ModalEliminar from "./ModalEliminar";
-import ModalEditar from "./ModalEditar";
-import type { Game } from "../types/types";
+import { ListaGames } from "../utils/ListaJuegos"
+import ModalAgregar from "./ModalAgregar"
+import ModalEliminar from "./ModalEliminar"
+import ModalEditar from "./ModalEditar"
+import type { Game } from "../types/types"
 /*
 const juegoDefault = {
   id: "",
@@ -23,56 +23,56 @@ const juegoDefault = {
 };
 */
 export const Table = () => {
-  const [inputId, setInputId] = useState("");
-  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null);
+  const [inputId, setInputId] = useState("")
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null)
   // de agregar
-  const [modalAbierto, setModalAbierto] = useState(false);
-  const abrirModal = () => setModalAbierto(true);
-  const cerrarModal = () => setModalAbierto(false);
+  const [modalAbierto, setModalAbierto] = useState(false)
+  const abrirModal = () => setModalAbierto(true)
+  const cerrarModal = () => setModalAbierto(false)
 
   // de eliminar
-  const [modalAbierto2, setModalAbierto2] = useState(false);
+  const [modalAbierto2, setModalAbierto2] = useState(false)
   const abrirModal2 = (juego: Game) => {
-    setJuegoSeleccionado(juego);
-    setModalAbierto2(true);
-  };
-  const cerrarModal2 = () => setModalAbierto2(false);
+    setJuegoSeleccionado(juego)
+    setModalAbierto2(true)
+  }
+  const cerrarModal2 = () => setModalAbierto2(false)
 
   // de editar
-  const [modalAbierto3, setModalAbierto3] = useState(false);
+  const [modalAbierto3, setModalAbierto3] = useState(false)
   const abrirModal3 = (juego: Game) => {
-    setJuegoSeleccionado(juego);
-    setModalAbierto3(true);
-  };
-  const cerrarModal3 = () => setModalAbierto3(false);
+    setJuegoSeleccionado(juego)
+    setModalAbierto3(true)
+  }
+  const cerrarModal3 = () => setModalAbierto3(false)
 
   const buscarJuego = async () => {
-    if (!inputId) return alert("Ingresa un ID válido"); // cambiar
+    if (!inputId) return alert("Ingresa un ID válido") // cambiar
     try {
-      const res = await fetch(`${URL}/games/${inputId}`);
-      if (!res.ok) throw new Error("Juego no encontrado");
-      const data = await res.json();
-      setJuegoSeleccionado(data);
+      const res = await fetch(`${API_URL}/games/${inputId}`)
+      if (!res.ok) throw new Error("Juego no encontrado")
+      const data = await res.json()
+      setJuegoSeleccionado(data)
     } catch (error) {
-      setJuegoSeleccionado(null);
-      alert((error as Error).message); // esto cambiar, es para probar
+      setJuegoSeleccionado(null)
+      alert((error as Error).message) // esto cambiar, es para probar
     }
-  };
+  }
 
   const httpAcualizarJuegos = async () => {
     try {
-      const resp = await fetch(`${URL}/games/top-rated`); // `${URL}/games/top-rated`
-      if (!resp.ok) throw new Error("servidor");
+      const resp = await fetch(`${API_URL}/games/top-rated`) // `${API_URL}/games/top-rated`
+      if (!resp.ok) throw new Error("servidor")
       //const data = await resp.json();
       // ver que hacer aqui para que se actualice la  tabla
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    httpAcualizarJuegos();
-  }, []);
+    httpAcualizarJuegos()
+  }, [])
 
   return (
     <div className="row container mt-auto">
@@ -81,9 +81,8 @@ export const Table = () => {
           className="btn btn-primary btn-de-tabla justify-content-start mt-5"
           type="button"
           onClick={() => {
-            abrirModal();
-          }}
-        >
+            abrirModal()
+          }}>
           Agregar
         </button>
 
@@ -94,10 +93,9 @@ export const Table = () => {
             </p>
             <form
               onSubmit={(e) => {
-                e.preventDefault(); // Evita que la página se recargue
-                buscarJuego();
-              }}
-            >
+                e.preventDefault() // Evita que la página se recargue
+                buscarJuego()
+              }}>
               <input
                 type="text"
                 className="form-control"
@@ -118,8 +116,8 @@ export const Table = () => {
             <BsFillTrashFill
               className="delete-btn"
               onClick={() => {
-                if (juegoSeleccionado) abrirModal2(juegoSeleccionado);
-                else alert("Busca un juego primero"); // borrar cambiar
+                if (juegoSeleccionado) abrirModal2(juegoSeleccionado)
+                else alert("Busca un juego primero") // borrar cambiar
                 return
               }}
             />
@@ -130,9 +128,9 @@ export const Table = () => {
                 onHide={cerrarModal2}
                 id={juegoSeleccionado.id}
                 onDeleted={() => {
-                  cerrarModal2();
-                  setJuegoSeleccionado(null);
-                  setInputId("");
+                  cerrarModal2()
+                  setJuegoSeleccionado(null)
+                  setInputId("")
                 }}
               />
             )}
@@ -140,8 +138,8 @@ export const Table = () => {
             <BsFillPencilFill
               className="edit-btn"
               onClick={() => {
-                if (juegoSeleccionado) abrirModal3(juegoSeleccionado);
-                else alert("Busca un juego primero"); //borrar cambiar
+                if (juegoSeleccionado) abrirModal3(juegoSeleccionado)
+                else alert("Busca un juego primero") //borrar cambiar
                 return
               }}
             />
@@ -152,17 +150,15 @@ export const Table = () => {
                 onHide={cerrarModal3}
                 juego={juegoSeleccionado}
                 onUpdated={(juegoActualizado) => {
-                  setJuegoSeleccionado(juegoActualizado);
-                  cerrarModal3();
+                  setJuegoSeleccionado(juegoActualizado)
+                  cerrarModal3()
                 }}
               />
             )}
           </span>
         </div>
 
-        {modalAbierto && (
-          <ModalAgregar show={modalAbierto} onHide={cerrarModal} />
-        )}
+        {modalAbierto && <ModalAgregar show={modalAbierto} onHide={cerrarModal} />}
       </div>
       <div className="col-md-10">
         <div className="table-wrapper">
@@ -190,7 +186,7 @@ export const Table = () => {
                         <BsFillTrashFill
                           className="delete-btn"
                           onClick={() => {
-                            abrirModal2(juego);
+                            abrirModal2(juego)
                           }}
                         />
 
@@ -200,9 +196,9 @@ export const Table = () => {
                             onHide={cerrarModal2}
                             id={juego.id}
                             onDeleted={() => {
-                              cerrarModal2();
-                              setJuegoSeleccionado(null);
-                              setInputId("");
+                              cerrarModal2()
+                              setJuegoSeleccionado(null)
+                              setInputId("")
                             }}
                           />
                         )}
@@ -210,7 +206,7 @@ export const Table = () => {
                         <BsFillPencilFill
                           className="edit-btn"
                           onClick={() => {
-                            abrirModal3(juego);
+                            abrirModal3(juego)
                           }}
                         />
 
@@ -220,20 +216,20 @@ export const Table = () => {
                             onHide={cerrarModal3}
                             juego={juego}
                             onUpdated={(juegoActualizado) => {
-                              setJuegoSeleccionado(juegoActualizado);
-                              cerrarModal3();
+                              setJuegoSeleccionado(juegoActualizado)
+                              cerrarModal3()
                             }}
                           />
                         )}
                       </span>
                     </td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

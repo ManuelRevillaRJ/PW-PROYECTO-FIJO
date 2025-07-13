@@ -1,32 +1,32 @@
 import { Modal } from "react-bootstrap";
 import { type FormEvent } from "react"
 import SubmitButton from "./Button"
-import {URL} from "../secret"
+import { API_URL } from "../secret"
 
 import "../styles/Modal.css"
 interface ModalEliminarJuego {
-  show: boolean;
-  onHide: () => void;
-  id: string;
-  onDeleted: () => void;
+  show: boolean
+  onHide: () => void
+  id: string
+  onDeleted: () => void
 }
 
 export default function ModalEliminar({ show, onHide, id, onDeleted }: ModalEliminarJuego) {
   const handleSubmit = (evt: FormEvent) => {
-    evt.preventDefault();
+    evt.preventDefault()
     handleDelete()
-  };
+  }
   const handleDelete = async () => {
     try {
-      const res = await fetch(`${URL}/games/${id}`, {
+      const res = await fetch(`${API_URL}/games/${id}`, {
         method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Error al eliminar");
-      onDeleted(); 
+      })
+      if (!res.ok) throw new Error("Error al eliminar")
+      onDeleted()
     } catch (error) {
-      alert((error as Error).message); // cambiar a modal de error
+      alert((error as Error).message) // cambiar a modal de error
     }
-  };
+  }
 
   return (
     <Modal className="modal" show={show} onHide={onHide} centered size="lg" backdrop="static">

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000"
+import { API_URL } from "../../secret"
 
 export const checkoutRequest = async (userId: number, gameIdList: number[]) => {
   const res = await fetch(`${API_URL}/cart/checkout`, {

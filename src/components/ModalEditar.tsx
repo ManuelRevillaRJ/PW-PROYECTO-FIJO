@@ -2,29 +2,24 @@ import { Modal } from "react-bootstrap";
 import { useState, type FormEvent } from "react";
 import FormInput from "./FormInput";
 import SubmitButton from "./Button";
-import {URL} from "../secret"
-import "../styles/Modal.css";
-import type { Game } from "../types/types";
+import { API_URL } from "../secret"
+import "../styles/Modal.css"
+import type { Game } from "../types/types"
 interface ModalEditarJuego {
-  show: boolean;
-  onHide: () => void;
-  juego: Game;
-  onUpdated: (juegoActualizado: Game) => void;
+  show: boolean
+  onHide: () => void
+  juego: Game
+  onUpdated: (juegoActualizado: Game) => void
 }
 
-export default function ModalEditar({
-  show,
-  onHide,
-  juego,
-  onUpdated,
-}: ModalEditarJuego) {
-  const [titulo1, setTitulo1] = useState(juego.titulo);
-  const [description, setDescription] = useState(juego.description ?? ""); // descripcion o sino vacio
-  const [precio, setPrecio] = useState(juego.precio ?? 0);
-  const [imagen, setImagen] = useState(juego.image ?? "");
+export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEditarJuego) {
+  const [titulo1, setTitulo1] = useState(juego.titulo)
+  const [description, setDescription] = useState(juego.description ?? "") // descripcion o sino vacio
+  const [precio, setPrecio] = useState(juego.precio ?? 0)
+  const [imagen, setImagen] = useState(juego.image ?? "")
 
   const handleSubmit = async (evt: FormEvent) => {
-    evt.preventDefault();
+    evt.preventDefault()
 
     if (titulo1 !== "" && description !== "" && imagen !== "") {
       const juegoActualizado: Game = {
@@ -33,27 +28,27 @@ export default function ModalEditar({
         description: description,
         precio: precio,
         image: imagen,
-      };
+      }
 
       try {
-        const res = await fetch(`${URL}/games/${juego.id}`, {
+        const res = await fetch(`${API_URL}/games/${juego.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(juegoActualizado),
-        });
+        })
 
-        if (!res.ok) throw new Error("Error al actualizar el juego");
+        if (!res.ok) throw new Error("Error al actualizar el juego")
 
-        const data = await res.json();
-        onUpdated(data); // Enviar el juego actualizado al padre
+        const data = await res.json()
+        onUpdated(data) // Enviar el juego actualizado al padre
       } catch (error: unknown) {
-        if (error instanceof Error) alert(error.message);
-        else alert("Error desconocido");
+        if (error instanceof Error) alert(error.message)
+        else alert("Error desconocido")
       }
     } else {
-      alert("Faltan datos obligatorios");
+      alert("Faltan datos obligatorios")
     }
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
@@ -85,7 +80,7 @@ export default function ModalEditar({
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
           <FormInput
-            label="Imagen (URL)"
+            label="Imagen (API_URL)"
             type="text"
             id="imagen"
             value={imagen}
@@ -103,10 +98,10 @@ export default function ModalEditar({
                 {" "}
                 Faltan datos{" "}
               </button>
-            );
+            )
           }
         })()}
       </Modal.Footer>
     </Modal>
-  );
+  )
 }
