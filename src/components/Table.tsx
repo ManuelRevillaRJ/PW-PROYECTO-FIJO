@@ -20,7 +20,6 @@ const juegoDefault = {
   plataformas: [],
   ventas: [],
 };
-const URLPrueba = "http://localhost:3000";
 export const Table = () => {
   const [inputId, setInputId] = useState("");
   const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null);
