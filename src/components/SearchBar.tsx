@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Game } from "../types/types";
 import GameCard from "./GameCard";
+import {URL} from "../secret"
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +18,7 @@ export default function SearchBar() {
 
       try {
         const res = await fetch(
-          `http://localhost:3000/games/buscar?nombre=${encodeURIComponent(
+          `${URL}/games/buscar?nombre=${encodeURIComponent(
             searchTerm
           )}`
         );
@@ -36,7 +37,7 @@ export default function SearchBar() {
   // Al hacer clic en un juego
   const handleJuegoClick = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:3000/games/${id}`);
+      const res = await fetch(`${URL}/games/${id}`);
       const juego = await res.json();
       setJuegoSeleccionado(juego);
     } catch (error) {
