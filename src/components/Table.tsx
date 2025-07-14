@@ -10,7 +10,7 @@ import ModalEliminar from "./ModalEliminar"
 import ModalEditar from "./ModalEditar"
 import type { Game } from "../types/types"
 import { toast } from "sonner";
-/*
+
 const juegoDefault = {
   id: "",
   titulo: "",
@@ -22,7 +22,7 @@ const juegoDefault = {
   plataformas: [],
   ventas: [],
 };
-*/
+
 export const Table = () => {
   const [inputId, setInputId] = useState("")
   const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null)
@@ -119,7 +119,7 @@ export const Table = () => {
               className="delete-btn"
               onClick={() => {
                 if (juegoSeleccionado) abrirModal2(juegoSeleccionado)
-                else toast.error("Busca un juego primero") 
+                else alert("Busca un juego primero") // borrar cambiar
                 return
               }}
             />
@@ -141,7 +141,7 @@ export const Table = () => {
               className="edit-btn"
               onClick={() => {
                 if (juegoSeleccionado) abrirModal3(juegoSeleccionado)
-                else alert("Busca un juego primero") //borrar cambiar
+                else toast.error("Busca un juego primero") 
                 return
               }}
             />
@@ -188,7 +188,7 @@ export const Table = () => {
                         <BsFillTrashFill
                           className="delete-btn"
                           onClick={() => {
-                            abrirModal2(juego)
+                           
                           }}
                         />
 
@@ -196,7 +196,7 @@ export const Table = () => {
                           <ModalEliminar
                             show={modalAbierto2}
                             onHide={cerrarModal2}
-                            id={juego.id}
+                            id={juegoSeleccionado?.id?? juegoDefault.id}
                             onDeleted={() => {
                               cerrarModal2()
                               setJuegoSeleccionado(null)
@@ -208,7 +208,7 @@ export const Table = () => {
                         <BsFillPencilFill
                           className="edit-btn"
                           onClick={() => {
-                            abrirModal3(juego)
+                            
                           }}
                         />
 
@@ -216,7 +216,7 @@ export const Table = () => {
                           <ModalEditar
                             show={modalAbierto3}
                             onHide={cerrarModal3}
-                            juego={juego}
+                            juego={juegoSeleccionado?? juegoDefault}
                             onUpdated={(juegoActualizado) => {
                               setJuegoSeleccionado(juegoActualizado)
                               cerrarModal3()
