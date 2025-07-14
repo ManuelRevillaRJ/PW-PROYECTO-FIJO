@@ -5,6 +5,7 @@ import CarouselBestSellers from "../components/CarouselBestSellers";
 import type { Game } from "../types/types";
 import { useState, useEffect } from "react"
 import { bestSellersRequest } from "../utils/api/gameApi"
+import CartBar from "../pages/CartBar"
 
 export default function BestSellers() {
   const [bestSellersList, setbestSellersList] = useState<Game[]>([])
@@ -46,6 +47,7 @@ export default function BestSellers() {
           </div>
         </div>
       </div>
+      <CartBar/>
     </>
   )
 }
