@@ -3,6 +3,8 @@ import type { Game } from "../types/types";
 import GameCard from "./GameCard";
 import { API_URL } from "../secret"
 
+const URL = import.meta.env.VITE_BACKEND_URL
+
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("")
   const [resultados, setResultados] = useState<Game[]>([])
@@ -33,7 +35,7 @@ export default function SearchBar() {
   // Al hacer clic en un juego
   const handleJuegoClick = async (id: number) => {
     try {
-      const res = await fetch(`${API_URL}/games/${id}`)
+      const res = await fetch(`${URL}/games/${id}`)
       const juego = await res.json()
       setJuegoSeleccionado(juego)
     } catch (error) {
