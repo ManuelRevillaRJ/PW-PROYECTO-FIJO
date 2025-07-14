@@ -3,6 +3,7 @@ import type { Game } from "../types/types";
 
 export interface CartItem {
   game: Game;
+  quantity: number;
 }
 
 interface CartContextType {
@@ -10,25 +11,28 @@ interface CartContextType {
   addToCart: (game: Game) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
-  showCart: () => void;
-  toggleCart: () => void;
-  isCartVisible: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isCartVisible, setCartVisible] = useState(false);
 
-  const showCart = () => setCartVisible(true);
-  const toggleCart = () => setCartVisible((prev) => !prev);
   const addToCart = (game: Game) => {
-  setCartItems(prev => {
-    const exists = prev.some(item => item.game.id === game.id);
-    return exists ? prev : [...prev, { game }];
-  });
+    setCartItems(prev => {
+      const existing = prev.find(item => item.game.id === game.id);
+      if (existing) {
+        return prev.map(item =>
+          item.game.id === game.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prev, { game, quantity: 1 }];
+      }
+    });
   };
+
   const removeFromCart = (id: string) => {
     setCartItems(prev => prev.filter(item => item.game.id !== id));
   };
@@ -36,7 +40,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => setCartItems([]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, showCart, toggleCart, isCartVisible,}}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
