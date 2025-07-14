@@ -46,3 +46,22 @@ export type Game = {
   plataformas: string[]
   ventas: Sale[]
 }
+
+// juego de backend
+export type Game_DB = {
+  rating: number
+  id: string
+  cover: string
+  titulo: string
+  descripcion: string
+  precio: number
+  oferta?: boolean
+  estado?: boolean
+  videoURL: string
+  imagenes: string[]
+
+  // Relaciones:
+  categoria_id? : number,
+  plataformas?: string[]
+  ventas?: Sale[]
+}

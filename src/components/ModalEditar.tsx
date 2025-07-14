@@ -4,31 +4,31 @@ import FormInput from "./FormInput";
 import SubmitButton from "./Button";
 import { API_URL } from "../secret"
 import "../styles/Modal.css"
-import type { Game } from "../types/types"
+import type { Game_DB } from "../types/types"
 import { toast } from "sonner";
 interface ModalEditarJuego {
   show: boolean
   onHide: () => void
-  juego: Game
-  onUpdated: (juegoActualizado: Game) => void
+  juego: Game_DB
+  onUpdated: (juegoActualizado: Game_DB) => void
 }
 
 export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEditarJuego) {
   const [titulo1, setTitulo1] = useState(juego.titulo)
-  const [description, setDescription] = useState(juego.description ?? "") // descripcion o sino vacio
+  const [description, setDescription] = useState(juego.descripcion ?? "") // descripcion o sino vacio
   const [precio, setPrecio] = useState(juego.precio ?? 0)
-  const [imagen, setImagen] = useState(juego.image ?? "")
+  const [imagen, setImagen] = useState(juego.cover ?? "")
 
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
 
     if (titulo1 !== "" && description !== "" && imagen !== "") {
-      const juegoActualizado: Game = {
+      const juegoActualizado: Game_DB = {
         ...juego,
         titulo: titulo1,
-        description: description,
+        descripcion: description,
         precio: precio,
-        image: imagen,
+        cover: imagen,
       }
 
       try {
