@@ -20,7 +20,7 @@ export default function IngresosMensuales() {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const res = await fetch("http://localhost:3000/games/ventas-mensuales");
+        const res = await fetch("https://pw-proyecto-fijo-backend.onrender.com/games/ventas-mensuales");
         const json = await res.json();
         setData(json);
       } catch (error) {
