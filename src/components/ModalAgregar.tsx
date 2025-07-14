@@ -33,7 +33,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
     categoria_id: 1,
   };
 
-  const [juego] = useState(juegoDefault);
+  const juego = juegoDefault;
 
   
 
