@@ -8,24 +8,28 @@ import { ListaGames } from "../utils/ListaJuegos"
 import ModalAgregar from "./ModalAgregar"
 import ModalEliminar from "./ModalEliminar"
 import ModalEditar from "./ModalEditar"
-import type { Game } from "../types/types"
+import type { Game_DB, Game} from "../types/types"
 import { toast } from "sonner";
 
 const juegoDefault = {
+  rating: 0,
   id: "",
+  cover: "",
   titulo: "",
-  description: "",
+  descripcion: "",
   precio: 0,
-  esta_oferta: false,
-  detalleImagenes: [],
-  categorias: [],
+  oferta: false,
+  estado: false,
+  videoURL: "",
+  imagenes: [],
+  categoria_id: 1,
   plataformas: [],
-  ventas: [],
+  ventas: []
 };
 
 export const Table = () => {
   const [inputId, setInputId] = useState("")
-  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game | null>(null)
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState<Game_DB | null>(null)
   // de agregar
   const [modalAbierto, setModalAbierto] = useState(false)
   const abrirModal = () => setModalAbierto(true)
@@ -33,7 +37,7 @@ export const Table = () => {
 
   // de eliminar
   const [modalAbierto2, setModalAbierto2] = useState(false)
-  const abrirModal2 = (juego: Game) => {
+  const abrirModal2 = (juego: Game_DB) => {
     setJuegoSeleccionado(juego)
     setModalAbierto2(true)
   }
@@ -41,7 +45,7 @@ export const Table = () => {
 
   // de editar
   const [modalAbierto3, setModalAbierto3] = useState(false)
-  const abrirModal3 = (juego: Game) => {
+  const abrirModal3 = (juego: Game_DB) => {
     setJuegoSeleccionado(juego)
     setModalAbierto3(true)
   }
