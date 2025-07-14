@@ -13,7 +13,9 @@ interface ModalJuegoProps {
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
   const { titulo, description, videoURL, precio } = juego;
 
-  const { addToCart } = useCart();
+  const { cartItems, addToCart, showCart } = useCart();
+
+  const isInCart = cartItems.some(item => item.game.id === juego.id);
   
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
@@ -48,8 +50,8 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
       </Modal.Body>
 
       <Modal.Footer className="bg-dark">
-        <Button variant="primary" className="mx-auto p-2" onClick={() => {addToCart(juego); onHide();}}>
-          Comprar Ahora
+        <Button variant="primary" className="mx-auto p-2" onClick={() => {addToCart(juego); showCart(); onHide();}}>
+          {isInCart ? "Ya en el carrito" : "Comprar Ahora"}
         </Button>
       </Modal.Footer>
     </Modal>

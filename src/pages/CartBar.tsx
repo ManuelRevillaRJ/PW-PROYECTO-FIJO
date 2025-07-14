@@ -4,14 +4,12 @@ import CartItemCard from '../components/CartItemCard';
 import CheckoutModal from '../components/ModalCheckout';
 
 const CartBar = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const { cartItems, removeFromCart, clearCart } = useCart();
+  const { cartItems, removeFromCart, clearCart, isCartVisible, toggleCart} = useCart();
 
   const checkout = () => {
     setShowCheckout(true);
   };
   const [showCheckout, setShowCheckout] = useState(false);
-  const toggleCart = () => setIsVisible(!isVisible);
 
   return (
     <>
@@ -25,7 +23,7 @@ const CartBar = () => {
       </button>
 
       {/* 🔹 CartBar only shown when visible */}
-      {isVisible && (
+      {isCartVisible && (
         <div className="position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 shadow" style={{ zIndex: 1050 }}>
           <div className="container">
             <div className="row">
