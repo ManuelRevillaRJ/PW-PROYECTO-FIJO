@@ -48,7 +48,7 @@ export const Table = () => {
   const cerrarModal3 = () => setModalAbierto3(false)
 
   const buscarJuego = async () => {
-    if (!inputId) return alert("Ingresa un ID válido") // cambiar
+    if (!inputId) toast.error("Ingresa un ID valido")  
     try {
       const res = await fetch(`${API_URL}/games/${inputId}`)
       if (!res.ok) throw new Error("Juego no encontrado")
@@ -56,7 +56,7 @@ export const Table = () => {
       setJuegoSeleccionado(data)
     } catch (error) {
       setJuegoSeleccionado(null)
-      alert((error as Error).message) // esto cambiar, es para probar
+      toast.error((error as Error).message) 
     }
   }
 
@@ -118,7 +118,7 @@ export const Table = () => {
               className="delete-btn"
               onClick={() => {
                 if (juegoSeleccionado) abrirModal2(juegoSeleccionado)
-                else alert("Busca un juego primero") // borrar cambiar
+                else toast.error("Busca un juego primero") 
                 return
               }}
             />
