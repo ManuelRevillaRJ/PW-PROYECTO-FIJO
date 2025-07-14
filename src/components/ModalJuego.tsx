@@ -34,18 +34,6 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
           ></iframe>
         </div>
 
-        <div className="d-flex overflow-auto gap-2 mb-3">
-          {/*detalleImagenes.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`img-${idx}`}
-              className="rounded"
-              width={150}
-            />
-          ))*/}
-        </div>
-
         <p>{description}</p>
         <p>Precio: ${precio}</p>
 
