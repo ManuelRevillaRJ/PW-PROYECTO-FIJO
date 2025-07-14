@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useUser } from "../hooks/useUser";
-import SearchBar from "./SearchBar";
+
 
 // Implementado para el buscador de juegos
 //import { useState } from "react";
@@ -197,9 +197,6 @@ export default function NavBar() {
               </Link>
             </li>
 
-            <li className="nav-item ms-auto d-flex align-items-center">
-              <SearchBar />
-            </li>
           </ul>
         </div>
       </div>
