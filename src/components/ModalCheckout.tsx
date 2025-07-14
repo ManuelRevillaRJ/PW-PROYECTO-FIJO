@@ -12,47 +12,52 @@ interface CheckoutModalProps {
 
 export default function CheckoutModal({ show, onHide }: CheckoutModalProps) {
   const { cartItems, clearCart } = useCart();
-  const { user} = useUser();
-  const [email, setEmail] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [expDate, setExpDate] = useState("");
-  const [cvv, setCvv] = useState("");
+  const { user } = useUser()
+  const [email, setEmail] = useState(user?.correo || "")
+  const [cardNumber, setCardNumber] = useState("")
+  const [expDate, setExpDate] = useState("")
+  const [cvv, setCvv] = useState("")
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false)
 
-  const total = cartItems.reduce((sum, item) => sum + item.game.precio, 0);
+  const total = cartItems.reduce((sum, item) => sum + item.game.precio, 0)
 
   const isValid =
     email.includes("@") &&
     /^\d{16}$/.test(cardNumber.replace(/\s/g, "")) &&
     /^\d{2}\/\d{2}$/.test(expDate) &&
-    /^\d{3}$/.test(cvv);
+    /^\d{3}$/.test(cvv)
 
   const handleConfirm = async () => {
-    setSubmitted(true);
-    if (!isValid) return;
-    if (user?.id === undefined){return}
-    try {
-        const ventas = await checkoutRequest(
-        parseInt(user?.id), cartItems.map((i)=>(parseInt(i.game.id))))
-        .then(async (res)=>(await res.json()))
-        if(!ventas.ventas){toast.error("No se pudo completar el pago D:")}
-    } catch (error) {
-        toast.error("Hubo un error en el pago")
+    setSubmitted(true)
+    if (!isValid) return
+    if (email === undefined) {
+      return
     }
+    try {
+      const ventas = await checkoutRequest(
+        email,
+        cartItems.map((i) => parseInt(i.game.id))
+      ).then(async (res) => await res.json())
+      console.log(ventas)
+      if (!ventas.ventas) {
+        toast.error("No se pudo completar el pago D:")
+        return
+      }
+      toast.success(`¡Gracias por tu compra, ${email}! :)`)
+      clearCart()
+      onHide()
 
-
-    toast.success(`¡Gracias por tu compra, ${email}! :)`);
-    clearCart();
-    onHide();
-
-    // Reset form after successful checkout
-    setEmail("");
-    setCardNumber("");
-    setExpDate("");
-    setCvv("");
-    setSubmitted(false);
-  };
+      // Reset form after successful checkout
+      setEmail("")
+      setCardNumber("")
+      setExpDate("")
+      setCvv("")
+      setSubmitted(false)
+    } catch (error) {
+      toast.error(`Hubo un error en el pago: ${error}`)
+    }
+  }
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
