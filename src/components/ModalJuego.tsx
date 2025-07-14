@@ -13,8 +13,8 @@ interface ModalJuegoProps {
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
   const { titulo, description, videoURL, precio } = juego;
 
-  const { addToCart } = useCart();
-  
+  const { addToCart, showCart } = useCart();
+
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
       <Modal.Header closeButton className="bg-dark text-white">
@@ -34,18 +34,6 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
           ></iframe>
         </div>
 
-        <div className="d-flex overflow-auto gap-2 mb-3">
-          {/*detalleImagenes.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`img-${idx}`}
-              className="rounded"
-              width={150}
-            />
-          ))*/}
-        </div>
-
         <p>{description}</p>
         <p>Precio: ${precio}</p>
 
@@ -60,7 +48,7 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
       </Modal.Body>
 
       <Modal.Footer className="bg-dark">
-        <Button variant="primary" className="mx-auto p-2" onClick={() => {addToCart(juego); onHide();}}>
+        <Button variant="primary" className="mx-auto p-2" onClick={() => {addToCart(juego); showCart(); onHide();}}>
           Comprar Ahora
         </Button>
       </Modal.Footer>
