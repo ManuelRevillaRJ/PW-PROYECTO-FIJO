@@ -1,17 +1,20 @@
-//import { useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import CartItemCard from '../components/CartItemCard';
-import { toast } from "sonner";
 
 const CartBar = () => {
-  const { cartItems, removeFromCart, clearCart, isCartVisible, toggleCart } = useCart();
+  const [isVisible, setIsVisible] = useState(false);
+  const { cartItems, removeFromCart, clearCart } = useCart();
 
   const checkout = () => {
-    toast.error("Checkout not implemented yet. Items: " + cartItems.map(i => i.game.titulo).join(", "));
+    alert("Checkout not implemented yet. Items: " + cartItems.map(i => i.game.titulo).join(", "));
   };
+
+  const toggleCart = () => setIsVisible(!isVisible);
 
   return (
     <>
+      {/* 🔹 Always-visible toggle button */}
       <button
         className="btn btn-dark"
         style={{ position: 'fixed', top: '4rem', right: '1rem', zIndex: 9999 }}
@@ -20,7 +23,8 @@ const CartBar = () => {
         🛒
       </button>
 
-      {isCartVisible && (
+      {/* 🔹 CartBar only shown when visible */}
+      {isVisible && (
         <div className="position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 shadow" style={{ zIndex: 1050 }}>
           <div className="container">
             <div className="row">
@@ -32,10 +36,11 @@ const CartBar = () => {
                     ) : (
                     cartItems.map(({ game }) => (
                         <CartItemCard
-                            key={game.id}
-                            game={game}
-                            onRemove={() => removeFromCart(game.id)}
-                            />
+                        key={game.id}
+                        name={game.titulo}
+                        //quantity={quantity}
+                        onRemove={() => removeFromCart(game.id)}
+                        />
                         ))
                     )}
                 </div>
