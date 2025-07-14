@@ -5,6 +5,7 @@ import RangeSlider from "react-range-slider-input"
 import "react-range-slider-input/dist/style.css"
 import "../styles/GameCatalog.css"
 import { gamesRequest } from "../utils/api/gameApi"
+import CartBar from "../pages/CartBar"
 
 export default function GameCatalog() {
   const [gameList, setGameList] = useState<Game[]>([])
@@ -107,6 +108,7 @@ export default function GameCatalog() {
   }
 
   return (
+    <>
     <div className="text-center mx-auto mb-4 p-4">
       <div className="row gx-4">
         {/* Game Cards */}
@@ -253,5 +255,7 @@ export default function GameCatalog() {
         </div>
       </div>
     </div>
+    <CartBar/>
+    </>
   )
 }

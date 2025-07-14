@@ -1,5 +1,8 @@
 import { Modal, Button } from "react-bootstrap";
 import type { Game } from "../types/types";
+import { useCart } from "../context/CartContext";
+
+const { addToCart } = useCart();
 
 interface ModalJuegoProps {
   show: boolean;
@@ -55,7 +58,7 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
       </Modal.Body>
 
       <Modal.Footer className="bg-dark">
-        <Button variant="primary" className="mx-auto p-2">
+        <Button variant="primary" className="mx-auto p-2" onClick={() => {addToCart(juego); onHide();}}>
           Comprar Ahora
         </Button>
       </Modal.Footer>
