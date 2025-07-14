@@ -19,7 +19,7 @@ import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename='/PW_G2_F'>
+    <BrowserRouter basename='/PW_G2_F/'>
       <Toaster position="bottom-center" richColors />
       <Routes>
         <Route path="/" element={<HomePage />} />
