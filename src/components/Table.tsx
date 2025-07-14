@@ -52,6 +52,7 @@ export const Table = () => {
     try {
       const res = await fetch(`${API_URL}/games/${inputId}`)
       if (!res.ok) throw new Error("Juego no encontrado")
+      if (res.ok) toast.success("Encontrado, selecciona que hacer")
       const data = await res.json()
       setJuegoSeleccionado(data)
     } catch (error) {
