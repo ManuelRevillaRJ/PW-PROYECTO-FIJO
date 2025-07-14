@@ -63,7 +63,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
       juego.descripcion = description
       juego.titulo = titulo1
       juego.videoURL = videoURL
-      const response = await addGamesRequest(juego); 
+      const response = (await addGamesRequest(juego)).json(); 
       if (!response){
         toast.error("No se pudo ingresar el juego")
       } else {

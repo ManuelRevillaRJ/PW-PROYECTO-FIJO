@@ -12,7 +12,7 @@ export const gamesRequest = async () => {
 export const addGamesRequest = async (game: Game_DB) => {
   const response = await fetch(`${API_URL}/games`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(game),
     });
   
