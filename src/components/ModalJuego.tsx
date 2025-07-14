@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import type { Game } from "../types/types";
 import { useCart } from "../context/CartContext";
 
-const { addToCart } = useCart();
+
 
 interface ModalJuegoProps {
   show: boolean;
@@ -13,6 +13,8 @@ interface ModalJuegoProps {
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
   const { titulo, description, videoURL, detalleImagenes, precio } = juego;
 
+  const { addToCart } = useCart();
+  
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
       <Modal.Header closeButton className="bg-dark text-white">
