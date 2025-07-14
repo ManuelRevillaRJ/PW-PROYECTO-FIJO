@@ -8,7 +8,7 @@ interface ModalJuegoProps {
 }
 
 export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
-  const { titulo, description, videoURL, detalleImagenes, precio } = juego;
+  const { titulo, description, videoURL, precio } = juego; //detalleImagenes
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg" backdrop={true}>
@@ -27,18 +27,6 @@ export default function ModalJuego({ show, onHide, juego }: ModalJuegoProps) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-        </div>
-
-        <div className="d-flex overflow-auto gap-2 mb-3">
-          {detalleImagenes.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`img-${idx}`}
-              className="rounded"
-              width={150}
-            />
-          ))}
         </div>
 
         <p>{description}</p>
