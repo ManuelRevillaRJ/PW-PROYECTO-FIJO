@@ -4,14 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import type { Game } from "../types/types";
 import CarouselTopRated from "../components/CarouselTopRated";
 import { useEffect, useState } from "react";
-import { API_URL } from "../secret" // usar este en vez de los de prueba
+import { topRatedRequest } from "../utils/api/gameApi"
 
 export default function TopRated() {
   const [topRatedList, setTopRatedList] = useState<Game[]>([])
 
   const httpObtenerTopRateds = async () => {
     try {
-      const resp = await fetch(`${API_URL}/games/top-rated`)
+      const resp = await topRatedRequest()
       if (!resp.ok) throw new Error("servidor")
       const data = await resp.json()
       console.log(data)

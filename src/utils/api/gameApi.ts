@@ -8,6 +8,20 @@ export const gamesRequest = async () => {
   return res
 }
 
+export const topRatedRequest = async () => {
+  const res = await fetch(`${API_URL}/games/top-rated`, {
+    headers: getHeaders(),
+  })
+  return res
+}
+
+export const bestSellersRequest = async () => {
+  const res = await fetch(`${API_URL}/games/best-sellers`, {
+    headers: getHeaders(),
+  })
+  return res
+}
+
 export const gamesParamsRequest = async (params: Record<string, string | string[]>) => {
   const url = new URL(`${API_URL}/games`)
   Object.entries(params).forEach(([key, value]) => {
