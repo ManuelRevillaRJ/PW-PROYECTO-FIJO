@@ -1,4 +1,5 @@
 import { API_URL } from "../../secret"
+import type { Game_DB } from "../../types/types"
 import { getHeaders } from "./headers"
 
 export const gamesRequest = async () => {
@@ -6,6 +7,16 @@ export const gamesRequest = async () => {
     headers: getHeaders(),
   })
   return res
+}
+
+export const addGamesRequest = async (game: Game_DB) => {
+  const response = await fetch(`${API_URL}/games`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(game),
+    });
+  
+  return response
 }
 
 export const topRatedRequest = async () => {

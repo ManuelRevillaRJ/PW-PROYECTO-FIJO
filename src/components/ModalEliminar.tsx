@@ -8,7 +8,7 @@ import { toast } from "sonner";
 interface ModalEliminarJuego {
   show: boolean
   onHide: () => void
-  id: string
+  id: number
   onDeleted: () => void
 }
 

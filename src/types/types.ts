@@ -50,7 +50,7 @@ export type Game = {
 // juego de backend
 export type Game_DB = {
   rating: number
-  id: string
+  id?: number
   cover: string
   titulo: string
   descripcion: string

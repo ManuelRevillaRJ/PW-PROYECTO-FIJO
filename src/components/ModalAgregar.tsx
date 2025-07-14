@@ -5,6 +5,8 @@ import SubmitButton from "./Button";
 import { ListaGames } from "../utils/ListaJuegos";
 
 import "../styles/Modal.css";
+import { toast } from "sonner";
+import { addGamesRequest } from "../utils/api/gameApi";
 
 interface ModalAgregarJuego {
   show: boolean;
@@ -16,8 +18,26 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
   const [description, setDescription] = useState("");
   const [precio, setPrecio] = useState(0);
   const [imagen, setImagen] = useState("");
+  const [videoURL,setVideo] = useState("")
 
-  const handleSubmit = (evt: FormEvent) => {
+  const juegoDefault = {
+    rating: 0,
+    cover: "",
+    titulo: "",
+    descripcion: "",
+    precio: 0,
+    oferta: false,
+    estado: false,
+    videoURL: "",
+    imagenes: [],
+    categoria_id: 1,
+  };
+
+  const [juego] = useState(juegoDefault);
+
+  
+
+  const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault();
     // prueba
     console.log({ titulo1, description, precio });
@@ -30,12 +50,30 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
         description: description,
         precio: precio,
         image: imagen,
+        
         esta_oferta: false,
         detalleImagenes: [],
         categorias: [],
         plataformas: [],
         ventas: [],
       });
+
+    if (titulo1 != "" && description != "" && imagen != "" && videoURL != ""){
+      juego.cover = imagen
+      juego.descripcion = description
+      juego.titulo = titulo1
+      juego.videoURL = videoURL
+      const response = await addGamesRequest(juego); 
+      if (!response){
+        toast.error("No se pudo ingresar el juego")
+      } else {
+        toast.success("Juego registrado!")
+      }
+    } else {
+      toast.error("Datos incompletos")
+    }
+
+      
       onHide();
 
     } 
@@ -79,6 +117,13 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
             id="imagen"
             value={imagen}
             onChange={(e) => setImagen(e.currentTarget.value)}
+          />
+          <FormInput
+            label="Video (URL)"
+            type="text"
+            id="video"
+            value={videoURL}
+            onChange={(e) => setVideo(e.currentTarget.value)}
           />
           
           <SubmitButton label="Crear"/>

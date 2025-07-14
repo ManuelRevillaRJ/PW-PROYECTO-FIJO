@@ -18,17 +18,19 @@ export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEdi
   const [description, setDescription] = useState(juego.descripcion ?? "") // descripcion o sino vacio
   const [precio, setPrecio] = useState(juego.precio ?? 0)
   const [imagen, setImagen] = useState(juego.cover ?? "")
+  const [videoURL,setVideo] = useState(juego.videoURL?? "")
 
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
 
-    if (titulo1 !== "" && description !== "" && imagen !== "") {
+    if (titulo1 !== "" && description !== "" && imagen !== "" || videoURL !== "") {
       const juegoActualizado: Game_DB = {
         ...juego,
         titulo: titulo1,
         descripcion: description,
         precio: precio,
         cover: imagen,
+        videoURL: videoURL
       }
 
       try {
@@ -38,7 +40,7 @@ export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEdi
           body: JSON.stringify(juegoActualizado),
         })
 
-        if (!res.ok) throw new Error("Error al actualizar el juego")
+        if (!res.ok) toast.error("Error al actualizar juego")
 
         const data = await res.json()
         onUpdated(data) // Enviar el juego actualizado al padre
@@ -81,11 +83,18 @@ export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEdi
             onChange={(e) => setPrecio(Number(e.currentTarget.value))}
           />
           <FormInput
-            label="Imagen (API_URL)"
+            label="Imagen (URL)"
             type="text"
             id="imagen"
             value={imagen}
             onChange={(e) => setImagen(e.currentTarget.value)}
+          />
+          <FormInput
+            label="Video (URL)"
+            type="text"
+            id="video"
+            value={videoURL}
+            onChange={(e) => setVideo(e.currentTarget.value)}
           />
 
           <SubmitButton label="Guardar" />

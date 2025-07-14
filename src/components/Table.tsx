@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 const juegoDefault = {
   rating: 0,
-  id: "",
+  id: 0,
   cover: "",
   titulo: "",
   descripcion: "",
@@ -132,7 +132,7 @@ export const Table = () => {
               <ModalEliminar
                 show={modalAbierto2}
                 onHide={cerrarModal2}
-                id={juegoSeleccionado.id}
+                id={juegoSeleccionado.id ?? 0}
                 onDeleted={() => {
                   cerrarModal2()
                   setJuegoSeleccionado(null)
