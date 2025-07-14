@@ -61,6 +61,7 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
     if (titulo1 != "" && description != "" && imagen != "" && videoURL != ""){
       juego.cover = imagen
       juego.descripcion = description
+      juego.precio = precio
       juego.titulo = titulo1
       juego.videoURL = videoURL
       const response = (await addGamesRequest(juego)).json(); 
