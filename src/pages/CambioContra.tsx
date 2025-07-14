@@ -3,11 +3,11 @@ import LayoutNavBar from "../layouts/LayoutNavBar"
 import { useUser } from "../hooks/useUser"
 
 export default function CambioContra() {
-  const { changePassword } = useUser()
+  const { changePassword, user } = useUser()
 
   const [formData, setFormData] = useState({
     // correo: sessionStorage.getItem("mail") || "",
-    correo: localStorage.getItem("token") || "",
+    correo: user?.correo || "",
     newPassword: "",
     confirmPassword: "",
     errorMsg: "",
