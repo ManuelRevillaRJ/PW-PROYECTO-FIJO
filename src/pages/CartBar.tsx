@@ -38,8 +38,7 @@ const CartBar = () => {
                     cartItems.map(({ game }) => (
                         <CartItemCard
                         key={game.id}
-                        name={game.titulo}
-                        //quantity={quantity}
+                        juego={game}
                         onRemove={() => removeFromCart(game.id)}
                         />
                         ))

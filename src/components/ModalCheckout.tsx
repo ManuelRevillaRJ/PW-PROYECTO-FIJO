@@ -1,6 +1,9 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
+import { toast } from "sonner";
+import { checkoutRequest } from "../utils/api/cartApi";
+import { useUser } from "../hooks/useUser";
 
 interface CheckoutModalProps {
   show: boolean;
@@ -9,7 +12,7 @@ interface CheckoutModalProps {
 
 export default function CheckoutModal({ show, onHide }: CheckoutModalProps) {
   const { cartItems, clearCart } = useCart();
-
+  const { user} = useUser();
   const [email, setEmail] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expDate, setExpDate] = useState("");
@@ -25,11 +28,21 @@ export default function CheckoutModal({ show, onHide }: CheckoutModalProps) {
     /^\d{2}\/\d{2}$/.test(expDate) &&
     /^\d{3}$/.test(cvv);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     setSubmitted(true);
     if (!isValid) return;
+    if (user?.id === undefined){return}
+    try {
+        const ventas = await checkoutRequest(
+        parseInt(user?.id), cartItems.map((i)=>(parseInt(i.game.id))))
+        .then(async (res)=>(await res.json()))
+        if(!ventas.ventas){toast.error("No se pudo completar el pago D:")}
+    } catch (error) {
+        toast.error("Hubo un error en el pago")
+    }
 
-    alert(`¡Gracias por tu compra, ${email}!`);
+
+    toast.success(`¡Gracias por tu compra, ${email}! :)`);
     clearCart();
     onHide();
 

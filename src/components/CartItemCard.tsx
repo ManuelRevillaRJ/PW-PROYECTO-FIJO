@@ -1,11 +1,13 @@
 //import React from 'react';
 
+import type { Game } from "../types/types";
+
 type CartItemCardProps = {
-  name: string;
+  juego: Game;
   onRemove: () => void;
 };
 
-const CartItemCard = ({ name, onRemove }: CartItemCardProps) => {
+const CartItemCard = ({ juego, onRemove }: CartItemCardProps) => {
     return (
         <div className="card text-dark text-center position-relative" style={{ minWidth: 120 }}>
             <button
@@ -17,12 +19,12 @@ const CartItemCard = ({ name, onRemove }: CartItemCardProps) => {
             </button>
             <div className="card-body p-2">
                 <img
-                    src="/public/assets/juegos/BD2.jpg"
-                    alt={name}
+                    src={juego.image}
+                    alt={juego.titulo}
                     style={{ height: 80 }}
                     className="mb-2 w-100 object-fit-contain rounded"
                 />
-                <div style={{ fontSize: '0.85rem' }}>{name}</div>
+                <div style={{ fontSize: '0.85rem' }}>{juego.titulo}</div>
             </div>
         </div>
     );
