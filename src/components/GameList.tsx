@@ -28,7 +28,7 @@ const GameList = () => {
       <h1 className="mb-4">Top Rated Games</h1>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {ListaGames.map((e: Game) => (
-          <GameCard game={e} />
+          <GameCard key={e.id} game={e} />
         ))}
       </div>
     </div>

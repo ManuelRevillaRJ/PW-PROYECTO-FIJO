@@ -14,7 +14,7 @@ export default function GameCard({ game }: GameCardProps) {
     <>
       <div className="col" key={game.id}>
         <div className="card h-100 shadow-sm d-flex flex-column">
-          <img src={game.image} className="card-img-top" alt={game.titulo} />
+          <img src={game.cover} className="card-img-top" alt={game.titulo} />
 
           <div className="card-body d-flex flex-column justify-content-between">
             <h5 className="card-title">{game.titulo}</h5>

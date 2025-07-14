@@ -19,33 +19,15 @@ export default function GameCatalog() {
     selectedPlataformas: [] as string[],
   })
 
-  // Fetch games whenever filters change
   useEffect(() => {
     const fetchGames = async () => {
       try {
         setIsLoading(true)
 
-        const params: Record<string, string | string[]> = {}
-
-        if (filters.enOferta) {
-          params.offer = "true"
-        }
-
-        if (filters.strict) {
-          params.strict = "true"
-        }
-
-        if (filters.selectedCategorias.length > 0) {
-          params.category = filters.selectedCategorias
-        }
-
-        if (filters.selectedPlataformas.length > 0) {
-          params.platform = filters.selectedPlataformas
-        }
-
-        const response = await gamesRequest(params)
-        const data = await response.json()
+        const response = await gamesRequest()
+        const data: Game[] = await response.json()
         setGameList(data)
+        console.log(data)
       } catch (err) {
         console.error("Error fetching games:", err)
       } finally {
@@ -54,10 +36,10 @@ export default function GameCatalog() {
     }
 
     fetchGames()
-  }, [filters.enOferta, filters.strict, filters.selectedCategorias, filters.selectedPlataformas])
+  }, [])
 
-  const allCategorias: string[] = [...new Set(gameList.flatMap((game) => game.categorias))]
-  const allPlataformas: string[] = [...new Set(gameList.flatMap((game) => game.plataformas))]
+  const allCategorias = [...new Set(gameList.flatMap((game) => game.categorias).filter(Boolean))]
+  const allPlataformas = [...new Set(gameList.flatMap((game) => game.plataformas).filter(Boolean))]
 
   const minPrice = gameList.length > 0 ? Math.min(...gameList.map((g) => g.precio)) : 0
   const maxPrice = gameList.length > 0 ? Math.max(...gameList.map((g) => g.precio)) + 1 : 100
@@ -75,9 +57,31 @@ export default function GameCatalog() {
         return false
       }
 
+      if (filters.enOferta && !game.esta_oferta) {
+        return false
+      }
+
+      if (filters.selectedCategorias.length > 0) {
+        if (filters.strict) {
+          if (!filters.selectedCategorias.every((p) => game.categorias.includes(p))) {
+            return false
+          }
+        } else {
+          if (!filters.selectedCategorias.some((p) => game.categorias.includes(p))) {
+            return false
+          }
+        }
+      }
+
+      if (filters.selectedPlataformas.length > 0) {
+        if (!filters.selectedPlataformas.some((p) => game.plataformas.includes(p))) {
+          return false
+        }
+      }
+
       return true
     })
-  }, [gameList, filters.search, filters.rangoPrecio])
+  }, [gameList, filters])
 
   // helper functions
   const toggleCategoria = (cat: string) => {
@@ -115,8 +119,8 @@ export default function GameCatalog() {
               </div>
             </div>
             <div className="row row-cols-4 g-3 p-3">
-              {filteredGames.map((game) => {
-                return <GameCard key={game.id} game={game}></GameCard>
+              {filteredGames.map((game, index) => {
+                return <GameCard key={`${game.titulo}-${index}`} game={game}></GameCard>
               })}
             </div>
           </div>
@@ -206,9 +210,7 @@ export default function GameCatalog() {
                 <div className="">
                   {allCategorias.map((cat) => {
                     return (
-                      <div
-                        key={allCategorias.indexOf(cat)}
-                        className="form-check form-check-inline">
+                      <div key={cat} className="form-check form-check-inline">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -230,9 +232,7 @@ export default function GameCatalog() {
                 <div className="">
                   {allPlataformas.map((plat) => {
                     return (
-                      <div
-                        key={allPlataformas.indexOf(plat)}
-                        className="form-check form-check-inline">
+                      <div key={plat} className="form-check form-check-inline">
                         <input
                           className="form-check-input"
                           type="checkbox"

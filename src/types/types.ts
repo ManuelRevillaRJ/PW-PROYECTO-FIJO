@@ -29,19 +29,20 @@ export type Sale = {
 
 // Juego (Game) - principal
 export type Game = {
-  rating?: number;
-  id: string;
-  image?: string;
-  titulo: string;
-  description: string;
-  precio: number;
-  esta_oferta: boolean;
-  estado?: boolean;
-  videoURL?: string;
-  detalleImagenes: string[];
+  rating?: number
+  id: string
+  image?: string
+  titulo: string
+  description: string
+  precio: number
+  esta_oferta: boolean
+  estado?: boolean
+  videoURL?: string
+  cover?: string
+  detalleImagenes: string[]
 
   // Relaciones:
-  categorias: string[];
-  plataformas: string[];
-  ventas: Sale[];
-};
+  categorias: string[]
+  plataformas: string[]
+  ventas: Sale[]
+}
