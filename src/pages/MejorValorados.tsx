@@ -5,6 +5,7 @@ import type { Game } from "../types/types";
 import CarouselTopRated from "../components/CarouselTopRated";
 import { useEffect, useState } from "react";
 import { topRatedRequest } from "../utils/api/gameApi"
+import CartBar from "../pages/CartBar"
 
 export default function TopRated() {
   const [topRatedList, setTopRatedList] = useState<Game[]>([])
@@ -50,6 +51,7 @@ export default function TopRated() {
           </div>
         </div>
       </div>
+      <CartBar/>
     </>
   )
 }
