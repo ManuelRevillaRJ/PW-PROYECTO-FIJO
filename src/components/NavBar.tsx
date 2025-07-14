@@ -2,21 +2,8 @@ import { Link } from "react-router";
 import { useUser } from "../hooks/useUser";
 
 
-// Implementado para el buscador de juegos
-//import { useState } from "react";
-//import { useNavigate } from "react-router-dom";
-
 export default function NavBar() {
   const { logout, isLoggedIn, user } = useUser();
-
-  // Implementado para el buscador de juegos
-  /*const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchTerm.trim()) return;
-    navigate(`/buscar?nombre=${encodeURIComponent(searchTerm)}`);
-  }*/
 
   return (
     <nav className="navbar justify-content-center navbar-expand-lg fixed-top bg-body-tertiary">
@@ -190,12 +177,7 @@ export default function NavBar() {
               </ul>
             </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to={"/carrito"}>
-                <i className="bi bi-bar-chart me-2"></i>
-                Carrito de Compras
-              </Link>
-            </li>
+            
 
           </ul>
         </div>

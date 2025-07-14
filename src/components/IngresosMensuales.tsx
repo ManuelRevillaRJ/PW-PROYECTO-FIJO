@@ -6,23 +6,35 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useEffect, useState } from "react";
 
-const data = [
-  { mes: "Enero", ganancia: 11000 },
-  { mes: "Febrero", ganancia: 7500 },
-  { mes: "Marzo", ganancia: 7700 },
-  { mes: "Abril", ganancia: 11500 },
-  { mes: "Mayo", ganancia: 11400 },
-  { mes: "Junio", ganancia: 7800 },
-  { mes: "Julio", ganancia: 7900 },
-  { mes: "Agosto", ganancia: 10000 },
-  { mes: "Septiembre", ganancia: 8200 },
-  { mes: "Octubre", ganancia: 8100 },
-  { mes: "Noviembre", ganancia: 9900 },
-  { mes: "Diciembre", ganancia: 8500 },
-];
+type VentaMensual = {
+  mes: string;
+  ganancia: number;
+};
 
 export default function IngresosMensuales() {
+  const [data, setData] = useState<VentaMensual[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      try {
+        const res = await fetch("https://pw-proyecto-fijo-backend.onrender.com/games/ventas-mensuales");
+        const json = await res.json();
+        setData(json);
+      } catch (error) {
+        console.error("Error al obtener ventas mensuales:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    obtenerDatos();
+  }, []);
+
+  if (loading) return <p>Cargando datos...</p>;
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data}>

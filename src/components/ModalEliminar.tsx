@@ -4,6 +4,7 @@ import SubmitButton from "./Button"
 import { API_URL } from "../secret"
 
 import "../styles/Modal.css"
+import { toast } from "sonner";
 interface ModalEliminarJuego {
   show: boolean
   onHide: () => void
@@ -24,7 +25,7 @@ export default function ModalEliminar({ show, onHide, id, onDeleted }: ModalElim
       if (!res.ok) throw new Error("Error al eliminar")
       onDeleted()
     } catch (error) {
-      alert((error as Error).message) // cambiar a modal de error
+      toast.error((error as Error).message)
     }
   }
 

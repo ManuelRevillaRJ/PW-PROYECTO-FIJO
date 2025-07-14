@@ -5,6 +5,7 @@ import SubmitButton from "./Button";
 import { API_URL } from "../secret"
 import "../styles/Modal.css"
 import type { Game } from "../types/types"
+import { toast } from "sonner";
 interface ModalEditarJuego {
   show: boolean
   onHide: () => void
@@ -42,11 +43,11 @@ export default function ModalEditar({ show, onHide, juego, onUpdated }: ModalEdi
         const data = await res.json()
         onUpdated(data) // Enviar el juego actualizado al padre
       } catch (error: unknown) {
-        if (error instanceof Error) alert(error.message)
-        else alert("Error desconocido")
+        if (error instanceof Error) toast.error(error.message)
+        else toast.error("Error desconocido")
       }
     } else {
-      alert("Faltan datos obligatorios")
+      toast.error("Faltan datos obligatorios")
     }
   }
 

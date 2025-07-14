@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import CartItemCard from '../components/CartItemCard';
+import CheckoutModal from '../components/ModalCheckout';
 
 const CartBar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { cartItems, removeFromCart, clearCart } = useCart();
 
   const checkout = () => {
-    alert("Checkout not implemented yet. Items: " + cartItems.map(i => i.game.titulo).join(", "));
+    setShowCheckout(true);
   };
-
+  const [showCheckout, setShowCheckout] = useState(false);
   const toggleCart = () => setIsVisible(!isVisible);
 
   return (
@@ -37,8 +38,7 @@ const CartBar = () => {
                     cartItems.map(({ game }) => (
                         <CartItemCard
                         key={game.id}
-                        name={game.titulo}
-                        //quantity={quantity}
+                        juego={game}
                         onRemove={() => removeFromCart(game.id)}
                         />
                         ))
@@ -49,6 +49,7 @@ const CartBar = () => {
                 <button className="btn btn-outline-light btn-sm mb-2" onClick={checkout}>
                   Checkout
                 </button>
+                <CheckoutModal show={showCheckout} onHide={() => setShowCheckout(false)} />
                 <br />
                 <button className="btn btn-outline-danger btn-sm" onClick={clearCart}>
                   Clear Cart
