@@ -12,14 +12,6 @@ interface ModalAgregarJuego {
   show: boolean;
   onHide: () => void;
 }
-
-export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
-  const [titulo1, setTitulo1] = useState("");
-  const [description, setDescription] = useState("");
-  const [precio, setPrecio] = useState(0);
-  const [imagen, setImagen] = useState("");
-  const [videoURL,setVideo] = useState("")
-
   const juegoDefault = {
     rating: 0,
     cover: "",
@@ -33,10 +25,16 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
     categoria_id: 1,
   };
 
+export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
+  const [titulo1, setTitulo1] = useState("");
+  const [description, setDescription] = useState("");
+  const [precio, setPrecio] = useState(0);
+  const [imagen, setImagen] = useState("");
+  const [videoURL,setVideo] = useState("")
+
   const juego = juegoDefault;
 
   
-
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault();
     // prueba
@@ -73,8 +71,6 @@ export default function ModalAgregar({ show, onHide }: ModalAgregarJuego) {
     } else {
       toast.error("Datos incompletos")
     }
-
-      
       onHide();
 
     } 
